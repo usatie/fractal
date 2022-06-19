@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/06/19 19:03:36 by susami           ###   ########.fr        #
+#    Updated: 2022/06/19 22:45:43 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,12 @@ LIBS		=	-lmlx -lXext -lX11
 LIBPATH		=	-Lminilibx-linux -lmlx -L/usr/X11R6/lib
 INCLUDE		=	-Iinclude
 FRAMEWORK	=	-framework OpenGL -framework AppKit
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
 SRCS		=	main.c
 OBJS		=	$(SRCS:%.c=%.o)
 
-all: $(OBJS)
+all: $(NAME)
+
+$(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBPATH) $(FRAMEWORK) -o $(NAME)
