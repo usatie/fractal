@@ -6,15 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/06/19 22:57:20 by susami           ###   ########.fr       */
+/*   Updated: 2022/06/19 23:02:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "mlx.h"
 #include <ctype.h>
 #include <unistd.h>
-#include "keysymdef.h"
+#include "fractol.h"
+#include "mlx.h"
+#include <keysymdef.h>
 
 int	expose_hook(void *param)
 {
@@ -92,7 +93,8 @@ int	key_hook(int keycode, void *param)
 
 int	mouse_hook(int button, int x, int y, void *param)
 {
-	printf("mouse_hook is called. button = %d, x = %d, y = %d, param = %p\n", button, x, y, param);
+	printf("mouse_hook is called. button = %d, x = %d, y = %d, param = %p\n",
+		button, x, y, param);
 	return (0);
 }
 
