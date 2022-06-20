@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/06/19 23:02:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/06/20 10:03:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 #include "fractol.h"
 #include "mlx.h"
 #include <keysymdef.h>
+#include <stdlib.h>
+
+typedef struct __attribute__((packed)) s_mlx_color {
+	unsigned char	blue;
+	unsigned char	green;
+	unsigned char	red;
+	unsigned char	alpha;
+}	t_mlx_color;
+
+int	color(t_mlx_color c)
+{
+	return (*(int *)&c);
+}
 
 int	expose_hook(void *param)
 {
@@ -104,15 +117,86 @@ int	loop_hook(void *param)
 	return (0);
 }
 
+void	pixel_out_sample(void *mlx_ptr, void *win_ptr)
+{
+	t_mlx_color	red;
+	t_mlx_color	green;
+	t_mlx_color	blue;
+
+	red = (t_mlx_color){.red = 255};
+	green = (t_mlx_color){.green = 255};
+	blue = (t_mlx_color){.blue = 255};
+	mlx_string_put(mlx_ptr, win_ptr, 0, 50, color(red), "red");
+	mlx_string_put(mlx_ptr, win_ptr, 1, 51, color(red), "red");
+	mlx_string_put(mlx_ptr, win_ptr, 100, 50, color(green), "green");
+	mlx_string_put(mlx_ptr, win_ptr, 105, 55, color(green), "green");
+	mlx_string_put(mlx_ptr, win_ptr, 200, 50, color(blue), "blue");
+	mlx_string_put(mlx_ptr, win_ptr, 210, 60, color(blue), "blue");
+	for (int x = 0; x < 100; x++)
+	{
+		for (int y = 100; y < 200; y++)
+		{
+			red.red = (x % 256) * 2;
+			green.green = (x % 256) * 2;
+			blue.blue = (x % 256) * 2;
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color(red));
+			mlx_pixel_put(mlx_ptr, win_ptr, x + 100, y, color(green));
+			mlx_pixel_put(mlx_ptr, win_ptr, x + 200, y, color(blue));
+		}
+	}
+}
+
+typedef struct s_img_info {
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img_info;
+
+void	draw_img_sample(void *mlx_ptr, void *win_ptr)
+{
+	void			*img_ptr; 
+	t_img_info		img_info;
+	char			*img;
+	t_mlx_color		red;
+	t_mlx_color		green;
+	t_mlx_color		blue;
+	unsigned int	col;
+
+	red = (t_mlx_color){.red = 255};
+	green = (t_mlx_color){.green = 255};
+	blue = (t_mlx_color){.blue = 255};
+
+	img_ptr = mlx_new_image(mlx_ptr, 200, 200);
+	img = mlx_get_data_addr(img_ptr,
+			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
+	printf("bits_per_pixel: %d, size_line: %d, endian: %d\n",
+			img_info.bits_per_pixel, img_info.size_line, img_info.endian);
+	for (int i = 0; i < img_info.size_line * 8; i++)
+	{
+		if (i < 100 * 8)
+			col =  mlx_get_color_value(mlx_ptr, color(red));
+		else if (i < 200 * 8)
+			col =  mlx_get_color_value(mlx_ptr, color(green));
+		else
+			col =  mlx_get_color_value(mlx_ptr, color(blue));
+		printf("%x/", col);
+		*(img + i/8) |= (col >> (i % img_info.bits_per_pixel)) & 1;
+	}
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 300, 300);
+//	mlx_destroy_image(mlx_ptr, img_ptr);
+}
+
 int	main(void)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "hoge");
 	printf("mlx: %p, win: %p\n", mlx_ptr, win_ptr);
 	mlx_clear_window(mlx_ptr, win_ptr);
+	//pixel_out_sample(mlx_ptr, win_ptr);
+	draw_img_sample(mlx_ptr, win_ptr);
 	mlx_key_hook(win_ptr, &key_hook, NULL);
 	mlx_mouse_hook(win_ptr, mouse_hook, NULL);
 	mlx_expose_hook(win_ptr, expose_hook, NULL);
