@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/24 11:15:01 by susami           ###   ########.fr        #
+#    Updated: 2022/07/24 12:12:55 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ FRAMEWORK	=	-framework OpenGL -framework AppKit
 CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
 SRC_DIR		=	src
-SRCS		=	src/main.c
+SRCS		=	src/main.c \
+			src/mlx_playground.c
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
