@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/24 12:12:55 by susami           ###   ########.fr        #
+#    Updated: 2022/07/24 16:07:07 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		=	fractol
 LIBFTDIR	=	libft
 LIBFT		=	$(LIBFTDIR)/libft.a
 
-LIBS		=	-lmlx -lXext -lX11 -lft
+LIBS		=	-lmlx -lXext -lX11 -lft -lm
 LIBPATH		=	-Lminilibx-linux -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE		=	-Iinclude
 FRAMEWORK	=	-framework OpenGL -framework AppKit
@@ -24,7 +24,9 @@ CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
-			src/mlx_playground.c
+			src/complex.c \
+			src/mlx_playground.c \
+			src/math_playground.c
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
