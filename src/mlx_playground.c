@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:11:55 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 18:24:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:45:03 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_img_info {
 	int		endian;
 }	t_img_info;
 
+void	draw_img_sample(void *mlx_ptr, void *win_ptr, char hue_add);
+
 int	expose_hook(void *param)
 {
 	printf("expose_hook is called. param = %p\n", param);
@@ -50,7 +52,14 @@ void	close_window(void *param)
 
 int	key_hook(int keycode, void *param)
 {
-	if (isprint(keycode) || keycode == XK_Tab)
+	t_mlx_ptrs *ptrs;
+
+	ptrs = (t_mlx_ptrs *)param;
+	if (keycode == 'j')
+		draw_img_sample(ptrs->mlx_ptr, ptrs->win_ptr, -8);
+	else if (keycode == 'k')
+		draw_img_sample(ptrs->mlx_ptr, ptrs->win_ptr, +8);
+	else if (isprint(keycode) || keycode == XK_Tab)
 		write(STDOUT_FILENO, &keycode, 1);
 	else if (keycode == XK_BackSpace)
 		printf("[BACK_SPACE]");
@@ -161,43 +170,36 @@ void	pixel_out_sample(void *mlx_ptr, void *win_ptr)
 	}
 }
 
-void	draw_img_sample(void *mlx_ptr, void *win_ptr)
+void	draw_img_sample(void *mlx_ptr, void *win_ptr, char hue_add)
 {
-	int				width;
-	int				height;
-	void			*img_ptr; 
-	t_img_info		img_info;
-	char			*img;
-	t_rgb	red;
-	t_rgb	green;
-	t_rgb	blue;
+	static unsigned char	hue = 0;
+	int						width;
+	int						height;
+	static void				*img_ptr = NULL; 
+	t_img_info				img_info;
+	char					*img;
+	t_hsv					col;
 
-	red = (t_rgb){.r = 255};
-	green = (t_rgb){.g = 255};
-	blue = (t_rgb){.b = 255};
-
+	hue += hue_add;
 	width = 200;
 	height = 200;
 
+	if (img_ptr)
+		mlx_destroy_image(mlx_ptr, img_ptr);
 	img_ptr = mlx_new_image(mlx_ptr, width, height);
 	img = mlx_get_data_addr(img_ptr,
 			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
-	printf("bits_per_pixel: %d, size_line: %d, endian: %d\n",
-			img_info.bits_per_pixel, img_info.size_line, img_info.endian);
+	//printf("bits_per_pixel: %d, size_line: %d, endian: %d\n",
+	//		img_info.bits_per_pixel, img_info.size_line, img_info.endian);
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			if ((x + y) % 10 < 5)
-				*((int *)img + height * y + x) = rgb2mlxint(red);
-			else if ((x + y) % 10 < 8)
-				*((int *)img + height * y + x) = rgb2mlxint(green);
-			else
-				*((int *)img + height * y + x) = rgb2mlxint(blue);
+			col = (t_hsv){.h = hue, .s = x, .v = y};
+			*((int *)img + height * y + x) = hsv2mlxint(col);
 		}
 	}
 	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 300, 300);
-//	mlx_destroy_image(mlx_ptr, img_ptr);
 }
 
 void	mlx_playground(void)
@@ -213,7 +215,7 @@ void	mlx_playground(void)
 	printf("mlx: %p, win: %p\n", mlx_ptr, win_ptr);
 	mlx_clear_window(mlx_ptr, win_ptr);
 	pixel_out_sample(mlx_ptr, win_ptr);
-	draw_img_sample(mlx_ptr, win_ptr);
+	draw_img_sample(mlx_ptr, win_ptr, 0);
 	mlx_key_hook(win_ptr, &key_hook, &ptrs);
 	//mlx_mouse_hook(win_ptr, mouse_hook, &ptrs);
 	//mlx_expose_hook(win_ptr, expose_hook, &ptrs);
