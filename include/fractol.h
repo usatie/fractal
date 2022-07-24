@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 18:19:20 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:31:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct __attribute__((packed)) s_rgb {
 
 t_rgb		hsv2rgb(t_hsv in);
 int		rgb2mlxint(t_rgb rgb);
+int		hsv2mlxint(t_hsv hsv);
 /*
 **  Complex number
 */

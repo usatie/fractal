@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 18:29:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:32:33 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ t_rgb	hsv2rgb(t_hsv in)
 int	rgb2mlxint(t_rgb rgb)
 {
 	return (*(int *)&rgb);
+}
+
+int	hsv2mlxint(t_hsv hsv)
+{
+	return (rgb2mlxint(hsv2rgb(hsv)));
 }
