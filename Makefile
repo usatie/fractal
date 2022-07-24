@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/05 09:37:42 by susami           ###   ########.fr        #
+#    Updated: 2022/07/24 11:15:01 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,10 @@ INCLUDE		=	-Iinclude
 FRAMEWORK	=	-framework OpenGL -framework AppKit
 CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
-SRCS		=	main.c
-OBJS		=	$(SRCS:%.c=%.o)
+SRC_DIR		=	src
+SRCS		=	src/main.c
+OBJ_DIR		=	objs
+OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 
 all: $(NAME)
@@ -31,11 +33,15 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBPATH) $(FRAMEWORK) -o $(NAME)
 
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $^ $(CFLAGS) -c -o $@
+
 $(LIBFT):
 	$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	$(RM) *.o *.out
+	$(RM) *.o *.out $(OBJ_DIR)/*.o
 	$(MAKE) -C $(LIBFTDIR) clean
 
 fclean: clean
