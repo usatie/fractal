@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:11:55 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 12:12:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:24:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 #include <keysymdef.h>
 #include <stdlib.h>
 
-typedef struct __attribute__((packed)) s_mlx_color {
-	unsigned char	blue;
-	unsigned char	green;
-	unsigned char	red;
-	unsigned char	alpha;
-}	t_mlx_color;
-
 typedef struct s_mlx_ptrs {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -35,11 +28,6 @@ typedef struct s_img_info {
 	int		size_line;
 	int		endian;
 }	t_img_info;
-
-int	color(t_mlx_color c)
-{
-	return (*(int *)&c);
-}
 
 int	expose_hook(void *param)
 {
@@ -146,29 +134,29 @@ int	loop_hook(void *param)
 
 void	pixel_out_sample(void *mlx_ptr, void *win_ptr)
 {
-	t_mlx_color	red;
-	t_mlx_color	green;
-	t_mlx_color	blue;
+	t_rgb	red;
+	t_rgb	green;
+	t_rgb	blue;
 
-	red = (t_mlx_color){.red = 255};
-	green = (t_mlx_color){.green = 255};
-	blue = (t_mlx_color){.blue = 255};
-	mlx_string_put(mlx_ptr, win_ptr, 0, 50, color(red), "red");
-	mlx_string_put(mlx_ptr, win_ptr, 1, 51, color(red), "red");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 50, color(green), "green");
-	mlx_string_put(mlx_ptr, win_ptr, 105, 55, color(green), "green");
-	mlx_string_put(mlx_ptr, win_ptr, 200, 50, color(blue), "blue");
-	mlx_string_put(mlx_ptr, win_ptr, 210, 60, color(blue), "blue");
+	red = (t_rgb){.r = 255};
+	green = (t_rgb){.g = 255};
+	blue = (t_rgb){.b = 255};
+	mlx_string_put(mlx_ptr, win_ptr, 0, 50, rgb2mlxint(red), "red");
+	mlx_string_put(mlx_ptr, win_ptr, 1, 51, rgb2mlxint(red), "red");
+	mlx_string_put(mlx_ptr, win_ptr, 100, 50, rgb2mlxint(green), "green");
+	mlx_string_put(mlx_ptr, win_ptr, 105, 55, rgb2mlxint(green), "green");
+	mlx_string_put(mlx_ptr, win_ptr, 200, 50, rgb2mlxint(blue), "blue");
+	mlx_string_put(mlx_ptr, win_ptr, 210, 60, rgb2mlxint(blue), "blue");
 	for (int x = 0; x < 100; x++)
 	{
 		for (int y = 100; y < 200; y++)
 		{
-			red.red = (x % 256) * 2;
-			green.green = (x % 256) * 2;
-			blue.blue = (x % 256) * 2;
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color(red));
-			mlx_pixel_put(mlx_ptr, win_ptr, x + 100, y, color(green));
-			mlx_pixel_put(mlx_ptr, win_ptr, x + 200, y, color(blue));
+			red.r = (x % 256) * 2;
+			green.g = (x % 256) * 2;
+			blue.b = (x % 256) * 2;
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, rgb2mlxint(red));
+			mlx_pixel_put(mlx_ptr, win_ptr, x + 100, y, rgb2mlxint(green));
+			mlx_pixel_put(mlx_ptr, win_ptr, x + 200, y, rgb2mlxint(blue));
 		}
 	}
 }
@@ -180,13 +168,13 @@ void	draw_img_sample(void *mlx_ptr, void *win_ptr)
 	void			*img_ptr; 
 	t_img_info		img_info;
 	char			*img;
-	t_mlx_color	red;
-	t_mlx_color	green;
-	t_mlx_color	blue;
+	t_rgb	red;
+	t_rgb	green;
+	t_rgb	blue;
 
-	red = (t_mlx_color){.red = 255};
-	green = (t_mlx_color){.green = 255};
-	blue = (t_mlx_color){.blue = 255};
+	red = (t_rgb){.r = 255};
+	green = (t_rgb){.g = 255};
+	blue = (t_rgb){.b = 255};
 
 	width = 200;
 	height = 200;
@@ -201,11 +189,11 @@ void	draw_img_sample(void *mlx_ptr, void *win_ptr)
 		for (int x = 0; x < width; x++)
 		{
 			if ((x + y) % 10 < 5)
-				*((int *)img + height * y + x) = color(red);
+				*((int *)img + height * y + x) = rgb2mlxint(red);
 			else if ((x + y) % 10 < 8)
-				*((int *)img + height * y + x) = color(green);
+				*((int *)img + height * y + x) = rgb2mlxint(green);
 			else
-				*((int *)img + height * y + x) = color(blue);
+				*((int *)img + height * y + x) = rgb2mlxint(blue);
 		}
 	}
 	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 300, 300);
@@ -227,8 +215,8 @@ void	mlx_playground(void)
 	pixel_out_sample(mlx_ptr, win_ptr);
 	draw_img_sample(mlx_ptr, win_ptr);
 	mlx_key_hook(win_ptr, &key_hook, &ptrs);
-	mlx_mouse_hook(win_ptr, mouse_hook, &ptrs);
-	mlx_expose_hook(win_ptr, expose_hook, &ptrs);
-	mlx_loop_hook(mlx_ptr, loop_hook, &ptrs);
+	//mlx_mouse_hook(win_ptr, mouse_hook, &ptrs);
+	//mlx_expose_hook(win_ptr, expose_hook, &ptrs);
+	//mlx_loop_hook(mlx_ptr, loop_hook, &ptrs);
 	mlx_loop(mlx_ptr);
 }

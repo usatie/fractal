@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/24 16:07:07 by susami           ###   ########.fr        #
+#    Updated: 2022/07/24 18:21:12 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 SRC_DIR		=	src
 SRCS		=	src/main.c \
 			src/complex.c \
+			src/color.c \
 			src/mlx_playground.c \
 			src/math_playground.c
 OBJ_DIR		=	objs

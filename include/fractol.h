@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 16:06:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:19:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,42 @@
 # define XK_MISCELLANY 1
 # define XK_XKB_KEYS 1
 
+/*
+**  HSV Color
+*/
+
+/*
+** h — Hue
+** s — Saturation
+** v — Value
+** alpha — Alpha
+*/
+typedef struct s_hsv {
+	unsigned char	h;
+	unsigned char	s;
+	unsigned char	v;
+	unsigned char	alpha;
+}	t_hsv;
+
+/*
+**  RGB Color
+*/
+
+/*
+** r — Red
+** g — Green
+** b — Blue
+** alpha — Alpha
+*/
+typedef struct __attribute__((packed)) s_rgb {
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	alpha;
+}	t_rgb;
+
+t_rgb		hsv2rgb(t_hsv in);
+int		rgb2mlxint(t_rgb rgb);
 /*
 **  Complex number
 */
