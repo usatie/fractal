@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 17:20:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 18:17:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct __attribute__((packed)) s_rgb {
 	unsigned char	alpha;
 }	t_rgb;
 
-t_rgb		hsv2rgb(t_hsv in);
-int			rgb2mlxint(t_rgb rgb);
-int			hsv2mlxint(t_hsv hsv);
+t_rgb			hsv2rgb(t_hsv in);
+int				rgb2mlxint(t_rgb rgb);
+int				hsv2mlxint(t_hsv hsv);
 /*
 **  Complex number
 */
@@ -67,13 +67,13 @@ typedef struct s_complex {
 	double	im;
 }	t_complex;
 
-t_complex	complex_new(double re, double im);
-t_complex	cadd(t_complex lhs, t_complex rhs);
-t_complex	csub(t_complex lhs, t_complex rhs);
-t_complex	cmul(t_complex lhs, t_complex rhs);
-t_complex	cdiv(t_complex c, t_complex b);
-char		*cstr(t_complex z);
-t_complex	mandelbrot(t_complex z, t_complex c);
+t_complex		complex_new(double re, double im);
+t_complex		cadd(t_complex lhs, t_complex rhs);
+t_complex		csub(t_complex lhs, t_complex rhs);
+t_complex		cmul(t_complex lhs, t_complex rhs);
+t_complex		cdiv(t_complex c, t_complex b);
+char			*cstr(t_complex z);
+t_complex		mandelbrot(t_complex z, t_complex c);
 
 /*
 **  Integer Point
@@ -146,9 +146,16 @@ typedef struct s_ctx {
 	//enum			fractal_type;
 
 // Returns img_ptr
-int			mandelbrot_divergence_speed(double a, double b, int max_loop);
-void		*get_fractal_img(void *mlx_ptr, t_double_point o,
-				double step, unsigned char hue, int max_loop);
-int			key_handler(int keycode, void *param);
-int			mouse_handler(int button, int x, int y, void *param);
+int				mandelbrot_divergence_speed(double a, double b, int max_loop);
+void			*get_fractal_img(void *mlx_ptr, t_double_point o,
+					double step, unsigned char hue, int max_loop);
+int				key_handler(int keycode, void *param);
+int				mouse_handler(int button, int x, int y, void *param);
+
+// print mlx keycode as readable format
+void			print_keycode(int keycode);
+t_double_point	calc_origin(t_int_point win_mouse_pnt,
+					t_double_point mouse_pnt, double step);
+void			close_window(void *param);
+
 #endif
