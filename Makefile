@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/25 19:10:01 by susami           ###   ########.fr        #
+#    Updated: 2022/07/25 23:56:21 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT		=	$(LIBFTDIR)/libft.a
 
 LIBS		=	-lmlx -lXext -lX11 -lft -lm
 LIBPATH		=	-Lminilibx-linux -L/usr/X11R6/lib -L$(LIBFTDIR)
-INCLUDE		=	-Iinclude
+INCLUDE		=	-Iinclude -I/usr/X11R6/include
 FRAMEWORK	=	-framework OpenGL -framework AppKit
 CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 

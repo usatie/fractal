@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 23:42:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 23:59:11 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <X11/X.h>
 
 #define WIN_WIDTH 600
 #define WIN_HEIGHT 300
@@ -44,7 +45,7 @@ t_double_point	calc_origin(t_int_point win_mouse_pnt,
 	return ((t_double_point){x, y});
 }
 
-void	close_window(void *param)
+int	close_window(void *param)
 {
 	t_ctx	*ctx;
 
@@ -281,6 +282,8 @@ int	main(void)
 	mlx_key_hook(ctx.win_ptr, key_handler, &ctx);
 	mlx_mouse_hook(ctx.win_ptr, mouse_handler, &ctx);
 	mlx_loop_hook(ctx.mlx_ptr, loop_handler, &ctx);
+	//mlx_hook(ctx.win_ptr, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, close_window, &ctx);
+	mlx_hook(ctx.win_ptr, ClientMessage, StructureNotifyMask, close_window, &ctx);
 	mlx_loop(ctx.mlx_ptr);
 	return (0);
 }
