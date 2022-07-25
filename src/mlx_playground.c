@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:11:55 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 18:45:03 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/24 22:41:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ void	mlx_playground(void)
 	mlx_clear_window(mlx_ptr, win_ptr);
 	pixel_out_sample(mlx_ptr, win_ptr);
 	draw_img_sample(mlx_ptr, win_ptr, 0);
-	mlx_key_hook(win_ptr, &key_hook, &ptrs);
-	//mlx_mouse_hook(win_ptr, mouse_hook, &ptrs);
+	//mlx_key_hook(win_ptr, &key_hook, &ptrs);
+	mlx_mouse_hook(win_ptr, mouse_hook, &ptrs);
 	//mlx_expose_hook(win_ptr, expose_hook, &ptrs);
 	//mlx_loop_hook(mlx_ptr, loop_hook, &ptrs);
 	mlx_loop(mlx_ptr);
