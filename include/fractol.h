@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 18:17:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:05:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 # define XK_MISCELLANY 1
 # define XK_XKB_KEYS 1
 
@@ -117,6 +118,8 @@ typedef struct s_img_info {
 	int		endian;
 }	t_img_info;
 
+typedef enum e_mode { Normal, Psyc }	t_mode;
+
 /*
 **  Fract-ol Context
 */
@@ -141,9 +144,13 @@ typedef struct s_ctx {
 	int				step_n;
 	double			step;
 	unsigned char	hue;
+	t_hsv			base_hsv;
 	unsigned int	max_loop;
+	t_mode			mode;
 }	t_ctx;
 	//enum			fractal_type;
+
+bool			is_equal(t_ctx l, t_ctx r);
 
 // Returns img_ptr
 int				mandelbrot_divergence_speed(double a, double b, int max_loop);
