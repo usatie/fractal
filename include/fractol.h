@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 11:19:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 17:20:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include <stdlib.h>
 # define XK_MISCELLANY 1
 # define XK_XKB_KEYS 1
 
@@ -101,28 +102,53 @@ typedef struct s_double_point {
 }	t_double_point;
 
 /*
+**  minilibx img info
+*/
+
+/*
+** bits_per_pixel — bits per pixel
+** size_line — size of the line
+** endian — endian
+*/
+
+typedef struct s_img_info {
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img_info;
+
+/*
 **  Fract-ol Context
 */
 
 /*
-** re — real part
-** im — imaginary part
+** mlx_ptr — 
+** win_ptr — 
+** img_ptr — 
+** win_mouse_pnt — 
+** mouse_pnt — 
+** step_n — 
+** step — 
+** hue — 
 */
 typedef struct s_ctx {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	void			*help_img_ptr;
 	t_int_point		win_mouse_pnt;
 	t_double_point	mouse_pnt;
 	int				step_n;
 	double			step;
 	unsigned char	hue;
+	unsigned int	max_loop;
 }	t_ctx;
 	//enum			fractal_type;
 
 // Returns img_ptr
+int			mandelbrot_divergence_speed(double a, double b, int max_loop);
 void		*get_fractal_img(void *mlx_ptr, t_double_point o,
-				double step, unsigned char hue);
+				double step, unsigned char hue, int max_loop);
 int			key_handler(int keycode, void *param);
 int			mouse_handler(int button, int x, int y, void *param);
 #endif

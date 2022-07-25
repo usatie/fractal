@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:13:23 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 16:06:49 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 12:45:02 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 #include <stdio.h>
 
-int	mandlebrot_divergence_speed(double a, double b)
+int	mandelbrot_divergence_speed(double a, double b)
 {
 	int		i;
 	t_complex	c;
@@ -54,7 +54,7 @@ void	math_playground(void)
 
 			a = (double)x * step;
 			b = (double)y * step;
-			printf("speed(%lf, %lf) = %d\n", a, b, mandlebrot_divergence_speed(a, b));
+			printf("speed(%lf, %lf) = %d\n", a, b, mandelbrot_divergence_speed(a, b));
 		}
 	}
 }

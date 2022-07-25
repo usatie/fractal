@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:11:55 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 22:41:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 12:38:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ typedef struct s_mlx_ptrs {
 	void	*mlx_ptr;
 	void	*win_ptr;
 } t_mlx_ptrs;
-
-typedef struct s_img_info {
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_img_info;
 
 void	draw_img_sample(void *mlx_ptr, void *win_ptr, char hue_add);
 

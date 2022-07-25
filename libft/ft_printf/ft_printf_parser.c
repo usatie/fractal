@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:34:31 by susami            #+#    #+#             */
-/*   Updated: 2022/06/01 17:53:55 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 14:16:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	parse_precision(t_fmt *fmt);
 void	parse_conversion_spec(t_fmt *fmt, va_list ap);
 
 #define N_CONVERSIONS 9
+
 void	printf_percent(t_fmt *fmt, va_list ap);
 void	printf_c(t_fmt *fmt, va_list ap);
 void	printf_s(t_fmt *fmt, va_list ap);
@@ -41,7 +42,7 @@ static const char	g_conversions[N_CONVERSIONS] = {
 	'x',
 	'X'
 };
-static	void		(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *, va_list) = {
+static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *, va_list) = {
 	printf_percent,
 	printf_c,
 	printf_s,
