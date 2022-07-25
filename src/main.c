@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 18:18:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 18:46:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#define WIN_WIDTH 500
+#define WIN_WIDTH 600
 #define WIN_HEIGHT 300
 #define WIN_TITLE "fract-ol"
 
 #define FRACT_WIDTH 300
 #define FRACT_HEIGHT 300
 
-#define HELP_WIDTH 200
+#define HELP_WIDTH 300
 #define HELP_HEIGHT 300
 
 void			mlx_playground(void);
@@ -127,15 +127,8 @@ void	put_ctx_info(t_ctx *ctx)
 {
 	t_rgb			red;
 	char			*str;
-	static t_ctx	prev_ctx;
-	bool			is_updated;
 	int				height;
 
-	is_updated = (prev_ctx.step != ctx->step)
-		|| (prev_ctx.max_loop != ctx->max_loop);
-	prev_ctx = *ctx;
-	if (!is_updated)
-		return ;
 	red = (t_rgb){.r = 255};
 	height = 50;
 
@@ -144,6 +137,11 @@ void	put_ctx_info(t_ctx *ctx)
 	height += 30;
 
 	asprintf(&str, "max_loop: %d", ctx->max_loop);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	free(str);
+	height += 30;
+
+	asprintf(&str, "resolution: %.20f", ctx->step);
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
@@ -161,6 +159,7 @@ void	put_ctx_info(t_ctx *ctx)
 	asprintf(&str, "mouse_pnt: (%lf, %lf)", ctx->mouse_pnt.x, ctx->mouse_pnt.y);
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
 	free(str);
+	height += 30;
 }
 
 int	key_handler(int keycode, void *param)
@@ -176,8 +175,8 @@ int	key_handler(int keycode, void *param)
 	}
 	else if (keycode == '[' && ctx->max_loop > 100)
 		ctx->max_loop -= 10;
-	else if (keycode == ']' && ctx->max_loop < 1000)
-		ctx->max_loop += 10;
+	else if (keycode == ']' && ctx->max_loop < 10000)
+		ctx->max_loop += 100;
 	else if (keycode == XK_Left)
 		ctx->win_mouse_pnt.x += 10;
 	else if (keycode == XK_Up)
@@ -228,8 +227,9 @@ int	loop_handler(void *param)
 			ctx->step,
 			ctx->hue,
 			ctx->max_loop);
+	mlx_clear_window(ctx->mlx_ptr, ctx->win_ptr);
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, ctx->img_ptr, 0, 0);
-	//put_ctx_info(ctx);
+	put_ctx_info(ctx);
 	lock = false;
 	return (0);
 }
@@ -238,7 +238,6 @@ int	main(void)
 {
 	t_ctx	ctx;
 
-	ft_printf(" %-9p %-10p ", (void *)10, (void *)999);
 	ctx.step_n = 0;
 	ctx.step = 0.01 * pow(2, (double)ctx.step_n / 10);
 	ctx.win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
