@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 19:32:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 23:42:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	close_window(void *param)
 	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
 	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
 	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
+	(void)mlx_destroy_image(ctx->mlx_ptr, ctx->img_ptr);
 	(void)mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
 	exit(0);
 }
@@ -96,14 +97,13 @@ void	*get_clear_img(void *mlx_ptr, int width, int height)
 	return (img_ptr);
 }
 
-void	*get_fractal_img(void *mlx_ptr, t_double_point o,
+void	draw_mandelbrot(void *img_ptr, t_double_point o,
 				double step, unsigned char hue, int max_loop)
 {
 	int						x;
 	int						y;
 	int						speed;
 	t_hsv					hsv;
-	void					*img_ptr;
 	t_img_info				img_info;
 	char					*img;
 	static t_double_point	prev_o;
@@ -119,7 +119,6 @@ void	*get_fractal_img(void *mlx_ptr, t_double_point o,
 	prev_o = o;
 	prev_step = step;
 	prev_max_loop = max_loop;
-	img_ptr = mlx_new_image(mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
 	img = mlx_get_data_addr(img_ptr,
 			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
 	y = -1;
@@ -137,11 +136,10 @@ void	*get_fractal_img(void *mlx_ptr, t_double_point o,
 			}
 			else
 				speed = speeds[x][y];
-			hsv = (t_hsv){(hue + speed) % 360, 255, 150, 0};
+			hsv = (t_hsv){(hue + speed) % 256, 255, 150, 0};
 			*((int *)img + FRACT_HEIGHT * y + x) = hsv2mlxint(hsv);
 		}
 	}
-	return (img_ptr);
 }
 
 void	put_ctx_info(t_ctx *ctx)
@@ -153,41 +151,36 @@ void	put_ctx_info(t_ctx *ctx)
 
 	img_ptr = get_clear_img(ctx->mlx_ptr, HELP_WIDTH, HELP_HEIGHT);
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, img_ptr, FRACT_WIDTH, 0);
+	mlx_destroy_image(ctx->mlx_ptr, img_ptr);
 	red = (t_rgb){.r = 255};
 	height = 50;
-
 	if (ctx->mode == Normal)
 		asprintf(&str, "mode: %s", "Normal");
 	else if (ctx->mode == Psyc)
 		asprintf(&str, "mode: %s", "Psychedelic");
 	else
 		asprintf(&str, "mode: %s", "Unknown");
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-
 	asprintf(&str, "max_loop: %d", ctx->max_loop);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-
-	asprintf(&str, "resolution: %.20f", ctx->step);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	asprintf(&str, "step[= 1 pixel] : %.20f", ctx->step);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-
 	asprintf(&str, "hue: %d", ctx->hue);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-
 	asprintf(&str, "win_mouse_pnt: (%d, %d)", ctx->win_mouse_pnt.x, ctx->win_mouse_pnt.y);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-
 	asprintf(&str, "mouse_pnt: (%lf, %lf)", ctx->mouse_pnt.x, ctx->mouse_pnt.y);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 }
@@ -206,7 +199,7 @@ int	key_handler(int keycode, void *param)
 	else if (keycode == '[' && ctx->max_loop > 100)
 		ctx->max_loop -= 10;
 	else if (keycode == ']' && ctx->max_loop < 10000)
-		ctx->max_loop += 100;
+		ctx->max_loop += 10;
 	else if (keycode == XK_Left)
 		ctx->win_mouse_pnt.x += 10;
 	else if (keycode == XK_Up)
@@ -253,9 +246,7 @@ int	loop_handler(void *param)
 	ctx = (t_ctx *)param;
 	if (ctx->mode == Psyc)
 		ctx->hue += 1;
-	if (ctx->img_ptr != NULL)
-		mlx_destroy_image(ctx->mlx_ptr, ctx->img_ptr);
-	ctx->img_ptr = get_fractal_img(ctx->mlx_ptr,
+	draw_mandelbrot(ctx->img_ptr,
 			calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step),
 			ctx->step,
 			ctx->hue,
@@ -263,6 +254,12 @@ int	loop_handler(void *param)
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, ctx->img_ptr, 0, 0);
 	put_ctx_info(ctx);
 	lock = false;
+	return (0);
+}
+
+int	expose_handler(void *param)
+{
+	printf("expose_hook is called. param = %p\n", param);
 	return (0);
 }
 
@@ -277,9 +274,10 @@ int	main(void)
 	ctx.mlx_ptr = mlx_init();
 	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	ctx.max_loop = 50;
-	ctx.img_ptr = NULL;
+	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
 	ctx.mode = Normal;
 	put_ctx_info(&ctx);
+	mlx_expose_hook(ctx.win_ptr, expose_handler, &ctx);
 	mlx_key_hook(ctx.win_ptr, key_handler, &ctx);
 	mlx_mouse_hook(ctx.win_ptr, mouse_handler, &ctx);
 	mlx_loop_hook(ctx.mlx_ptr, loop_handler, &ctx);

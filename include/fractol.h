@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 19:05:16 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/25 23:34:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ bool			is_equal(t_ctx l, t_ctx r);
 
 // Returns img_ptr
 int				mandelbrot_divergence_speed(double a, double b, int max_loop);
-void			*get_fractal_img(void *mlx_ptr, t_double_point o,
+void			draw_mandelbrot(void *img_ptr, t_double_point o,
 					double step, unsigned char hue, int max_loop);
 int				key_handler(int keycode, void *param);
 int				mouse_handler(int button, int x, int y, void *param);
