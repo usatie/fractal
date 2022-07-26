@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 18:53:58 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 23:22:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,100 @@
 #define HELP_WIDTH 300
 #define HELP_HEIGHT 300
 
+typedef struct s_img {
+	void	*mlx_ptr;
+	void	*img_ptr;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_img;
+
+t_img	*init_img(void *mlx_ptr, int width, int height)
+{
+	t_img	*img;
+	int		bpp;
+	int		size_line;
+	int		endian;
+
+	img = malloc(sizeof(t_img));
+	if (img == NULL)
+		return (NULL);
+	img->mlx_ptr = mlx_ptr;
+	img->img_ptr = mlx_new_image(mlx_ptr, width, height);
+	img->data = mlx_get_data_addr(img->img_ptr, &bpp, &size_line, &endian);
+	img->bpp = bpp;
+	img->size_line = size_line;
+	img->endian = endian;
+	return (img);
+}
+
+typedef struct s_rect {
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_rect;
+
+void	put_pixel_in_img(t_img *img, int x, int y, int color)
+{
+	size_t	idx;
+
+	idx = (x * img->bpp >> 3) + (y * img->size_line);
+	*(int *)(&img->data[idx]) = color;
+}
+
+void	clear_rect(void *mlx_ptr, void *win_ptr, t_rect rect)
+{
+	int		x;
+	int		y;
+	t_img	*img;
+
+	img = init_img(mlx_ptr, rect.width, rect.height);
+	if (img == NULL)
+		return ;
+	y = -1;
+	while (++y < rect.height)
+	{
+		x = -1;
+		while (++x < rect.width)
+			put_pixel_in_img(img, x, y, rgb2mlxint((t_rgb){0}));
+	}
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img->img_ptr, rect.x, rect.y);
+}
+
 void	ctx_update_step(t_ctx *ctx)
 {
 	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
+}
+
+void	ctx_next_color_mode(t_ctx *ctx)
+{
+	ctx->color_mode = (ctx->color_mode + 1) % 2;
+}
+
+void	ctx_next_julia_mode(t_ctx *ctx)
+{
+	ctx->julia_mode = (ctx->julia_mode + 1) % 2;
+}
+
+void	ctx_next_fractal_type(t_ctx *ctx)
+{
+	ctx->fractal_type = (ctx->fractal_type + 1) % 3;
+	ctx->win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
+	if (ctx->fractal_type == Barnsley)
+	{
+		ctx->mouse_pnt = (t_double_point){0.5, 5};
+		ctx->max_loop = 100;
+		ctx->step_n = 20;
+	}
+	else
+	{
+		ctx->mouse_pnt = (t_double_point){0, 0};
+		ctx->max_loop = 100;
+		ctx->step_n = 0;
+	}
+	ctx_update_step(ctx);
 }
 
 t_double_point	calc_origin(t_int_point win_mouse_pnt,
@@ -47,17 +138,15 @@ t_double_point	calc_origin(t_int_point win_mouse_pnt,
 	return ((t_double_point){x, y});
 }
 
-int	close_window(void *param)
+int	close_window(t_ctx *ctx)
 {
-	t_ctx	*ctx;
-
-	ctx = (t_ctx *)param;
 	mlx_key_hook(ctx->win_ptr, NULL, NULL);
 	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
 	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
 	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
-	(void)mlx_destroy_image(ctx->mlx_ptr, ctx->img_ptr);
-	(void)mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
+	mlx_destroy_image(ctx->mlx_ptr, ctx->img_ptr);
+	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
+	free(ctx->mlx_ptr);
 	exit(0);
 }
 
@@ -203,7 +292,7 @@ void	draw_fractal(void *img_ptr, t_double_point o,
 			}
 			else
 				speed = speeds[x][y];
-			hsv = (t_hsv){(hue + speed) % 256, 255, 150, 0};
+			hsv = (t_hsv){(hue + speed * 256 / ctx.max_loop) % 256, 255, 150, 0};
 			*((int *)img + FRACT_HEIGHT * y + x) = hsv2mlxint(hsv);
 		}
 	}
@@ -284,7 +373,7 @@ int	key_handler(int keycode, void *param)
 	ctx = (t_ctx *)param;
 	if (keycode == XK_Escape)
 	{
-		close_window(param);
+		close_window(ctx);
 		return (0);
 	}
 	else if (keycode == '[' && ctx->max_loop > 10)
@@ -300,25 +389,11 @@ int	key_handler(int keycode, void *param)
 	else if (keycode == XK_Down)
 		ctx->win_mouse_pnt.y -= 10;
 	else if (keycode == 'c')
-		ctx->color_mode = (ctx->color_mode + 1) % 2;
+		ctx_next_color_mode(ctx);
 	else if (keycode == 'j')
-		ctx->julia_mode = (ctx->julia_mode + 1) % 2;
+		ctx_next_julia_mode(ctx);
 	else if (keycode == 'f')
-	{
-		ctx->fractal_type = (ctx->fractal_type + 1) % 3;
-		ctx->win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
-		if (ctx->fractal_type == Barnsley)
-		{
-			ctx->mouse_pnt = (t_double_point){0.5, 5};
-			ctx->step_n = 20;
-		}
-		else
-		{
-			ctx->mouse_pnt = (t_double_point){0, 0};
-			ctx->step_n = 0;
-		}
-		ctx_update_step(ctx);
-	}
+		ctx_next_fractal_type(ctx);
 	else
 		return (0);
 	return (0);
@@ -410,7 +485,8 @@ t_fractal_type parse_fractal_type(char *arg)
 		return (Julia);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
 		return (Barnsley);
-	usageErr();
+	else
+		usageErr();
 }
 
 t_ctx	argparse(int argc, char **argv)
@@ -427,7 +503,7 @@ t_ctx	argparse(int argc, char **argv)
 	ctx.julia_mode = Normal;
 	ctx.fractal_type = parse_fractal_type(argv[1]);
 	ctx.hue = 128;
-	ctx.c_radian = M_PI / 180 * 45;
+	ctx.c_radian = M_PI / 180 * 120;
 	ctx.c = cmul(complex_new(0.7885, 0), complex_new(cos(ctx.c_radian), sin(ctx.c_radian)));
 	ctx_update_step(&ctx);
 	return (ctx);

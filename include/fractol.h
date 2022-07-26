@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 18:36:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 22:38:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,6 @@ int				mouse_handler(int button, int x, int y, void *param);
 void			print_keycode(int keycode);
 t_double_point	calc_origin(t_int_point win_mouse_pnt,
 					t_double_point mouse_pnt, double step);
-int				close_window(void *param);
+int				close_window(t_ctx *ctx);
 
 #endif
