@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 17:10:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 18:44:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 
 #define HELP_WIDTH 300
 #define HELP_HEIGHT 300
+
+void	ctx_update_step(t_ctx *ctx)
+{
+	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
+}
 
 t_double_point	calc_origin(t_int_point win_mouse_pnt,
 		t_double_point mouse_pnt, double step)
@@ -91,6 +96,55 @@ int	divergence_speed(t_complex z, t_complex c, int max_loop)
 	return (i);
 }
 
+void	draw_barnsley(void *img_ptr, t_ctx ctx)
+{
+	t_rgb		green;
+	float		rng;
+	t_complex	c;
+	int			x;
+	int			y;
+	char		*img;
+	t_img_info	img_info;
+	unsigned int			i;
+	t_double_point	o;
+
+	(void)img_ptr;
+	img = mlx_get_data_addr(ctx.img_ptr,
+			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
+	y = -1;
+	while (++y < FRACT_HEIGHT)
+	{
+		x = -1;
+		while (++x < FRACT_WIDTH)
+			*((int *)img + FRACT_HEIGHT * y + x) = rgb2mlxint((t_rgb){0, 0, 0, 0});
+	}
+
+	o = calc_origin(ctx.win_mouse_pnt, ctx.mouse_pnt, ctx.step),
+	green = (t_rgb){0, 255, 50, 0};
+	i = 0;
+	while (++i < pow(10, ctx.max_loop / 10))
+	{
+		rng = ((float)rand()) / RAND_MAX;
+		if (rng <= 0.01f)
+			c = complex_new(0, 0.16f * c.im);
+		else if (rng <= 0.06f)
+			c = complex_new(-0.15f * c.re + 0.28f * c.im,
+					0.26f * c.re + 0.24f * c.im + 0.44f);
+		else if (rng <= 0.06f)
+			c = complex_new(0.2f * c.re + -0.26f * c.im,
+					0.23f * c.re + 0.22f * c.im + 1.6f);
+		else
+			c = complex_new(0.85f * c.re + 0.04f * c.im,
+					-0.04f * c.re + 0.85f * c.im + 1.6f);
+
+		x = (c.re - o.x) / ctx.step;
+		y = (o.y - c.im) / ctx.step;
+		if (x >= 0 && y >= 0 && x <= FRACT_WIDTH && y <= FRACT_HEIGHT)
+			*((int *)img + FRACT_HEIGHT * y + x) = rgb2mlxint(green);
+	}
+
+}
+
 void	draw_fractal(void *img_ptr, t_double_point o,
 				double step, unsigned char hue, int max_loop, t_fractal_type fractal_type, t_ctx ctx)
 {
@@ -104,6 +158,7 @@ void	draw_fractal(void *img_ptr, t_double_point o,
 	static double			prev_step;
 	static int				prev_max_loop;
 	static double			prev_c_radian;
+	static t_fractal_type	prev_fractal_type;
 	static int				speeds[FRACT_WIDTH][FRACT_HEIGHT];
 	bool					is_updated;
 
@@ -111,11 +166,17 @@ void	draw_fractal(void *img_ptr, t_double_point o,
 		|| (prev_o.x != o.x)
 		|| (prev_o.y != o.y)
 		|| (prev_max_loop != max_loop)
-		|| (prev_c_radian != ctx.c_radian);
+		|| (prev_c_radian != ctx.c_radian)
+		|| (prev_fractal_type != ctx.fractal_type);
 	prev_o = o;
 	prev_step = step;
 	prev_max_loop = max_loop;
 	prev_c_radian = ctx.c_radian;
+	prev_fractal_type = ctx.fractal_type;
+	if (is_updated && ctx.fractal_type == Barnsley)
+		draw_barnsley(ctx.img_ptr, ctx);
+	if (ctx.fractal_type == Barnsley)
+		return ;
 	img = mlx_get_data_addr(img_ptr,
 			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
 	y = -1;
@@ -164,12 +225,8 @@ void	put_ctx_info(t_ctx *ctx)
 		asprintf(&str, "fractal type: %s", "Mandelbrot");
 	else if (ctx->fractal_type == Julia)
 		asprintf(&str, "fractal type: %s", "Julia");
-	else if (ctx->fractal_type == Phoenix)
-		asprintf(&str, "fractal type: %s", "Phoenix");
 	else if (ctx->fractal_type == Barnsley)
 		asprintf(&str, "fractal type: %s", "Barnsley");
-	else if (ctx->fractal_type == Flowerbrot)
-		asprintf(&str, "fractal type: %s", "Flowerbrot");
 	else
 		asprintf(&str, "fractal type: %s", "Unknown");
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
@@ -230,9 +287,9 @@ int	key_handler(int keycode, void *param)
 		close_window(param);
 		return (0);
 	}
-	else if (keycode == '[' && ctx->max_loop > 100)
+	else if (keycode == '[' && ctx->max_loop > 10)
 		ctx->max_loop -= 10;
-	else if (keycode == ']' && ctx->max_loop < 10000)
+	else if (keycode == ']' && ctx->max_loop)
 		ctx->max_loop += 10;
 	else if (keycode == XK_Left)
 		ctx->win_mouse_pnt.x += 10;
@@ -247,7 +304,21 @@ int	key_handler(int keycode, void *param)
 	else if (keycode == 'j')
 		ctx->julia_mode = (ctx->julia_mode + 1) % 2;
 	else if (keycode == 'f')
-		ctx->fractal_type = (ctx->fractal_type + 1) % 5;
+	{
+		ctx->fractal_type = (ctx->fractal_type + 1) % 3;
+		ctx->win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
+		if (ctx->fractal_type == Barnsley)
+		{
+			ctx->mouse_pnt = (t_double_point){0.5, 5};
+			ctx->step_n = 20;
+		}
+		else
+		{
+			ctx->mouse_pnt = (t_double_point){0, 0};
+			ctx->step_n = 0;
+		}
+		ctx_update_step(ctx);
+	}
 	else
 		return (0);
 	return (0);
@@ -308,11 +379,6 @@ int	expose_handler(void *param)
 	return (0);
 }
 
-void	ctx_update_step(t_ctx *ctx)
-{
-	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
-}
-
 int	get_index(char *element, char **argv)
 {
 	int	i;
@@ -332,7 +398,7 @@ void	usageErr(void) __attribute__((noreturn));
 void	usageErr(void)
 {
 	ft_dprintf(STDERR_FILENO, "Usage: ./fractol {Fractal Type} [--psychedelic | -p]\n");
-	ft_dprintf(STDERR_FILENO, "Fractal Type: [Mandelbrot] [Julia] [Phoenix] [Barnsley] [Flowerbrot]\n");
+	ft_dprintf(STDERR_FILENO, "Fractal Type: [Mandelbrot] [Julia] [Barnsley]\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -342,12 +408,8 @@ t_fractal_type parse_fractal_type(char *arg)
 		return (Mandelbrot);
 	else if (ft_strcmp(arg, "Julia") == 0)
 		return (Julia);
-	else if (ft_strcmp(arg, "Phoenix") == 0)
-		return (Phoenix);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
 		return (Barnsley);
-	else if (ft_strcmp(arg, "Flowerbrot") == 0)
-		return (Flowerbrot);
 	usageErr();
 }
 

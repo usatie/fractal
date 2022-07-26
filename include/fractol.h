@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 16:56:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 18:36:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_img_info {
 }	t_img_info;
 
 typedef enum e_mode { Normal, Psyc }	t_mode;
-typedef enum e_fractal_type {Mandelbrot, Julia, Phoenix, Barnsley, Flowerbrot}	t_fractal_type;
+typedef enum e_fractal_type {Mandelbrot, Julia, Barnsley}	t_fractal_type;
 
 /*
 **  Fract-ol Context
