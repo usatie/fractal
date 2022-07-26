@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 18:44:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 18:53:58 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	draw_barnsley(void *img_ptr, t_ctx ctx)
 	o = calc_origin(ctx.win_mouse_pnt, ctx.mouse_pnt, ctx.step),
 	green = (t_rgb){0, 255, 50, 0};
 	i = 0;
-	while (++i < pow(10, ctx.max_loop / 10))
+	while (++i < pow(10, 4 + (double)ctx.max_loop / 100))
 	{
 		rng = ((float)rand()) / RAND_MAX;
 		if (rng <= 0.01f)
