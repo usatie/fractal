@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 23:22:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 00:01:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,6 @@ t_img	*init_img(void *mlx_ptr, int width, int height)
 	return (img);
 }
 
-typedef struct s_rect {
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-}	t_rect;
-
 void	put_pixel_in_img(t_img *img, int x, int y, int color)
 {
 	size_t	idx;
@@ -73,6 +66,13 @@ void	put_pixel_in_img(t_img *img, int x, int y, int color)
 	idx = (x * img->bpp >> 3) + (y * img->size_line);
 	*(int *)(&img->data[idx]) = color;
 }
+
+typedef struct s_rect {
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_rect;
 
 void	clear_rect(void *mlx_ptr, void *win_ptr, t_rect rect)
 {
@@ -148,27 +148,6 @@ int	close_window(t_ctx *ctx)
 	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
 	free(ctx->mlx_ptr);
 	exit(0);
-}
-
-void	*get_clear_img(void *mlx_ptr, int width, int height)
-{
-	int						x;
-	int						y;
-	void					*img_ptr;
-	t_img_info				img_info;
-	char					*img;
-
-	img_ptr = mlx_new_image(mlx_ptr, height, height);
-	img = mlx_get_data_addr(img_ptr,
-			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
-	y = -1;
-	while (++y < height)
-	{
-		x = -1;
-		while (++x < width)
-			*((int *)img + height * y + x) = rgb2mlxint((t_rgb){0, 0, 0, 0});
-	}
-	return (img_ptr);
 }
 
 int	divergence_speed(t_complex z, t_complex c, int max_loop)
@@ -303,11 +282,8 @@ void	put_ctx_info(t_ctx *ctx)
 	t_rgb			red;
 	char			*str;
 	int				height;
-	void			*img_ptr;
 
-	img_ptr = get_clear_img(ctx->mlx_ptr, HELP_WIDTH, HELP_HEIGHT);
-	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, img_ptr, FRACT_WIDTH, 0);
-	mlx_destroy_image(ctx->mlx_ptr, img_ptr);
+	clear_rect(ctx->mlx_ptr, ctx->win_ptr, (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT});
 	red = (t_rgb){.r = 255};
 	height = 30;
 	if (ctx->fractal_type == Mandelbrot)
@@ -351,7 +327,7 @@ void	put_ctx_info(t_ctx *ctx)
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-	asprintf(&str, "fractal's c: %lf + %lfi", ctx->c.re, ctx->c.im);
+	asprintf(&str, "c_radian: %lfpi", (ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2)*2));
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
@@ -518,8 +494,10 @@ int	main(int argc, char **argv)
 	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
 	put_ctx_info(&ctx);
+	mlx_do_key_autorepeaton(ctx.mlx_ptr);
+	mlx_hook(ctx.win_ptr, KeyPress, KeyPressMask, key_handler, &ctx);
+	//mlx_key_hook(ctx.win_ptr, key_handler, &ctx);
 	mlx_expose_hook(ctx.win_ptr, expose_handler, &ctx);
-	mlx_key_hook(ctx.win_ptr, key_handler, &ctx);
 	mlx_mouse_hook(ctx.win_ptr, mouse_handler, &ctx);
 	mlx_loop_hook(ctx.mlx_ptr, loop_handler, &ctx);
 	mlx_hook(ctx.win_ptr, ClientMessage, StructureNotifyMask, close_window, &ctx);
