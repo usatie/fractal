@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 23:59:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 16:56:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_img_info {
 }	t_img_info;
 
 typedef enum e_mode { Normal, Psyc }	t_mode;
+typedef enum e_fractal_type {Mandelbrot, Julia, Phoenix, Barnsley, Flowerbrot}	t_fractal_type;
 
 /*
 **  Fract-ol Context
@@ -146,16 +147,20 @@ typedef struct s_ctx {
 	unsigned char	hue;
 	t_hsv			base_hsv;
 	unsigned int	max_loop;
-	t_mode			mode;
+	t_mode			color_mode;
+	t_mode			julia_mode;
+	t_fractal_type	fractal_type;
+	double			c_radian;
+	t_complex		c;
 }	t_ctx;
 	//enum			fractal_type;
 
 bool			is_equal(t_ctx l, t_ctx r);
 
 // Returns img_ptr
-int				mandelbrot_divergence_speed(double a, double b, int max_loop);
-void			draw_mandelbrot(void *img_ptr, t_double_point o,
-					double step, unsigned char hue, int max_loop);
+int				divergence_speed(t_complex z, t_complex c, int max_loop);
+void			draw_fractal(void *img_ptr, t_double_point o,
+					double step, unsigned char hue, int max_loop, t_fractal_type fractal_type, t_ctx ctx);
 int				key_handler(int keycode, void *param);
 int				mouse_handler(int button, int x, int y, void *param);
 

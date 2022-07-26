@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 23:59:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/26 17:10:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 
 #define HELP_WIDTH 300
 #define HELP_HEIGHT 300
-
-void			mlx_playground(void);
-void			math_playground(void);
 
 t_double_point	calc_origin(t_int_point win_mouse_pnt,
 		t_double_point mouse_pnt, double step)
@@ -59,24 +56,6 @@ int	close_window(void *param)
 	exit(0);
 }
 
-int	mandelbrot_divergence_speed(double a, double b, int max_loop)
-{
-	int			i;
-	t_complex	c;
-	t_complex	z;
-
-	z = complex_new(0, 0);
-	c = complex_new(a, b);
-	i = -1;
-	while (++i < max_loop)
-	{
-		z = mandelbrot(z, c);
-		if (isinf(z.re) || isinf(z.im))
-			return (i);
-	}
-	return (i);
-}
-
 void	*get_clear_img(void *mlx_ptr, int width, int height)
 {
 	int						x;
@@ -98,8 +77,22 @@ void	*get_clear_img(void *mlx_ptr, int width, int height)
 	return (img_ptr);
 }
 
-void	draw_mandelbrot(void *img_ptr, t_double_point o,
-				double step, unsigned char hue, int max_loop)
+int	divergence_speed(t_complex z, t_complex c, int max_loop)
+{
+	int			i;
+
+	i = -1;
+	while (++i < max_loop)
+	{
+		z = mandelbrot(z, c);
+		if (isinf(z.re) || isinf(z.im))
+			return (i);
+	}
+	return (i);
+}
+
+void	draw_fractal(void *img_ptr, t_double_point o,
+				double step, unsigned char hue, int max_loop, t_fractal_type fractal_type, t_ctx ctx)
 {
 	int						x;
 	int						y;
@@ -110,16 +103,19 @@ void	draw_mandelbrot(void *img_ptr, t_double_point o,
 	static t_double_point	prev_o;
 	static double			prev_step;
 	static int				prev_max_loop;
+	static double			prev_c_radian;
 	static int				speeds[FRACT_WIDTH][FRACT_HEIGHT];
 	bool					is_updated;
 
 	is_updated = (prev_step != step)
 		|| (prev_o.x != o.x)
 		|| (prev_o.y != o.y)
-		|| (prev_max_loop != max_loop);
+		|| (prev_max_loop != max_loop)
+		|| (prev_c_radian != ctx.c_radian);
 	prev_o = o;
 	prev_step = step;
 	prev_max_loop = max_loop;
+	prev_c_radian = ctx.c_radian;
 	img = mlx_get_data_addr(img_ptr,
 			&img_info.bits_per_pixel, &img_info.size_line, &img_info.endian);
 	y = -1;
@@ -130,9 +126,18 @@ void	draw_mandelbrot(void *img_ptr, t_double_point o,
 		{
 			if (is_updated)
 			{
-				speed = mandelbrot_divergence_speed(o.x + step * (double)x,
-						o.y - step * (double)y,
-						max_loop);
+				if (fractal_type == Mandelbrot)
+					speed = divergence_speed(
+							complex_new(0, 0),
+							complex_new(o.x + step * (double)x, o.y - step * (double)y),
+							max_loop);
+				else if (fractal_type == Julia)
+					speed = divergence_speed(
+							complex_new(o.x + step * (double)x, o.y - step * (double)y),
+							ctx.c,
+							max_loop);
+				else
+					exit(EXIT_FAILURE);
 				speeds[x][y] = speed;
 			}
 			else
@@ -154,13 +159,37 @@ void	put_ctx_info(t_ctx *ctx)
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, img_ptr, FRACT_WIDTH, 0);
 	mlx_destroy_image(ctx->mlx_ptr, img_ptr);
 	red = (t_rgb){.r = 255};
-	height = 50;
-	if (ctx->mode == Normal)
-		asprintf(&str, "mode: %s", "Normal");
-	else if (ctx->mode == Psyc)
-		asprintf(&str, "mode: %s", "Psychedelic");
+	height = 30;
+	if (ctx->fractal_type == Mandelbrot)
+		asprintf(&str, "fractal type: %s", "Mandelbrot");
+	else if (ctx->fractal_type == Julia)
+		asprintf(&str, "fractal type: %s", "Julia");
+	else if (ctx->fractal_type == Phoenix)
+		asprintf(&str, "fractal type: %s", "Phoenix");
+	else if (ctx->fractal_type == Barnsley)
+		asprintf(&str, "fractal type: %s", "Barnsley");
+	else if (ctx->fractal_type == Flowerbrot)
+		asprintf(&str, "fractal type: %s", "Flowerbrot");
 	else
-		asprintf(&str, "mode: %s", "Unknown");
+		asprintf(&str, "fractal type: %s", "Unknown");
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	free(str);
+	height += 30;
+	if (ctx->color_mode == Normal)
+		asprintf(&str, "color mode: %s", "Normal");
+	else if (ctx->color_mode == Psyc)
+		asprintf(&str, "color mode: %s", "Psychedelic");
+	else
+		asprintf(&str, "color mode: %s", "Unknown");
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	free(str);
+	height += 30;
+	if (ctx->julia_mode == Normal)
+		asprintf(&str, "julia mode: %s", "Normal");
+	else if (ctx->julia_mode == Psyc)
+		asprintf(&str, "julia mode: %s", "Psychedelic");
+	else
+		asprintf(&str, "julia mode: %s", "Unknown");
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
@@ -173,6 +202,10 @@ void	put_ctx_info(t_ctx *ctx)
 	free(str);
 	height += 30;
 	asprintf(&str, "hue: %d", ctx->hue);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	free(str);
+	height += 30;
+	asprintf(&str, "fractal's c: %lf + %lfi", ctx->c.re, ctx->c.im);
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
@@ -209,8 +242,12 @@ int	key_handler(int keycode, void *param)
 		ctx->win_mouse_pnt.x -= 10;
 	else if (keycode == XK_Down)
 		ctx->win_mouse_pnt.y -= 10;
-	else if (keycode == 'p')
-		ctx->mode = (ctx->mode + 1) % 2;
+	else if (keycode == 'c')
+		ctx->color_mode = (ctx->color_mode + 1) % 2;
+	else if (keycode == 'j')
+		ctx->julia_mode = (ctx->julia_mode + 1) % 2;
+	else if (keycode == 'f')
+		ctx->fractal_type = (ctx->fractal_type + 1) % 5;
 	else
 		return (0);
 	return (0);
@@ -245,13 +282,20 @@ int	loop_handler(void *param)
 		return (0);
 	lock = true;
 	ctx = (t_ctx *)param;
-	if (ctx->mode == Psyc)
-		ctx->hue += 1;
-	draw_mandelbrot(ctx->img_ptr,
+	if (ctx->color_mode == Psyc)
+		ctx->hue += 4;
+	if (ctx->julia_mode == Psyc)
+	{
+		ctx->c_radian += M_PI / 60;
+		ctx->c = cmul(complex_new(0.7885, 0), complex_new(cos(ctx->c_radian), sin(ctx->c_radian)));
+	}
+	draw_fractal(ctx->img_ptr,
 			calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step),
 			ctx->step,
 			ctx->hue,
-			ctx->max_loop);
+			ctx->max_loop,
+			ctx->fractal_type,
+			*ctx);
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, ctx->img_ptr, 0, 0);
 	put_ctx_info(ctx);
 	lock = false;
@@ -264,25 +308,82 @@ int	expose_handler(void *param)
 	return (0);
 }
 
-int	main(void)
+void	ctx_update_step(t_ctx *ctx)
+{
+	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
+}
+
+int	get_index(char *element, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (ft_strcmp(argv[i], element) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+void	usageErr(void) __attribute__((noreturn));
+
+void	usageErr(void)
+{
+	ft_dprintf(STDERR_FILENO, "Usage: ./fractol {Fractal Type} [--psychedelic | -p]\n");
+	ft_dprintf(STDERR_FILENO, "Fractal Type: [Mandelbrot] [Julia] [Phoenix] [Barnsley] [Flowerbrot]\n");
+	exit(EXIT_FAILURE);
+}
+
+t_fractal_type parse_fractal_type(char *arg)
+{
+	if (ft_strcmp(arg, "Mandelbrot") == 0)
+		return (Mandelbrot);
+	else if (ft_strcmp(arg, "Julia") == 0)
+		return (Julia);
+	else if (ft_strcmp(arg, "Phoenix") == 0)
+		return (Phoenix);
+	else if (ft_strcmp(arg, "Barnsley") == 0)
+		return (Barnsley);
+	else if (ft_strcmp(arg, "Flowerbrot") == 0)
+		return (Flowerbrot);
+	usageErr();
+}
+
+t_ctx	argparse(int argc, char **argv)
 {
 	t_ctx	ctx;
 
-	ctx.step_n = 0;
-	ctx.step = 0.01 * pow(2, (double)ctx.step_n / 10);
+	if (argc != 2)
+		usageErr();
+	ctx = (t_ctx){0};
 	ctx.win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
 	ctx.mouse_pnt = (t_double_point){0, 0};
+	ctx.max_loop = 50;
+	ctx.color_mode = Normal;
+	ctx.julia_mode = Normal;
+	ctx.fractal_type = parse_fractal_type(argv[1]);
+	ctx.hue = 128;
+	ctx.c_radian = M_PI / 180 * 45;
+	ctx.c = cmul(complex_new(0.7885, 0), complex_new(cos(ctx.c_radian), sin(ctx.c_radian)));
+	ctx_update_step(&ctx);
+	return (ctx);
+}
+
+int	main(int argc, char **argv)
+{
+	t_ctx	ctx;
+
+	ctx = argparse(argc, argv);
 	ctx.mlx_ptr = mlx_init();
 	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
-	ctx.max_loop = 50;
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
-	ctx.mode = Normal;
 	put_ctx_info(&ctx);
 	mlx_expose_hook(ctx.win_ptr, expose_handler, &ctx);
 	mlx_key_hook(ctx.win_ptr, key_handler, &ctx);
 	mlx_mouse_hook(ctx.win_ptr, mouse_handler, &ctx);
 	mlx_loop_hook(ctx.mlx_ptr, loop_handler, &ctx);
-	//mlx_hook(ctx.win_ptr, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, close_window, &ctx);
 	mlx_hook(ctx.win_ptr, ClientMessage, StructureNotifyMask, close_window, &ctx);
 	mlx_loop(ctx.mlx_ptr);
 	return (0);
