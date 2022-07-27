@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 18:19:02 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 21:51:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,63 @@
 #include <stdio.h>
 #include <math.h>
 
-void	ctx_update_step(t_ctx *ctx)
+static t_double_point	calc_origin(t_int_point win_mouse_pnt,
+		t_double_point mouse_pnt, double step)
 {
-	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
+	double	x;
+	double	y;
+
+	x = mouse_pnt.x - step * win_mouse_pnt.x;
+	y = mouse_pnt.y + step * win_mouse_pnt.y;
+	return ((t_double_point){x, y});
+}
+
+void	ctx_on_update(t_ctx *ctx)
+{
+	static bool		initialized;
+	static t_ctx	prev;
+
+	if (prev.fractal_type != ctx->fractal_type || !initialized)
+	{
+		ctx->julia_mode = Normal;
+		ctx->max_loop = 100;
+		if (ctx->fractal_type == Barnsley)
+		{
+			ctx->mouse_pnt = (t_double_point){0.5, 5};
+			ctx->step_n = 40;
+		}
+		else
+		{
+			ctx->mouse_pnt = (t_double_point){0, 0};
+			ctx->step_n = 0;
+		}
+	}
+	if (prev.step_n != ctx->step_n || !initialized)
+		ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
+	if (prev.step != ctx->step
+		|| prev.mouse_pnt.x != ctx->mouse_pnt.x
+		|| prev.mouse_pnt.y != ctx->mouse_pnt.y
+		|| prev.win_mouse_pnt.x != ctx->win_mouse_pnt.x
+		|| prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y
+		|| !initialized)
+		ctx->o = calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step);
+	initialized = true;
+	prev = *ctx;
+}
+
+bool	ctx_is_updated(t_ctx *ctx)
+{
+	static t_ctx	prev;
+	bool			is_updated;
+
+	is_updated = (prev.step != ctx->step)
+		|| (prev.o.x != ctx->o.x)
+		|| (prev.o.y != ctx->o.y)
+		|| (prev.max_loop != ctx->max_loop)
+		|| (prev.c_radian != ctx->c_radian)
+		|| (prev.fractal_type != ctx->fractal_type);
+	prev = *ctx;
+	return (is_updated);
 }
 
 void	ctx_next_color_mode(t_ctx *ctx)
@@ -34,30 +88,7 @@ void	ctx_next_fractal_type(t_ctx *ctx)
 {
 	ctx->fractal_type = (ctx->fractal_type + 1) % 3;
 	ctx->win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
-	if (ctx->fractal_type == Barnsley)
-	{
-		ctx->mouse_pnt = (t_double_point){0.5, 5};
-		ctx->max_loop = 100;
-		ctx->step_n = 20;
-	}
-	else
-	{
-		ctx->mouse_pnt = (t_double_point){0, 0};
-		ctx->max_loop = 100;
-		ctx->step_n = 0;
-	}
-	ctx_update_step(ctx);
-}
-
-t_double_point	calc_origin(t_int_point win_mouse_pnt,
-		t_double_point mouse_pnt, double step)
-{
-	double	x;
-	double	y;
-
-	x = mouse_pnt.x - step * win_mouse_pnt.x;
-	y = mouse_pnt.y + step * win_mouse_pnt.y;
-	return ((t_double_point){x, y});
+	ctx_on_update(ctx);
 }
 
 void	put_ctx_to_window(t_ctx *ctx)

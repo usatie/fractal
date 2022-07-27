@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 14:25:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:26:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "math.h"
 #include <unistd.h>
 
-void	ctx_update_step(t_ctx *ctx);
 void	usage_err(void) __attribute__((noreturn));
 
 void	usage_err(void)
@@ -57,6 +56,6 @@ t_ctx	argparse(int argc, char **argv)
 	ctx.c_radian = M_PI / 180 * 120;
 	ctx.c = cmul(complex_new(0.7885, 0),
 			complex_new(cos(ctx.c_radian), sin(ctx.c_radian)));
-	ctx_update_step(&ctx);
+	ctx_on_update(&ctx);
 	return (ctx);
 }

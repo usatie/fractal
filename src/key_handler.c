@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:05:58 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:33:45 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int	key_handler(int keycode, t_ctx *ctx)
 		ctx_next_fractal_type(ctx);
 	else
 		return (0);
+	ctx_on_update(ctx);
 	return (0);
 }
