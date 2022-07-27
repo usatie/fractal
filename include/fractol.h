@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 10:46:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:14:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,14 +188,17 @@ bool			is_equal(t_ctx l, t_ctx r);
 int				divergence_speed(t_complex z, t_complex c, int max_loop);
 void			draw_fractal(void *img_ptr, t_double_point o,
 					double step, unsigned char hue, int max_loop, t_fractal_type fractal_type, t_ctx ctx);
-int				key_handler(int keycode, void *param);
-int				mouse_handler(int button, int x, int y, void *param);
+int				key_handler(int keycode, t_ctx *ctx);
+int				mouse_handler(int button, int x, int y, t_ctx *ctx);
+int				loop_handler(t_ctx *ctx);
 
 // print mlx keycode as readable format
 void			print_keycode(int keycode);
 t_double_point	calc_origin(t_int_point win_mouse_pnt,
 					t_double_point mouse_pnt, double step);
-int				close_window(t_ctx *ctx);
+int	close_window(t_ctx *ctx);
+void	clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
+
 
 t_ctx	argparse(int argc, char **argv);
 
@@ -204,6 +207,8 @@ void	ctx_update_step(t_ctx *ctx);
 void	ctx_next_color_mode(t_ctx *ctx);
 void	ctx_next_julia_mode(t_ctx *ctx);
 void	ctx_next_fractal_type(t_ctx *ctx);
+
+void	put_ctx_to_window(t_ctx *ctx);
 
 int	green(void);
 int	red(void);

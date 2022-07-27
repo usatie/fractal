@@ -6,19 +6,17 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:36:22 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 10:36:53 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:04:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <math.h>
 
-int	mouse_handler(int button, int x, int y, void *param)
+int	mouse_handler(int button, int x, int y, t_ctx *ctx)
 {
-	t_ctx			*ctx;
 	t_double_point	o;
 
-	ctx = (t_ctx *)param;
 	if (button == 4)
 		ctx->step_n--;
 	else if (button == 5)
