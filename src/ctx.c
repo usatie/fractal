@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:30:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:19:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	put_ctx_to_window(t_ctx *ctx)
 	char			*str;
 	int				height;
 
-	clear_win_rect(ctx->mlx_ptr, ctx->win_ptr, (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT});
+	clear_win_rect(ctx->mlx_ptr, ctx->win_ptr,
+		(t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT});
 	red = (t_rgb){.r = 255};
 	height = 30;
 	if (ctx->fractal_type == Mandelbrot)
@@ -77,7 +78,8 @@ void	put_ctx_to_window(t_ctx *ctx)
 		asprintf(&str, "fractal type: %s", "Barnsley");
 	else
 		asprintf(&str, "fractal type: %s", "Unknown");
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 	if (ctx->color_mode == Normal)
@@ -86,7 +88,8 @@ void	put_ctx_to_window(t_ctx *ctx)
 		asprintf(&str, "color mode: %s", "Psychedelic");
 	else
 		asprintf(&str, "color mode: %s", "Unknown");
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 	if (ctx->julia_mode == Normal)
@@ -95,50 +98,41 @@ void	put_ctx_to_window(t_ctx *ctx)
 		asprintf(&str, "julia mode: %s", "Psychedelic");
 	else
 		asprintf(&str, "julia mode: %s", "Unknown");
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 	asprintf(&str, "max_loop: %d", ctx->max_loop);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 	asprintf(&str, "step[= 1 pixel] : %.20f", ctx->step);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
 	asprintf(&str, "hue: %d", ctx->hue);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-	asprintf(&str, "c_radian: %lfpi", (ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2) * 2));
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	asprintf(&str, "c_radian: %lfpi",
+		(ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2) * 2));
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-	asprintf(&str, "win_mouse_pnt: (%d, %d)", ctx->win_mouse_pnt.x, ctx->win_mouse_pnt.y);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	asprintf(&str, "win_mouse_pnt: (%d, %d)",
+		ctx->win_mouse_pnt.x, ctx->win_mouse_pnt.y);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-	asprintf(&str, "mouse_pnt: (%lf, %lf)", ctx->mouse_pnt.x, ctx->mouse_pnt.y);
-	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
+	asprintf(&str, "mouse_pnt: (%lf, %lf)",
+		ctx->mouse_pnt.x, ctx->mouse_pnt.y);
+	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
+		FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-}
-
-bool	is_equal(t_ctx l, t_ctx r)
-{
-	(void)l;
-	(void)r;
-	return (false);
-	/*
-	return (
-		l.win_mouse_pnt.x == r.win_mouse_pnt.x
-		&& l.win_mouse_pnt.y == r.win_mouse_pnt.y
-		&& l.mouse_pnt.x == r.mouse_pnt.x
-		&& l.mouse_pnt.y == r.mouse_pnt.y
-		&& l.step == r.step
-		&& l.hue == r.hue
-		&& l.max_loop == r.max_loop
-		&& l.mode == r.mode
-	);
-	*/
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:29:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:22:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_barnsley(void *img_ptr, t_ctx ctx)
 	{
 		x = -1;
 		while (++x < FRACT_WIDTH)
-			*((int *)img + FRACT_HEIGHT * y + x) = rgb2mlxint((t_rgb){0, 0, 0, 0});
+			*((int *)img + FRACT_HEIGHT * y + x) = 0;
 	}
 	o = calc_origin(ctx.win_mouse_pnt, ctx.mouse_pnt, ctx.step);
 	i = 0;
@@ -78,7 +78,8 @@ void	draw_barnsley(void *img_ptr, t_ctx ctx)
 }
 
 void	draw_fractal(void *img_ptr, t_double_point o,
-				double step, unsigned char hue, int max_loop, t_fractal_type fractal_type, t_ctx ctx)
+				double step, unsigned char hue, int max_loop,
+				t_fractal_type fractal_type, t_ctx ctx)
 {
 	int						x;
 	int						y;
@@ -122,20 +123,23 @@ void	draw_fractal(void *img_ptr, t_double_point o,
 				if (fractal_type == Mandelbrot)
 					speed = divergence_speed(
 							complex_new(0, 0),
-							complex_new(o.x + step * (double)x, o.y - step * (double)y),
+							complex_new(o.x + step * (double)x,
+								o.y - step * (double)y),
 							max_loop);
 				else if (fractal_type == Julia)
 					speed = divergence_speed(
-							complex_new(o.x + step * (double)x, o.y - step * (double)y),
+							complex_new(o.x + step * (double)x,
+								o.y - step * (double)y),
 							ctx.c,
 							max_loop);
 				else
 					exit(EXIT_FAILURE);
+				speed = speed * 256 / ctx.max_loop;
 				speeds[x][y] = speed;
 			}
 			else
 				speed = speeds[x][y];
-			hsv = (t_hsv){(hue + speed * 256 / ctx.max_loop) % 256, 255, 150, 0};
+			hsv = (t_hsv){(hue + speed) % 256, 255, 150, 0};
 			*((int *)img + FRACT_HEIGHT * y + x) = hsv2mlxint(hsv);
 		}
 	}

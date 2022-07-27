@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:25:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:25:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	usage_err(void) __attribute__((noreturn));
 
 void	usage_err(void)
 {
-	ft_dprintf(STDERR_FILENO, "Usage: ./fractol {Fractal Type} [--psychedelic | -p]\n");
-	ft_dprintf(STDERR_FILENO, "Fractal Type: [Mandelbrot] [Julia] [Barnsley]\n");
+	ft_dprintf(STDERR_FILENO,
+		"Usage: ./fractol {Fractal Type} [--psychedelic | -p]\n");
+	ft_dprintf(STDERR_FILENO,
+		"Fractal Type: [Mandelbrot] [Julia] [Barnsley]\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -53,7 +55,8 @@ t_ctx	argparse(int argc, char **argv)
 	ctx.fractal_type = parse_fractal_type(argv[1]);
 	ctx.hue = 128;
 	ctx.c_radian = M_PI / 180 * 120;
-	ctx.c = cmul(complex_new(0.7885, 0), complex_new(cos(ctx.c_radian), sin(ctx.c_radian)));
+	ctx.c = cmul(complex_new(0.7885, 0),
+			complex_new(cos(ctx.c_radian), sin(ctx.c_radian)));
 	ctx_update_step(&ctx);
 	return (ctx);
 }

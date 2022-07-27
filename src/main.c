@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:19:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:24:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char **argv)
 	mlx_hook(ctx.win_ptr, KeyPress, KeyPressMask, key_handler, &ctx);
 	mlx_mouse_hook(ctx.win_ptr, mouse_handler, &ctx);
 	mlx_loop_hook(ctx.mlx_ptr, loop_handler, &ctx);
-	mlx_hook(ctx.win_ptr, ClientMessage, StructureNotifyMask, close_window, &ctx);
+	mlx_hook(ctx.win_ptr, ClientMessage, StructureNotifyMask,
+		close_window, &ctx);
 	mlx_loop(ctx.mlx_ptr);
 	return (0);
 }
