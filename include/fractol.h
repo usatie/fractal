@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 23:22:38 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 00:19:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,10 @@ typedef struct s_rect {
 	int	height;
 }	t_rect;
 
-const t_rect	g_rect_fractal = (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
-const t_rect	g_rect_help = (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT};
+static const t_rect	g_rect_fractal
+	= (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
+static const t_rect	g_rect_help
+	= (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT};
 
 bool			rect_contains(t_int_point p, t_rect rect);
 

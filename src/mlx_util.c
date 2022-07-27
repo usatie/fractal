@@ -6,16 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:09:07 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 18:10:09 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 00:02:06 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "libft.h"
-#include <unistd.h>
-#include "mlx.h"
-#include <keysymdef.h>
 #include "ft_printf.h"
+#include "mlx.h"
+#include <unistd.h>
+#include <keysymdef.h>
 
 void	print_keycode(int keycode)
 {

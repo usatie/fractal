@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 19:33:45 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 00:02:55 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	key_handler(int keycode, t_ctx *ctx)
 {
 	print_keycode(keycode);
 	if (keycode == XK_Escape)
-	{
 		close_window(ctx);
-		return (0);
-	}
 	else if (keycode == '[' && ctx->max_loop > 10)
 		ctx->max_loop -= 10;
 	else if (keycode == ']' && ctx->max_loop)
