@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/26 22:38:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:46:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <stdbool.h>
 # define XK_MISCELLANY 1
 # define XK_XKB_KEYS 1
+
+# define WIN_WIDTH 600
+# define WIN_HEIGHT 300
+# define WIN_TITLE "fract-ol"
+
+# define FRACT_WIDTH 300
+# define FRACT_HEIGHT 300
+
+# define HELP_WIDTH 300
+# define HELP_HEIGHT 300
 
 /*
 **  HSV Color
@@ -102,16 +112,6 @@ typedef struct s_double_point {
 	double	y;
 }	t_double_point;
 
-/*
-**  minilibx img info
-*/
-
-/*
-** bits_per_pixel — bits per pixel
-** size_line — size of the line
-** endian — endian
-*/
-
 typedef struct s_img_info {
 	int		bits_per_pixel;
 	int		size_line;
@@ -120,6 +120,31 @@ typedef struct s_img_info {
 
 typedef enum e_mode { Normal, Psyc }	t_mode;
 typedef enum e_fractal_type {Mandelbrot, Julia, Barnsley}	t_fractal_type;
+
+typedef struct s_rect {
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_rect;
+
+/*
+**  minilibx img container
+*/
+
+/*
+** bpp — bits per pixel
+** size_line — size of the line
+** endian — endian
+*/
+typedef struct s_img {
+	void	*mlx_ptr;
+	void	*img_ptr;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_img;
 
 /*
 **  Fract-ol Context
@@ -152,6 +177,8 @@ typedef struct s_ctx {
 	t_fractal_type	fractal_type;
 	double			c_radian;
 	t_complex		c;
+	t_img			fractal_img;
+	t_img			help_img;
 }	t_ctx;
 	//enum			fractal_type;
 
@@ -170,4 +197,14 @@ t_double_point	calc_origin(t_int_point win_mouse_pnt,
 					t_double_point mouse_pnt, double step);
 int				close_window(t_ctx *ctx);
 
+t_ctx	argparse(int argc, char **argv);
+
+
+void	ctx_update_step(t_ctx *ctx);
+void	ctx_next_color_mode(t_ctx *ctx);
+void	ctx_next_julia_mode(t_ctx *ctx);
+void	ctx_next_fractal_type(t_ctx *ctx);
+
+int	green(void);
+int	red(void);
 #endif

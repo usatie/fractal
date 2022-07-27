@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/25 23:56:21 by susami           ###   ########.fr        #
+#    Updated: 2022/07/27 10:40:33 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SRCS		=	src/main.c \
 			src/color.c \
 			src/mlx_util.c \
 			src/ctx.c \
+			src/argparse.c \
+			src/key_handler.c \
+			src/mouse_handler.c \
+			src/img.c \
 
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

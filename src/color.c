@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 18:32:33 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:46:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ int	rgb2mlxint(t_rgb rgb)
 int	hsv2mlxint(t_hsv hsv)
 {
 	return (rgb2mlxint(hsv2rgb(hsv)));
+}
+
+int	green(void)
+{
+	return (rgb2mlxint(((t_rgb){0, 255, 0, 0})));
+}
+
+int	red(void)
+{
+	return (rgb2mlxint(((t_rgb){255, 0, 0, 0})));
 }
