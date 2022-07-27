@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 14:24:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:25:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char **argv)
 	ctx.mlx_ptr = mlx_init();
 	ctx.win_ptr = mlx_new_window(ctx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	ctx.img_ptr = mlx_new_image(ctx.mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
+	init_img(&ctx.fractal_img, ctx.mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
+	init_img(&ctx.help_img, ctx.mlx_ptr, HELP_WIDTH, HELP_HEIGHT);
 	put_ctx_to_window(&ctx);
 	mlx_do_key_autorepeaton(ctx.mlx_ptr);
 	mlx_hook(ctx.win_ptr, KeyPress, KeyPressMask, key_handler, &ctx);

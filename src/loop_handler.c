@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:10:07 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 18:30:38 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@ int	loop_handler(t_ctx *ctx)
 		ctx->c = cmul(complex_new(0.7885, 0),
 				complex_new(cos(ctx->c_radian), sin(ctx->c_radian)));
 	}
-	draw_fractal(ctx->img_ptr,
-		calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step),
-		ctx->step,
-		ctx->hue,
-		ctx->max_loop,
-		ctx->fractal_type,
-		*ctx);
-	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr, ctx->img_ptr, 0, 0);
+	draw_fractal(ctx);
+	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr,
+		ctx->fractal_img.img_ptr, 0, 0);
 	put_ctx_to_window(ctx);
 	lock = false;
 	return (0);
