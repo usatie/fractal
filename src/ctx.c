@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 21:51:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 22:05:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,6 @@ void	ctx_on_update(t_ctx *ctx)
 		ctx->o = calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step);
 	initialized = true;
 	prev = *ctx;
-}
-
-bool	ctx_is_updated(t_ctx *ctx)
-{
-	static t_ctx	prev;
-	bool			is_updated;
-
-	is_updated = (prev.step != ctx->step)
-		|| (prev.o.x != ctx->o.x)
-		|| (prev.o.y != ctx->o.y)
-		|| (prev.max_loop != ctx->max_loop)
-		|| (prev.c_radian != ctx->c_radian)
-		|| (prev.fractal_type != ctx->fractal_type);
-	prev = *ctx;
-	return (is_updated);
 }
 
 void	ctx_next_color_mode(t_ctx *ctx)

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 21:52:04 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 23:22:38 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,11 @@ typedef struct s_rect {
 	int	height;
 }	t_rect;
 
+const t_rect	g_rect_fractal = (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
+const t_rect	g_rect_help = (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT};
+
+bool			rect_contains(t_int_point p, t_rect rect);
+
 /*
 **  minilibx img container
 */
@@ -201,6 +206,10 @@ void			init_img(t_img *img, void *mlx_ptr, int width, int height);
 void			clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
 void			clear_img_rect(t_img *img, t_rect rect);
 void			put_pixel_in_img(t_img *img, int x, int y, int color);
+void			draw_mandelbrot(t_ctx *ctx);
+void			draw_julia(t_ctx *ctx);
+void			draw_barnsley(t_ctx *ctx);
+int				mandelbrot_div_speed(t_complex z, t_complex c, int max_loop);
 
 t_ctx			argparse(int argc, char **argv);
 
@@ -210,6 +219,7 @@ void			ctx_next_julia_mode(t_ctx *ctx);
 void			ctx_next_fractal_type(t_ctx *ctx);
 void			ctx_on_update(t_ctx *ctx);
 bool			ctx_is_updated(t_ctx *ctx);
+bool			need_fractal_update(t_ctx *ctx);
 
 void			put_ctx_to_window(t_ctx *ctx);
 

@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/27 11:19:34 by susami           ###   ########.fr        #
+#    Updated: 2022/07/27 22:51:34 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS		=	src/main.c \
 			src/loop_handler.c \
 			src/img.c \
 			src/fractal.c \
+			src/rect.c \
 
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
