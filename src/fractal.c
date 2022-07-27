@@ -6,14 +6,18 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:19:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:29:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fractol.h"
 #include "mlx.h"
 #include <math.h>
+
+t_complex	mandelbrot(t_complex z, t_complex c)
+{
+	return (cadd(cmul(z, z), c));
+}
 
 int	divergence_speed(t_complex z, t_complex c, int max_loop)
 {
@@ -31,13 +35,13 @@ int	divergence_speed(t_complex z, t_complex c, int max_loop)
 
 void	draw_barnsley(void *img_ptr, t_ctx ctx)
 {
-	float		rng;
-	t_complex	c;
-	int			x;
-	int			y;
-	char		*img;
-	t_img_info	img_info;
-	unsigned int			i;
+	float			rng;
+	t_complex		c;
+	int				x;
+	int				y;
+	char			*img;
+	t_img_info		img_info;
+	unsigned int	i;
 	t_double_point	o;
 
 	(void)img_ptr;
@@ -50,8 +54,7 @@ void	draw_barnsley(void *img_ptr, t_ctx ctx)
 		while (++x < FRACT_WIDTH)
 			*((int *)img + FRACT_HEIGHT * y + x) = rgb2mlxint((t_rgb){0, 0, 0, 0});
 	}
-
-	o = calc_origin(ctx.win_mouse_pnt, ctx.mouse_pnt, ctx.step),
+	o = calc_origin(ctx.win_mouse_pnt, ctx.mouse_pnt, ctx.step);
 	i = 0;
 	while (++i < pow(10, 4 + (double)ctx.max_loop / 100))
 	{

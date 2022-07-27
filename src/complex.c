@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:04:20 by susami            #+#    #+#             */
-/*   Updated: 2022/07/24 16:06:42 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:24:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ t_complex	cadd(t_complex lhs, t_complex rhs)
 	return (complex_new(lhs.re + rhs.re, lhs.im + rhs.im));
 }
 
+/*
 t_complex	csub(t_complex lhs, t_complex rhs)
 {
 	return (complex_new(lhs.re - rhs.re, lhs.im - rhs.im));
 }
+*/
 
 t_complex	cmul(t_complex lhs, t_complex rhs)
 {
@@ -45,6 +47,7 @@ a.re = (c.re * b.re + c.im * b.im) / (b.re * b.re + b.im * b.im)
 a.im = (c.re * (-b.im) + c.im * b.re ) / (b.re * b.re + b.im * b.im)
 */
 
+/*
 t_complex	cdiv(t_complex c, t_complex b)
 {
 	t_complex	a;
@@ -53,6 +56,7 @@ t_complex	cdiv(t_complex c, t_complex b)
 	a.im = (c.re * (-b.im) + c.im * b.re) / (b.re * b.re + b.im * b.im);
 	return (a);
 }
+*/
 
 char	*cstr(t_complex z)
 {
@@ -61,9 +65,3 @@ char	*cstr(t_complex z)
 	asprintf(&ret, "%lf + %lfi", z.re, z.im);
 	return (ret);
 }
-
-t_complex	mandelbrot(t_complex z, t_complex c)
-{
-	return (cadd(cmul(z, z), c));
-}
-

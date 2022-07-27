@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 10:29:57 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:25:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 #include <unistd.h>
 
 void	ctx_update_step(t_ctx *ctx);
-void	usageErr(void) __attribute__((noreturn));
+void	usage_err(void) __attribute__((noreturn));
 
-void	usageErr(void)
+void	usage_err(void)
 {
 	ft_dprintf(STDERR_FILENO, "Usage: ./fractol {Fractal Type} [--psychedelic | -p]\n");
 	ft_dprintf(STDERR_FILENO, "Fractal Type: [Mandelbrot] [Julia] [Barnsley]\n");
 	exit(EXIT_FAILURE);
 }
 
-t_fractal_type parse_fractal_type(char *arg)
+t_fractal_type	parse_fractal_type(char *arg)
 {
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
 		return (Mandelbrot);
@@ -35,7 +35,7 @@ t_fractal_type parse_fractal_type(char *arg)
 	else if (ft_strcmp(arg, "Barnsley") == 0)
 		return (Barnsley);
 	else
-		usageErr();
+		usage_err();
 }
 
 t_ctx	argparse(int argc, char **argv)
@@ -43,7 +43,7 @@ t_ctx	argparse(int argc, char **argv)
 	t_ctx	ctx;
 
 	if (argc != 2)
-		usageErr();
+		usage_err();
 	ctx = (t_ctx){0};
 	ctx.win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
 	ctx.mouse_pnt = (t_double_point){0, 0};
@@ -57,4 +57,3 @@ t_ctx	argparse(int argc, char **argv)
 	ctx_update_step(&ctx);
 	return (ctx);
 }
-

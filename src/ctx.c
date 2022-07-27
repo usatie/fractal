@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:15:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/27 11:30:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
-	asprintf(&str, "c_radian: %lfpi", (ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2)*2));
+	asprintf(&str, "c_radian: %lfpi", (ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2) * 2));
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, FRACT_WIDTH + 50, height, rgb2mlxint(red), str);
 	free(str);
 	height += 30;
