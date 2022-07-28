@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/28 00:19:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 00:46:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 # define XK_MISCELLANY 1
 # define XK_XKB_KEYS 1
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 300
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 400
 # define WIN_TITLE "fract-ol"
 
-# define FRACT_WIDTH 300
-# define FRACT_HEIGHT 300
+# define FRACT_WIDTH 400
+# define FRACT_HEIGHT 400
 
-# define HELP_WIDTH 300
-# define HELP_HEIGHT 300
+# define HELP_WIDTH 400
+# define HELP_HEIGHT 400
 
 /*
 **  HSV Color
