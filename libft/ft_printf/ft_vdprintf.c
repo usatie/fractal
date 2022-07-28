@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 17:47:17 by susami            #+#    #+#             */
-/*   Updated: 2022/06/01 17:30:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 23:45:52 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "ft_printf.h"
 #include "libft.h"
+#include "string.h"
 
 void	fmt_init(t_fmt *fmt, const char *format);
 void	fmt_clear_spec(t_fmt *fmt);
@@ -36,6 +37,11 @@ static void	print_bytes(t_fmt *fmt, const char *str, size_t len)
 	{
 		errno = EOVERFLOW;
 		fmt->out_size = -1;
+	}
+	else if (fmt->dst_str_flags & STRING_FLG)
+	{
+		strncat(fmt->dst_str, str, len);
+		fmt->out_size += len;
 	}
 	else
 		fmt->out_size += write(fmt->fd, str, len);

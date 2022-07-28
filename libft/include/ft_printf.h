@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:43:35 by susami            #+#    #+#             */
-/*   Updated: 2022/06/01 18:14:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:31:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # define SIGN_SPACE_FLG	010
 # define SIGN_PLUS_FLG	020
 # define PRECISION_FLG	040
+
+// print destination flags
+
+# define STRING_FLG		01
+# define ALLOCATE_FLG	02
 
 // GENERAL properties:
 // 	- format
@@ -50,10 +55,18 @@ typedef struct s_fmt
 	char		conversion;
 	char		sign_c;
 	char		_PADDING[2];
+
+	va_list		ap;
+	char		*dst_str;
+	int			dst_str_flags;
 }	t_fmt;
 
 int		ft_vdprintf(int fd, const char *format, va_list ap);
 int		ft_vprintf(const char *format, va_list ap);
 int		ft_dprintf(int fd, const char *format, ...);
 int		ft_printf(const char *format, ...);
+int		ft_vsprintf(char *str, const char *format, va_list ap);
+int		ft_vasprintf(char **ret, const char *format, va_list ap);
+int		ft_sprintf(char *str, const char *format, ...);
+int		ft_asprintf(char **ret, const char *format, ...);
 #endif

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:54:39 by susami            #+#    #+#             */
-/*   Updated: 2022/06/01 17:36:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:39:49 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 void	print(t_fmt *fmt, char *str, size_t len);
 
-void	printf_c(t_fmt *fmt, va_list ap);
-void	printf_s(t_fmt *fmt, va_list ap);
+void	printf_c(t_fmt *fmt);
+void	printf_s(t_fmt *fmt);
 
-void	printf_c(t_fmt *fmt, va_list ap)
+void	printf_c(t_fmt *fmt)
 {
 	char	c;
 
-	c = (char)va_arg(ap, int);
+	c = (char)va_arg(fmt->ap, int);
 	(fmt->format)++;
 	print(fmt, &c, 1);
 }
@@ -42,12 +42,12 @@ static size_t	ft_strnlen(char *str, size_t n)
 	return (cnt);
 }
 
-void	printf_s(t_fmt *fmt, va_list ap)
+void	printf_s(t_fmt *fmt)
 {
 	char	*s;
 	size_t	len;
 
-	s = va_arg(ap, char *);
+	s = va_arg(fmt->ap, char *);
 	if (s == NULL)
 		s = "(null)";
 	(fmt->format)++;

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:58:27 by susami            #+#    #+#             */
-/*   Updated: 2022/06/01 17:29:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:40:06 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "ft_printf.h"
 
 void	print(t_fmt *fmt, char *str, size_t len);
-void	printf_di(t_fmt *fmt, va_list ap);
-void	printf_u(t_fmt *fmt, va_list ap);
+void	printf_di(t_fmt *fmt);
+void	printf_u(t_fmt *fmt);
 
 // enough for binary unsigned long long
 #define MAXBUF 64
@@ -82,12 +82,12 @@ static void	putull(unsigned long long x, t_fmt *fmt)
 	free(buf);
 }
 
-void	printf_di(t_fmt *fmt, va_list ap)
+void	printf_di(t_fmt *fmt)
 {
 	int		x;
 
 	(fmt->format)++;
-	x = va_arg(ap, int);
+	x = va_arg(fmt->ap, int);
 	if (fmt->flags & SIGN_SPACE_FLG)
 		fmt->sign_c = ' ';
 	if (fmt->flags & SIGN_PLUS_FLG)
@@ -106,11 +106,11 @@ void	printf_di(t_fmt *fmt, va_list ap)
 	}
 }
 
-void	printf_u(t_fmt *fmt, va_list ap)
+void	printf_u(t_fmt *fmt)
 {
 	unsigned int	x;
 
 	(fmt->format)++;
-	x = va_arg(ap, unsigned int);
+	x = va_arg(fmt->ap, unsigned int);
 	putull(x, fmt);
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:34:31 by susami            #+#    #+#             */
-/*   Updated: 2022/07/25 14:16:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:35:50 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 void	parse_flags(t_fmt *fmt);
 void	parse_width(t_fmt *fmt);
 void	parse_precision(t_fmt *fmt);
-void	parse_conversion_spec(t_fmt *fmt, va_list ap);
+void	parse_conversion_spec(t_fmt *fmt);
 
 #define N_CONVERSIONS 9
 
-void	printf_percent(t_fmt *fmt, va_list ap);
-void	printf_c(t_fmt *fmt, va_list ap);
-void	printf_s(t_fmt *fmt, va_list ap);
-void	printf_p(t_fmt *fmt, va_list ap);
-void	printf_di(t_fmt *fmt, va_list ap);
-void	printf_u(t_fmt *fmt, va_list ap);
-void	printf_x_lower(t_fmt *fmt, va_list ap);
-void	printf_x_upper(t_fmt *fmt, va_list ap);
+void	printf_percent(t_fmt *fmt);
+void	printf_c(t_fmt *fmt);
+void	printf_s(t_fmt *fmt);
+void	printf_p(t_fmt *fmt);
+void	printf_di(t_fmt *fmt);
+void	printf_u(t_fmt *fmt);
+void	printf_x_lower(t_fmt *fmt);
+void	printf_x_upper(t_fmt *fmt);
 
 static const char	g_conversions[N_CONVERSIONS] = {
 	'%',
@@ -42,7 +42,7 @@ static const char	g_conversions[N_CONVERSIONS] = {
 	'x',
 	'X'
 };
-static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *, va_list) = {
+static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *) = {
 	printf_percent,
 	printf_c,
 	printf_s,
@@ -137,7 +137,7 @@ void	parse_precision(t_fmt *fmt)
 	}
 }
 
-void	parse_conversion_spec(t_fmt *fmt, va_list ap)
+void	parse_conversion_spec(t_fmt *fmt)
 {
 	char	c;
 	int		i;
@@ -149,7 +149,7 @@ void	parse_conversion_spec(t_fmt *fmt, va_list ap)
 		if (c == g_conversions[i])
 		{
 			fmt->conversion = c;
-			g_conversion_funcs[i](fmt, ap);
+			g_conversion_funcs[i](fmt);
 			return ;
 		}
 		i++;

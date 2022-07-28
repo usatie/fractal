@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 07:33:20 by susami            #+#    #+#              #
-#    Updated: 2022/06/16 10:44:32 by susami           ###   ########.fr        #
+#    Updated: 2022/07/28 15:42:47 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ PRINTF_SRCS	=	ft_printf/ft_printf.c			\
 				ft_printf/ft_vdprintf.c			\
 				ft_printf/ft_vprintf.c			\
 				ft_printf/ft_dprintf.c			\
+				ft_printf/ft_asprintf.c			\
 				ft_printf/ft_printf_cs.c		\
 				ft_printf/ft_printf_diu.c		\
 				ft_printf/ft_printf_fmt.c		\
