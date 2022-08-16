@@ -6,13 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 19:44:10 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:40:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 #include <math.h>
+
+bool	not_equal(double a, double b);
 
 void	draw_fractal(t_ctx *ctx)
 {
@@ -33,11 +35,11 @@ bool	need_fractal_update(t_ctx *ctx)
 	if (!initialized)
 		is_updated = true;
 	else
-		is_updated = ((prev.step != ctx->step)
-				|| (prev.o.x != ctx->o.x)
-				|| (prev.o.y != ctx->o.y)
+		is_updated = (not_equal(prev.step, ctx->step)
+				|| not_equal(prev.o.x, ctx->o.x)
+				|| not_equal(prev.o.y, ctx->o.y)
 				|| (prev.max_loop != ctx->max_loop)
-				|| (prev.c_radian != ctx->c_radian)
+				|| not_equal(prev.c_radian, ctx->c_radian)
 				|| (prev.fractal_type != ctx->fractal_type));
 	initialized = true;
 	prev = *ctx;

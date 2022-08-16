@@ -6,10 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 10:40:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:38:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "fractol.h"
 #include "mlx.h"
 
@@ -27,17 +28,19 @@ void	init_img(t_img *img, void *mlx_ptr, int width, int height)
 	img->endian = endian;
 }
 
+/*
 void	destroy_img(t_img *img)
 {
 	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
 }
+*/
 
 void	put_pixel_in_img(t_img *img, int x, int y, int color)
 {
-	size_t	idx;
+	int	idx;
 
 	idx = (x * img->bpp >> 3) + (y * img->size_line);
-	*(int *)(&img->data[idx]) = color;
+	ft_memmove(&img->data[idx], &color, sizeof(int));
 }
 
 void	clear_img_rect(t_img *img, t_rect rect)

@@ -6,10 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 14:20:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:15:19 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "fractol.h"
 
 // Looked up this conversion code from here
@@ -45,7 +46,10 @@ t_rgb	hsv2rgb(t_hsv in)
 
 int	rgb2mlxint(t_rgb rgb)
 {
-	return (*(int *)&rgb);
+	int	col;
+
+	ft_memmove(&col, &rgb, sizeof(int));
+	return (col);
 }
 
 int	hsv2mlxint(t_hsv hsv)

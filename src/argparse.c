@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 19:26:10 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:34:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	usage_err(void)
 	exit(EXIT_FAILURE);
 }
 
-t_fractal_type	parse_fractal_type(char *arg)
+static t_fractal_type	parse_fractal_type(char *arg)
 {
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
 		return (Mandelbrot);

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 11:10:29 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 11:10:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:34:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <math.h>
 
 void	ctx_string_put(t_ctx *ctx, int *height, char *str);
+void	ctx_put_max_loop(t_ctx *ctx, int *height);
+void	ctx_put_step(t_ctx *ctx, int *height);
+void	ctx_put_hue(t_ctx *ctx, int *height);
+void	ctx_put_radian(t_ctx *ctx, int *height);
+void	ctx_put_mouse_point(t_ctx *ctx, int *height);
 
 void	ctx_put_max_loop(t_ctx *ctx, int *height)
 {

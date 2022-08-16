@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/29 19:21:00 by susami           ###   ########.fr        #
+#    Updated: 2022/08/16 21:44:43 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,10 @@ LIBFT		=	$(LIBFTDIR)/libft.a
 
 LIBS		=	-lmlx -lXext -lX11 -lft -lm
 LIBPATH		=	-Lminilibx-linux -L/usr/X11R6/lib -L$(LIBFTDIR)
-INCLUDE		=	-Iinclude -I/usr/X11R6/include
+INCLUDE_DIR	=	include
+INCLUDE		=	-I$(INCLUDE_DIR) -I/usr/X11R6/include
 FRAMEWORK	=	-framework OpenGL -framework AppKit
-CFLAGS		=	-Weverything -Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
+CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
@@ -41,6 +42,7 @@ SRCS		=	src/main.c \
 			src/mandelbrot.c \
 			src/julia.c \
 			src/barnsley.c \
+			src/double_util.c \
 
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -67,3 +69,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
 
 re: fclean all
+
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-poison-system-directories -Wno-packed
+debug: re
+	norminette $(SRC_DIR) $(INCLUDE_DIR)

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 19:34:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:41:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_mandelbrot(t_ctx *ctx)
 		while (++p.x < FRACT_WIDTH)
 		{
 			speed = speeds[p.x][p.y];
-			hsv = (t_hsv){(ctx->hue + speed) % 256, 255, 150, 0};
+			hsv = (t_hsv){(unsigned char)(ctx->hue + speed), 255, 150, 0};
 			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, hsv2mlxint(hsv));
 		}
 	}

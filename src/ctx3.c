@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 10:36:33 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 11:11:02 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:33:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <math.h>
 
 void	ctx_string_put(t_ctx *ctx, int *height, char *str);
+void	ctx_put_fractal_mode(t_ctx *ctx, int *height);
+void	ctx_put_color_mode(t_ctx *ctx, int *height);
+void	ctx_put_julia_mode(t_ctx *ctx, int *height);
 
 void	ctx_put_fractal_mode(t_ctx *ctx, int *height)
 {
