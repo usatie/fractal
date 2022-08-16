@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 23:35:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 19:26:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_double_point	barnsley_next(t_double_point p)
 {
 	float			rng;
 
-	rng = ((float)rand()) / RAND_MAX;
+	rng = rand() / (float)RAND_MAX;
 	if (rng <= 0.01f)
 		return ((t_double_point){0, 0.16 * p.y});
 	else if (rng <= 0.06f)
@@ -58,7 +58,7 @@ static t_int_point	calc_xy_in_window(t_double_point point, t_ctx *ctx)
 {
 	t_int_point	ret;
 
-	ret.x = (point.x - ctx->o.x) / ctx->step;
-	ret.y = (ctx->o.y - point.y) / ctx->step;
+	ret.x = (int)((point.x - ctx->o.x) / ctx->step);
+	ret.y = (int)((ctx->o.y - point.y) / ctx->step);
 	return (ret);
 }

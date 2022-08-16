@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/07/28 00:11:32 by susami           ###   ########.fr        #
+#    Updated: 2022/07/29 19:21:00 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBS		=	-lmlx -lXext -lX11 -lft -lm
 LIBPATH		=	-Lminilibx-linux -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE		=	-Iinclude -I/usr/X11R6/include
 FRAMEWORK	=	-framework OpenGL -framework AppKit
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
+CFLAGS		=	-Weverything -Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
@@ -29,6 +29,8 @@ SRCS		=	src/main.c \
 			src/mlx_util.c \
 			src/ctx.c \
 			src/ctx2.c \
+			src/ctx3.c \
+			src/ctx4.c \
 			src/argparse.c \
 			src/key_handler.c \
 			src/mouse_handler.c \

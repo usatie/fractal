@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 23:37:51 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 19:44:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ bool	need_fractal_update(t_ctx *ctx)
 	return (is_updated);
 }
 
-int	mandelbrot_div_speed(t_complex z, t_complex c, int max_loop)
+unsigned int	mandelbrot_div_speed(t_complex z, t_complex c,
+		unsigned int max_loop)
 {
-	int			i;
+	unsigned int	i;
 
-	i = -1;
-	while (++i < max_loop)
+	i = 0;
+	while (i < max_loop)
 	{
 		z = cadd(cmul(z, z), c);
 		if (isinf(z.re) || isinf(z.im))
 			return (i);
+		i++;
 	}
 	return (i);
 }

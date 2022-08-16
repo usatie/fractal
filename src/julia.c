@@ -6,20 +6,21 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:08 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 23:21:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 19:28:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	update_julia(int speeds[FRACT_WIDTH][FRACT_HEIGHT], t_ctx *ctx);
+static void	update_julia(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
+				t_ctx *ctx);
 
 void	draw_julia(t_ctx *ctx)
 {
-	t_int_point	p;
-	t_hsv		hsv;
-	int			speed;
-	static int	speeds[FRACT_WIDTH][FRACT_HEIGHT];
+	t_int_point			p;
+	t_hsv				hsv;
+	unsigned int		speed;
+	static unsigned int	speeds[FRACT_WIDTH][FRACT_HEIGHT];
 
 	if (need_fractal_update(ctx))
 		update_julia(speeds, ctx);
@@ -36,10 +37,11 @@ void	draw_julia(t_ctx *ctx)
 	}
 }
 
-static void	update_julia(int speeds[FRACT_WIDTH][FRACT_HEIGHT], t_ctx *ctx)
+static void	update_julia(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
+		t_ctx *ctx)
 {
-	t_int_point	p;
-	int			speed;
+	t_int_point		p;
+	unsigned int	speed;
 
 	p.y = -1;
 	while (++p.y < FRACT_HEIGHT)

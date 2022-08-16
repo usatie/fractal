@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:43:35 by susami            #+#    #+#             */
-/*   Updated: 2022/07/28 18:31:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 18:35:05 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_fmt
 	int			fd;
 	char		conversion;
 	char		sign_c;
-	char		_PADDING[2];
 
 	va_list		ap;
 	char		*dst_str;

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/07/28 00:02:55 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 11:16:17 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	close_window(t_ctx *ctx)
 	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
 	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
 	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
-	mlx_destroy_image(ctx->mlx_ptr, ctx->img_ptr);
+	mlx_destroy_image(ctx->mlx_ptr, ctx->fractal_img.img_ptr);
+	mlx_destroy_image(ctx->mlx_ptr, ctx->help_img.img_ptr);
 	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
 	free(ctx->mlx_ptr);
 	exit(0);

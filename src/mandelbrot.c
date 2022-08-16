@@ -6,21 +6,21 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 23:22:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 19:34:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	update_mandelbrot(int speeds[FRACT_WIDTH][FRACT_HEIGHT],
+static void	update_mandelbrot(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
 				t_ctx *ctx);
 
 void	draw_mandelbrot(t_ctx *ctx)
 {
-	t_int_point	p;
-	t_hsv		hsv;
-	int			speed;
-	static int	speeds[FRACT_WIDTH][FRACT_HEIGHT];
+	t_int_point			p;
+	t_hsv				hsv;
+	unsigned int		speed;
+	static unsigned int	speeds[FRACT_WIDTH][FRACT_HEIGHT];
 
 	if (need_fractal_update(ctx))
 		update_mandelbrot(speeds, ctx);
@@ -37,10 +37,11 @@ void	draw_mandelbrot(t_ctx *ctx)
 	}
 }
 
-static void	update_mandelbrot(int speeds[FRACT_WIDTH][FRACT_HEIGHT], t_ctx *ctx)
+static void	update_mandelbrot(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
+		t_ctx *ctx)
 {
-	t_int_point	p;
-	int			speed;
+	t_int_point		p;
+	unsigned int	speed;
 
 	p.y = -1;
 	while (++p.y < FRACT_HEIGHT)

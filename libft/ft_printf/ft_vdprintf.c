@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 17:47:17 by susami            #+#    #+#             */
-/*   Updated: 2022/07/28 23:45:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/16 21:02:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	fmt_clear_spec(t_fmt *fmt);
 void	parse_flags(t_fmt *fmt);
 void	parse_width(t_fmt *fmt);
 void	parse_precision(t_fmt *fmt);
-void	parse_conversion_spec(t_fmt *fmt, va_list ap);
+void	parse_conversion_spec(t_fmt *fmt);
 
 void	print(t_fmt *fmt, char *str, size_t len);
 void	print_non_conversion_bytes(t_fmt *fmt);
 
 // If overflow happens, set -1 to out_size and set EOVERFLOW to errno.
 // MEMO: libc's printf does not set errno when len > INT_MAX.
+// TODO: ALLOCATE_FLG should be handled here!
+// ft_asprintf and ft_vasprintf is not completed.
 static void	print_bytes(t_fmt *fmt, const char *str, size_t len)
 {
 	if (fmt->out_size < 0)
@@ -40,7 +42,7 @@ static void	print_bytes(t_fmt *fmt, const char *str, size_t len)
 	}
 	else if (fmt->dst_str_flags & STRING_FLG)
 	{
-		strncat(fmt->dst_str, str, len);
+		ft_memmove(fmt->dst_str + fmt->out_size, str, len);
 		fmt->out_size += len;
 	}
 	else
@@ -107,6 +109,7 @@ int	ft_vdprintf(int fd, const char *format, va_list ap)
 	}
 	fmt_init(&fmt, format);
 	fmt.fd = fd;
+	fmt.ap = ap;
 	while (fmt.out_size > -1 && *(fmt.format))
 	{
 		fmt_clear_spec(&fmt);
@@ -116,7 +119,7 @@ int	ft_vdprintf(int fd, const char *format, va_list ap)
 			parse_flags(&fmt);
 			parse_width(&fmt);
 			parse_precision(&fmt);
-			parse_conversion_spec(&fmt, ap);
+			parse_conversion_spec(&fmt);
 		}
 		else
 			print_non_conversion_bytes(&fmt);

@@ -6,13 +6,13 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 07:33:20 by susami            #+#    #+#              #
-#    Updated: 2022/07/28 15:42:47 by susami           ###   ########.fr        #
+#    Updated: 2022/08/16 19:19:47 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -MMD -MP
 INCLUDE	=	-I include
 M_SRCS	=	ft_isalpha.c	\
 			ft_isdigit.c	\
@@ -62,6 +62,7 @@ B_SRCS	=	ft_lstnew.c			\
 EXTRA_SRCS	=	ft_isspace.c			\
 				ft_strtol.c				\
 				ft_strcmp.c				\
+				ft_strncat.c			\
 				ft_realloc.c			\
 				ft_reallocf.c			\
 
@@ -71,7 +72,7 @@ PRINTF_SRCS	=	ft_printf/ft_printf.c			\
 				ft_printf/ft_vdprintf.c			\
 				ft_printf/ft_vprintf.c			\
 				ft_printf/ft_dprintf.c			\
-				ft_printf/ft_asprintf.c			\
+				ft_printf/ft_sprintf.c			\
 				ft_printf/ft_printf_cs.c		\
 				ft_printf/ft_printf_diu.c		\
 				ft_printf/ft_printf_fmt.c		\
@@ -87,6 +88,7 @@ ERROR_FUNCTIONS_SRCS	=	ft_error_functions/ft_error_functions.c	\
 OBJDIR		=	objs
 SRCS		=	$(M_SRCS) $(B_SRCS) $(EXTRA_SRCS) $(GNL_SRCS) $(PRINTF_SRCS) $(ARGPARSE_SRCS) $(ERROR_FUNCTIONS_SRCS)
 OBJS		=	$(SRCS:%.c=$(OBJDIR)/%.o)
+DEPS		=	$(OBJS:%.o=%.d)
 
 all: $(NAME)
 
@@ -106,7 +108,13 @@ $(OBJDIR)/%.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE)
 
 bonus: all
-debug: fclean
-	$(MAKE) CFLAGS="$(CFLAGS) -Weverything"
 
-.PHONY: all clean fclean re
+debug: CFLAGS += -Weverything -Wno-poison-system-directories -Wno-cast-qual -Wno-padded
+debug: re
+	norminette include ft_*.c ft_error_functions ft_argparse ft_printf
+
+test:
+	./test.sh
+
+.PHONY: all clean fclean re bonus debug
+-include $(DEPS)

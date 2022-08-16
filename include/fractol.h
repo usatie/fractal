@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 00:46:30 by susami           ###   ########.fr       */
+/*   Updated: 2022/07/29 19:31:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,6 @@ typedef struct s_img {
 typedef struct s_ctx {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	void			*img_ptr;
-	void			*help_img_ptr;
 	t_int_point		win_mouse_pnt;
 	t_double_point	mouse_pnt;
 	int				step_n;
@@ -193,7 +191,8 @@ typedef struct s_ctx {
 bool			is_equal(t_ctx l, t_ctx r);
 
 // Returns img_ptr
-int				divergence_speed(t_complex z, t_complex c, int max_loop);
+unsigned int	divergence_speed(t_complex z, t_complex c,
+					unsigned int max_loop);
 void			draw_fractal(t_ctx *ctx);
 int				key_handler(int keycode, t_ctx *ctx);
 int				mouse_handler(int button, int x, int y, t_ctx *ctx);
@@ -211,7 +210,8 @@ void			put_pixel_in_img(t_img *img, int x, int y, int color);
 void			draw_mandelbrot(t_ctx *ctx);
 void			draw_julia(t_ctx *ctx);
 void			draw_barnsley(t_ctx *ctx);
-int				mandelbrot_div_speed(t_complex z, t_complex c, int max_loop);
+unsigned int	mandelbrot_div_speed(t_complex z, t_complex c,
+					unsigned int max_loop);
 
 t_ctx			argparse(int argc, char **argv);
 
