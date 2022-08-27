@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 19:31:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/27 20:57:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-# define XK_MISCELLANY 1
-# define XK_XKB_KEYS 1
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 400

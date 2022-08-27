@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/08/16 21:44:43 by susami           ###   ########.fr        #
+#    Updated: 2022/08/27 21:11:05 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,21 @@ LIBPATH		=	-Lminilibx-linux -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
 INCLUDE		=	-I$(INCLUDE_DIR) -I/usr/X11R6/include
 FRAMEWORK	=	-framework OpenGL -framework AppKit
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -D XK_MISCELLANY -D XK_XKB_KEYS
+CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE)
+
+# LINUX | OSX | ARM
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -D LINUX
+endif
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -D OSX
+endif
+
+UNAME_P := $(shell uname -p)
+ifneq ($(filter arm%, $(UNAME_P)),)
+	CFLAGS += -D ARM
+endif
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
@@ -46,7 +60,6 @@ SRCS		=	src/main.c \
 
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
 
 all: $(NAME)
 

@@ -6,13 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 11:16:17 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/27 21:08:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
-#include <keysymdef.h>
+#include "mlx_keymap.h"
 
 int	close_window(t_ctx *ctx)
 {
@@ -30,25 +30,25 @@ int	close_window(t_ctx *ctx)
 int	key_handler(int keycode, t_ctx *ctx)
 {
 	print_keycode(keycode);
-	if (keycode == XK_Escape)
+	if (keycode == MK_ESCAPE)
 		close_window(ctx);
-	else if (keycode == '[' && ctx->max_loop > 10)
+	else if (keycode == MK_BRACKETLEFT && ctx->max_loop > 10)
 		ctx->max_loop -= 10;
-	else if (keycode == ']' && ctx->max_loop)
+	else if (keycode == MK_BRACKETRIGHT && ctx->max_loop)
 		ctx->max_loop += 10;
-	else if (keycode == XK_Left)
+	else if (keycode == MK_LEFT)
 		ctx->win_mouse_pnt.x += 10;
-	else if (keycode == XK_Up)
+	else if (keycode == MK_UP)
 		ctx->win_mouse_pnt.y += 10;
-	else if (keycode == XK_Right)
+	else if (keycode == MK_RIGHT)
 		ctx->win_mouse_pnt.x -= 10;
-	else if (keycode == XK_Down)
+	else if (keycode == MK_DOWN)
 		ctx->win_mouse_pnt.y -= 10;
-	else if (keycode == 'c')
+	else if (keycode == MK_C)
 		ctx_next_color_mode(ctx);
-	else if (keycode == 'j')
+	else if (keycode == MK_J)
 		ctx_next_julia_mode(ctx);
-	else if (keycode == 'f')
+	else if (keycode == MK_F)
 		ctx_next_fractal_type(ctx);
 	else
 		return (0);
