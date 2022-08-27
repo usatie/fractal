@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:09:07 by susami            #+#    #+#             */
-/*   Updated: 2022/08/27 20:58:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/08/27 23:16:07 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,8 @@ void	print_keycode(int keycode)
 		write(STDOUT_FILENO, &keycode, 1);
 	else if (keycode == MK_BACKSPACE)
 		ft_printf("[BACK_SPACE]");
-	else if (keycode == MK_LINE_FEED)
-		ft_printf("[LINE_FEED]");
-	else if (keycode == MK_CLEAR)
-		ft_printf("[CLEAR]");
 	else if (keycode == MK_RETURN)
 		ft_printf("[RETURN]");
-	else if (keycode == MK_PAUSE)
-		ft_printf("[PAUSE]");
 	else if (keycode == MK_DELETE)
 		ft_printf("[DELETE]");
 	else if (keycode == MK_F1)
@@ -71,9 +65,9 @@ void	print_keycode(int keycode)
 		ft_printf("[→]");
 	else if (keycode == MK_DOWN)
 		ft_printf("[↓]");
-	else if (keycode == MK_CMD_L)
+	else if (keycode == MK_COMMAND_L)
 		ft_printf("[CMD_L]");
-	else if (keycode == MK_CMD_R)
+	else if (keycode == MK_COMMAND_R)
 		ft_printf("[CMD_R]");
 	else if (keycode == MK_OPTION)
 		ft_printf("[Option]");
