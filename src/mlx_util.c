@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:09:07 by susami            #+#    #+#             */
-/*   Updated: 2022/08/27 23:16:07 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:50:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 #include "mlx_keymap.h"
 #include <unistd.h>
 
+void	print_keycode(int keycode)
+{
+	ft_printf("key_hook is called. keycode = %x\n", keycode);
+}
+/*
 void	print_keycode(int keycode)
 {
 	if (ft_isprint(keycode) || keycode == MK_TAB)
@@ -76,3 +81,4 @@ void	print_keycode(int keycode)
 	else
 		ft_printf("key_hook is called. keycode = %x\n", keycode);
 }
+*/
