@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 17:47:17 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:02:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:01:56 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_vdprintf(int fd, const char *format, va_list ap)
 	}
 	fmt_init(&fmt, format);
 	fmt.fd = fd;
-	fmt.ap = ap;
+	va_copy(fmt.ap, ap);
 	while (fmt.out_size > -1 && *(fmt.format))
 	{
 		fmt_clear_spec(&fmt);

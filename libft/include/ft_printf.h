@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:43:35 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 18:35:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 19:17:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 // specifications
 // #/0/-/ /+/.
-# define ALT_FLG		01
-# define PAD_ZERO_FLG	02
-# define PAD_RIGHT_FLG	04
-# define SIGN_SPACE_FLG	010
-# define SIGN_PLUS_FLG	020
-# define PRECISION_FLG	040
+# define ALT_FLG		0001
+# define PAD_ZERO_FLG	0002
+# define PAD_RIGHT_FLG	0004
+# define SIGN_SPACE_FLG	0010
+# define SIGN_PLUS_FLG	0020
+# define PRECISION_FLG	0040
 
 // print destination flags
 

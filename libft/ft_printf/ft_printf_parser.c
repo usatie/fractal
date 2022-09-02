@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:34:31 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 17:27:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 19:28:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parse_width(t_fmt *fmt);
 void	parse_precision(t_fmt *fmt);
 void	parse_conversion_spec(t_fmt *fmt);
 
-#define N_CONVERSIONS 9
+#define N_CONVERSIONS 10
 
 void	printf_percent(t_fmt *fmt);
 void	printf_c(t_fmt *fmt);
@@ -30,6 +30,7 @@ void	printf_di(t_fmt *fmt);
 void	printf_u(t_fmt *fmt);
 void	printf_x_lower(t_fmt *fmt);
 void	printf_x_upper(t_fmt *fmt);
+void	printf_f(t_fmt *fmt);
 
 static const char	g_conversions[N_CONVERSIONS] = {
 	'%',
@@ -40,7 +41,8 @@ static const char	g_conversions[N_CONVERSIONS] = {
 	'i',
 	'u',
 	'x',
-	'X'
+	'X',
+	'f'
 };
 static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *) = {
 	printf_percent,
@@ -51,7 +53,8 @@ static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *) = {
 	printf_di,
 	printf_u,
 	printf_x_lower,
-	printf_x_upper
+	printf_x_upper,
+	printf_f
 };
 
 /*	Overview of conversion specifiers
@@ -125,6 +128,8 @@ void	parse_precision(t_fmt *fmt)
 		c = *(fmt->format);
 		while (ft_isdigit(c))
 		{
+			if (fmt->precision > (INT_MAX - (c - '0')) / 10)
+				errno = EOVERFLOW;
 			fmt->precision = fmt->precision * 10 + (c - '0');
 			++(fmt->format);
 			c = *(fmt->format);

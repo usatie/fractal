@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 07:33:20 by susami            #+#    #+#              #
-#    Updated: 2022/08/16 19:19:47 by susami           ###   ########.fr        #
+#    Updated: 2022/09/02 19:05:30 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,12 @@ PRINTF_SRCS	=	ft_printf/ft_printf.c			\
 				ft_printf/ft_printf_parser.c	\
 				ft_printf/ft_printf_percent.c	\
 				ft_printf/ft_printf_px.c		\
+				ft_printf/ft_printf_f.c			\
+				ft_printf/ft_decimal.c			\
+				ft_printf/ft_ieee754_float.c	\
+				ft_printf/ft_ieee754_double.c	\
+				ft_printf/ft_ftoa.c				\
+				ft_printf/ft_dtoa.c				\
 
 ARGPARSE_SRCS	=	ft_argparse/ft_argparse_num.c	\
 

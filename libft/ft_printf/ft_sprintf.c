@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:01:51 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 19:13:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:01:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	ft_internal_printf(t_fmt *fmt)
 		else
 			print_non_conversion_bytes(fmt);
 	}
+	if (fmt->out_size > 0)
+		fmt->dst_str[fmt->out_size] = '\0';
 	return (fmt->out_size);
 }
 
@@ -55,7 +57,7 @@ int	ft_vsprintf(char *str, const char *format, va_list ap)
 		return (-1);
 	}
 	fmt_init(&fmt, format);
-	fmt.ap = ap;
+	va_copy(fmt.ap, ap);
 	fmt.dst_str_flags = STRING_FLG;
 	fmt.dst_str = str;
 	fmt.dst_str[0] = '\0';
