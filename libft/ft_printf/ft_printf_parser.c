@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:34:31 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 19:28:24 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:30:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *) = {
 	flags							: "#-+ 0"
 	width							: "20" "3"
 	precision						: ".10" ".5"
+	long							: "l"
 	conversion specifier			: "%csdiupxX"
 
 */
@@ -148,6 +149,12 @@ void	parse_conversion_spec(t_fmt *fmt)
 	int		i;
 
 	c = *(fmt->format);
+	if (c == 'l')
+	{
+		fmt->flags |= LONG_FLG;
+		(fmt->format)++;
+		c = *(fmt->format);
+	}
 	i = 0;
 	while (i < N_CONVERSIONS)
 	{

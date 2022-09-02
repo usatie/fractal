@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:43:35 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 19:17:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:27:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SIGN_SPACE_FLG	0010
 # define SIGN_PLUS_FLG	0020
 # define PRECISION_FLG	0040
+# define LONG_FLG		0100
 
 // print destination flags
 

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:04:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 19:29:25 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:32:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print(t_fmt *fmt, char *str, size_t len);
 
 void	printf_f(t_fmt *fmt)
 {
-	float	f;
+	double	d;
 	char	buf[BUF_SIZE];
 
 	(fmt->format)++;
@@ -32,10 +32,13 @@ void	printf_f(t_fmt *fmt)
 		fmt->out_size = -1;
 		return ;
 	}
-	f = (float)va_arg(fmt->ap, double);
+	d = va_arg(fmt->ap, double);
 	if (~fmt->flags & PRECISION_FLG)
 		fmt->precision = DEFAULT_PRECISION;
-	ftoa(f, buf, fmt->width, fmt->precision);
+	if (fmt->flags & LONG_FLG)
+		dtoa(d, buf, fmt->width, fmt->precision);
+	else
+		ftoa((float)d, buf, fmt->width, fmt->precision);
 	print(fmt, buf, ft_strlen(buf));
 }
 

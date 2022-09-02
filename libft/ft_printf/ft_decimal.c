@@ -6,12 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:06:03 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 19:04:45 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/02 22:47:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "ft_decimal.h"
+
+static t_decimal	round_fract(t_decimal decimal, int precision);
 
 // Create decimal from num
 t_decimal	new_decimal(unsigned long long num)
@@ -101,6 +103,7 @@ void	decimal_to_str(t_decimal decimal, char *res, int precision)
 {
 	int	i;
 
+	decimal = round_fract(decimal, precision);
 	i = 0;
 	while (i < DOUBLE_MAX_INT - 1 && decimal.int_digits[i] == 0)
 		i++;
@@ -115,11 +118,35 @@ void	decimal_to_str(t_decimal decimal, char *res, int precision)
 			*res = decimal.fract_digits[i] + '0';
 		else
 			*res = '0';
-		if (i == precision - 1 && i + 1 < DOUBLE_MAX_FRACT)
-			if (decimal.fract_digits[i + 1] >= 5)
-				*res += 1;
 		res++;
 		i++;
 	}
 	*res = '\0';
+}
+
+static t_decimal	round_fract(t_decimal decimal, int precision)
+{
+	int	i;
+	int	carry;
+
+	if (precision >= DOUBLE_MAX_FRACT || decimal.fract_digits[precision] < 5)
+		return (decimal);
+	i = precision - 1;
+	carry = 1;
+	while (carry > 0 && i >= 0)
+	{
+		decimal.fract_digits[i] += carry;
+		carry = decimal.fract_digits[i] / 10;
+		decimal.fract_digits[i] %= 10;
+		i--;
+	}
+	i = DOUBLE_MAX_INT - 1;
+	while (carry > 0 && i >= 0)
+	{
+		decimal.int_digits[i] += carry;
+		carry = decimal.int_digits[i] / 10;
+		decimal.int_digits[i] %= 10;
+		i--;
+	}
+	return (decimal);
 }
