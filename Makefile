@@ -21,13 +21,14 @@ MLX_DIR		=	minilibx-linux
 LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
 INCLUDE		=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
-FRAMEWORK	=	-framework OpenGL -framework AppKit
 CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE)
 
 # LINUX | OSX | ARM
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -D LINUX
+else
+	FRAMEWORK = -framework OpenGL -framework AppKit
 endif
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -D OSX

@@ -13,6 +13,7 @@
 #include "fractol.h"
 #include <math.h>
 #include <stdio.h>
+#include "ft_printf.h"
 
 t_complex	complex_new(double re, double im)
 {
@@ -57,11 +58,3 @@ t_complex	cdiv(t_complex c, t_complex b)
 	return (a);
 }
 */
-
-char	*cstr(t_complex z)
-{
-	char	*ret;
-
-	asprintf(&ret, "%lf + %lfi", z.re, z.im);
-	return (ret);
-}

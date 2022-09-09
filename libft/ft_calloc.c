@@ -14,6 +14,9 @@
 #include <errno.h>
 #include <stdlib.h>
 #include "libft.h"
+#ifndef SIZE_MAX
+# include <stdint.h>
+#endif
 
 /*
 DESCRIPTION
