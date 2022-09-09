@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:04:20 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 11:24:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/09 22:15:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_complex	cdiv(t_complex c, t_complex b)
 }
 */
 
+/*
 char	*cstr(t_complex z)
 {
 	char	*ret;
@@ -65,3 +66,4 @@ char	*cstr(t_complex z)
 	asprintf(&ret, "%lf + %lfi", z.re, z.im);
 	return (ret);
 }
+*/
