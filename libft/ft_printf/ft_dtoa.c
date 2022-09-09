@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:42:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 18:47:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/09 22:00:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "ft_ieee754.h"
 #include "ft_decimal.h"
 
-static void			padzero(int pad, char *res);
 static t_decimal	ieee754_double_to_decimal(t_ieee754_double *f);
+static void			parse_ieee754_double(t_ieee754_double *d,
+						t_decimal *decimal, int *exponent);
+static void			padzero(int pad, char *res);
 
 /*
    Convert double value `d` to string `res`.
@@ -56,13 +58,7 @@ static t_decimal	ieee754_double_to_decimal(t_ieee754_double *d)
 	t_decimal	decimal;
 	int			exponent;
 
-	exponent = (d->ieee.exponent - IEEE754_DOUBLE_BIAS) - IEEE754_DOUBLE_MANTISSA_BITS;
-	decimal = new_decimal(((long long)1 << IEEE754_DOUBLE_MANTISSA_BITS) | d->ieee.mantissa);
-	if (is_d_denormalized(*d))
-	{
-		exponent = (1 - IEEE754_DOUBLE_BIAS) - IEEE754_DOUBLE_MANTISSA_BITS;
-		decimal = new_decimal(d->ieee.mantissa);
-	}
+	parse_ieee754_double(d, &decimal, &exponent);
 	while (exponent != 0)
 	{
 		if (exponent > 0)
@@ -77,6 +73,27 @@ static t_decimal	ieee754_double_to_decimal(t_ieee754_double *d)
 		}
 	}
 	return (decimal);
+}
+
+// Parse t_ieee754_double to exponent and mantissa decimal
+static void	parse_ieee754_double(t_ieee754_double *d, t_decimal *decimal,
+		int *exponent)
+{
+	long long	mantissa;
+
+	mantissa = d->ieee.mantissa;
+	if (is_d_denormalized(*d))
+	{
+		*exponent = (1 - IEEE754_DOUBLE_BIAS) - IEEE754_DOUBLE_MANTISSA_BITS;
+		*decimal = new_decimal(mantissa);
+	}
+	else
+	{
+		*exponent = (d->ieee.exponent - IEEE754_DOUBLE_BIAS)
+			- IEEE754_DOUBLE_MANTISSA_BITS;
+		mantissa += ((long long)1 << IEEE754_DOUBLE_MANTISSA_BITS);
+		*decimal = new_decimal(mantissa);
+	}
 }
 
 // Pad left side of res with 0

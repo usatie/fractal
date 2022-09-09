@@ -6,11 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:05:42 by susami            #+#    #+#             */
-/*   Updated: 2022/05/26 22:59:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/09 22:02:50 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
+// On 42 VM ubuntu, SIZE_MAX is defined in stdint.h
+// #include <limits.h>
+#include <stdint.h>
 #include <errno.h>
 #include <stdlib.h>
 #include "libft.h"
