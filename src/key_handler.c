@@ -6,11 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/08/27 21:08:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:21:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_ctx.h"
 #include "mlx.h"
 #include "mlx_keymap.h"
 

@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/10 15:27:30 by susami           ###   ########.fr        #
+#    Updated: 2022/09/10 17:36:40 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRCS		=	src/main.c \
 			src/mlx_util.c \
 			src/ctx.c \
 			src/ctx_put.c \
+			src/ctx_put_config.c \
+			src/ctx_put_config2.c \
 			src/argparse.c \
 			src/key_handler.c \
 			src/mouse_handler.c \

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 15:42:32 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:19:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,17 @@ typedef struct s_hsv {
 ** b — Blue
 ** alpha — Alpha
 */
-typedef struct __attribute__((packed)) s_rgb {
-	unsigned char	b;
-	unsigned char	g;
-	unsigned char	r;
-	unsigned char	alpha;
+typedef union u_rgb {
+	struct s_rgb {
+		unsigned char	b:8;
+		unsigned char	g:8;
+		unsigned char	r:8;
+		unsigned char	alpha:8;
+	} rgb;
+	int	mlxint;
 }	t_rgb;
 
 t_rgb			hsv2rgb(t_hsv in);
-int				rgb2mlxint(t_rgb rgb);
 int				hsv2mlxint(t_hsv hsv);
 /*
 **  Complex number
@@ -81,7 +83,6 @@ t_complex		cadd(t_complex lhs, t_complex rhs);
 t_complex		csub(t_complex lhs, t_complex rhs);
 t_complex		cmul(t_complex lhs, t_complex rhs);
 t_complex		cdiv(t_complex c, t_complex b);
-char			*cstr(t_complex z);
 t_complex		mandelbrot(t_complex z, t_complex c);
 
 /*
@@ -213,12 +214,6 @@ unsigned int	mandelbrot_div_speed(t_complex z, t_complex c,
 
 t_ctx			argparse(int argc, char **argv);
 
-//void			ctx_update_step(t_ctx *ctx);
-void			ctx_next_color_mode(t_ctx *ctx);
-void			ctx_next_julia_mode(t_ctx *ctx);
-void			ctx_next_fractal_type(t_ctx *ctx);
-void			ctx_on_update(t_ctx *ctx);
-bool			ctx_is_updated(t_ctx *ctx);
 bool			need_fractal_update(const t_ctx *ctx);
 
 void			put_ctx_to_window(t_ctx *ctx);

@@ -6,11 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 22:44:42 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:21:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_ctx.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "math.h"

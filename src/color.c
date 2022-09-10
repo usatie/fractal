@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:15:19 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:20:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,37 @@ t_rgb	hsv2rgb(t_hsv in)
 	unsigned char	t;
 
 	if (in.s == 0)
-		return ((t_rgb){.r = in.v, .g = in.v, .b = in.v, .alpha = in.alpha});
+		return ((t_rgb){{in.v, in.v, in.v, in.alpha}});
 	region = in.h / 43;
 	remainder = (in.h - (region * 43)) * 6;
 	p = (in.v * (255 - in.s)) >> 8;
 	q = (in.v * (255 - ((in.s * remainder) >> 8))) >> 8;
 	t = (in.v * (255 - ((in.s * (255 - remainder)) >> 8))) >> 8;
 	if (region == 0)
-		return ((t_rgb){.r = in.v, .g = t, .b = p, .alpha = in.alpha});
+		return ((t_rgb){{in.v, t, p, in.alpha}});
 	else if (region == 1)
-		return ((t_rgb){.r = q, .g = in.v, .b = p, .alpha = in.alpha});
+		return ((t_rgb){{q, in.v, p, in.alpha}});
 	else if (region == 2)
-		return ((t_rgb){.r = p, .g = in.v, .b = t, .alpha = in.alpha});
+		return ((t_rgb){{p, in.v, t, in.alpha}});
 	else if (region == 3)
-		return ((t_rgb){.r = p, .g = q, .b = in.v, .alpha = in.alpha});
+		return ((t_rgb){{p, q, in.v, in.alpha}});
 	else if (region == 4)
-		return ((t_rgb){.r = t, .g = p, .b = in.v, .alpha = in.alpha});
+		return ((t_rgb){{t, p, in.v, in.alpha}});
 	else
-		return ((t_rgb){.r = in.v, .g = p, .b = q, .alpha = in.alpha});
-}
-
-int	rgb2mlxint(t_rgb rgb)
-{
-	int	col;
-
-	ft_memmove(&col, &rgb, sizeof(int));
-	return (col);
+		return ((t_rgb){{in.v, p, q, in.alpha}});
 }
 
 int	hsv2mlxint(t_hsv hsv)
 {
-	return (rgb2mlxint(hsv2rgb(hsv)));
+	return (hsv2rgb(hsv).mlxint);
 }
 
 int	green(void)
 {
-	return (rgb2mlxint(((t_rgb){0, 255, 0, 0})));
+	return (((t_rgb){{0, 255, 0, 0}}).mlxint);
 }
 
 int	red(void)
 {
-	return (rgb2mlxint(((t_rgb){255, 0, 0, 0})));
+	return (((t_rgb){{255, 0, 0, 0}}).mlxint);
 }

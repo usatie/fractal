@@ -6,11 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:36:22 by susami            #+#    #+#             */
-/*   Updated: 2022/07/27 19:25:39 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:22:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_ctx.h"
 #include <math.h>
 
 int	mouse_handler(int button, int x, int y, t_ctx *ctx)
