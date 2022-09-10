@@ -6,11 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 00:39:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:59:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_ctx.h"
 #include "mlx.h"
 #include <math.h>
 
@@ -22,9 +23,9 @@ int	loop_handler(t_ctx *ctx)
 	if (cnt++ % 1000 != 0 || lock)
 		return (0);
 	lock = true;
-	if (ctx->color_mode == Psyc)
+	if (ctx->color_mode == psyc)
 		ctx->hue += 4;
-	if (ctx->julia_mode == Psyc)
+	if (ctx->julia_mode == psyc)
 	{
 		ctx->c_radian += M_PI / 60;
 		ctx->c = cmul(complex_new(0.7885, 0),

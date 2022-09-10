@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:18:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:03:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include "fractol_color.h"
+# include "fractol_util.h"
+# include "fractol_ctx.h"
 
 # define FRACT_WIDTH 400
 # define FRACT_HEIGHT 400
@@ -28,153 +30,58 @@
 # define WIN_HEIGHT 400
 # define WIN_TITLE "fract-ol"
 
-typedef uint32_t		t_speeds[400][400];
+// const values
+static const t_rect			g_rect_fractal = (t_rect){
+	0,
+	0,
+	FRACT_WIDTH,
+	FRACT_HEIGHT
+};
+static const t_rect			g_rect_config = (t_rect){
+	FRACT_WIDTH,
+	0,
+	CONFIG_WIDTH,
+	CONFIG_HEIGHT
+};
 
-/*
-**  Complex number
-*/
+// custom type
+typedef uint32_t			t_speeds[400][400];
 
-/*
-** re — real part
-** im — imaginary part
-*/
-typedef struct s_complex {
-	double	re;
-	double	im;
-}	t_complex;
+// main.c
+int			main(int argc, char **argv);
+int			close_window(t_ctx *ctx);
 
-t_complex	complex_new(double re, double im);
-t_complex	cadd(t_complex lhs, t_complex rhs);
-t_complex	csub(t_complex lhs, t_complex rhs);
-t_complex	cmul(t_complex lhs, t_complex rhs);
-t_complex	cdiv(t_complex c, t_complex b);
-t_complex	mandelbrot(t_complex z, t_complex c);
+// argparse.c
+t_ctx		argparse(int argc, char **argv);
 
-/*
-**  Integer Point
-*/
-
-/*
-** x — int x
-** y — int y
-*/
-typedef struct s_ipoint {
-	int	x;
-	int	y;
-}	t_ipoint;
-
-/*
-**  Double Point
-*/
-
-/*
-** x — double x
-** y — double y
-*/
-typedef struct s_dpoint {
-	double	x;
-	double	y;
-}	t_dpoint;
-
-typedef struct s_img_info {
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_img_info;
-
-typedef enum e_mode { Normal, Psyc }	t_mode;
-typedef enum e_fractal_type {Mandelbrot, Julia, Barnsley}	t_fractal_type;
-
-typedef struct s_rect {
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-}	t_rect;
-
-static const t_rect		g_rect_fractal
-	= (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
-static const t_rect		g_rect_config
-	= (t_rect){FRACT_WIDTH, 0, CONFIG_WIDTH, CONFIG_HEIGHT};
-bool		rect_contains(t_ipoint p, t_rect rect);
-
-/*
-**  minilibx img container
-*/
-
-/*
-** bpp — bits per pixel
-** size_line — size of the line
-** endian — endian
-*/
-typedef struct s_img {
-	void	*mlx_ptr;
-	void	*img_ptr;
-	char	*data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}	t_img;
-
-/*
-**  Fract-ol Context
-*/
-
-/*
-** mlx_ptr — 
-** win_ptr — 
-** img_ptr — 
-** win_mouse_pnt — 
-** mouse_pnt — 
-** step_n — 
-** step — 
-** hue — 
-*/
-typedef struct s_ctx {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_ipoint		win_mouse_pnt;
-	t_dpoint		mouse_pnt;
-	int				step_n;
-	double			step;
-	uint8_t			hue;
-	t_hsv			base_hsv;
-	uint32_t		max_loop;
-	t_mode			color_mode;
-	t_mode			julia_mode;
-	t_fractal_type	fractal_type;
-	double			c_radian;
-	t_complex		c;
-	t_img			fractal_img;
-	t_img			config_img;
-	t_dpoint		o;
-}	t_ctx;
-	//enum			fractal_type;
-
-// Returns img_ptr
-uint32_t	divergence_speed(t_complex z, t_complex c,
-				uint32_t max_loop);
-void		draw_fractal(const t_ctx *ctx);
+// key_handler.c
 int			key_handler(int keycode, t_ctx *ctx);
+
+// mouse_handler.c
 int			mouse_handler(int button, int x, int y, t_ctx *ctx);
+
+// loop_handler.c
 int			loop_handler(t_ctx *ctx);
 
-// print mlx keycode as readable format
-void		print_keycode(int keycode);
-int			close_window(t_ctx *ctx);
+// fractal.c
+void		draw_fractal(const t_ctx *ctx);
+uint32_t	mandelbrot_div_speed(t_complex z, t_complex c, uint32_t max_loop);
+bool		need_fractal_update(const t_ctx *ctx);
+
+// mandelbrot.c
+void		draw_mandelbrot(const t_ctx *ctx);
+// julia.c
+void		draw_julia(const t_ctx *ctx);
+// barnsley.c
+void		draw_barnsley(const t_ctx *ctx);
+
+// img.c
 void		init_img(t_img *img, void *mlx_ptr, int width, int height);
 void		clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
 void		clear_img_rect(const t_img *img, t_rect rect);
 void		put_pixel_in_img(const t_img *img, int x, int y, int color);
-void		draw_mandelbrot(const t_ctx *ctx);
-void		draw_julia(const t_ctx *ctx);
-void		draw_barnsley(const t_ctx *ctx);
-uint32_t	mandelbrot_div_speed(t_complex z, t_complex c,
-				uint32_t max_loop);
 
-t_ctx		argparse(int argc, char **argv);
+// mlx_util.c
+void		print_keycode(int keycode);
 
-bool		need_fractal_update(const t_ctx *ctx);
-
-void		put_ctx_to_window(t_ctx *ctx);
 #endif

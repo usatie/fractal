@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:46:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:48:27 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	usage_err(void)
 static t_fractal_type	parse_fractal_type(const char *arg)
 {
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
-		return (Mandelbrot);
+		return (mandelbrot);
 	else if (ft_strcmp(arg, "Julia") == 0)
-		return (Julia);
+		return (julia);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
-		return (Barnsley);
+		return (barnsley);
 	else
 		usage_err();
 }
@@ -50,8 +50,8 @@ t_ctx	argparse(int argc, char **argv)
 	ctx.win_mouse_pnt = (t_ipoint){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
 	ctx.mouse_pnt = (t_dpoint){0, 0};
 	ctx.max_loop = 50;
-	ctx.color_mode = Normal;
-	ctx.julia_mode = Normal;
+	ctx.color_mode = normal;
+	ctx.julia_mode = normal;
 	ctx.fractal_type = parse_fractal_type(argv[1]);
 	ctx.hue = 128;
 	ctx.c_radian = M_PI / 180 * 120;

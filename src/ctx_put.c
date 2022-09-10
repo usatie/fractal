@@ -6,12 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:26:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:16:19 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "fractol_util.h"
 #include "fractol_ctx.h"
 #include "mlx.h"
 
@@ -45,28 +44,29 @@ void	ctx_string_put(const t_ctx *ctx, int *height, char *str)
 
 static bool	is_updated(const t_ctx *ctx)
 {
-	static bool		initialized;
+	static bool		is_first_time = true;
 	static t_ctx	prev;
 	bool			is_updated;
 
-	if (!initialized)
-		is_updated = true;
-	else
-		is_updated = (
-				(prev.win_mouse_pnt.x != ctx->win_mouse_pnt.x)
-				|| (prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y)
-				|| neq(prev.mouse_pnt.x, ctx->mouse_pnt.x)
-				|| neq(prev.mouse_pnt.y, ctx->mouse_pnt.y)
-				|| neq(prev.step, ctx->step)
-				|| (prev.hue != ctx->hue)
-				|| neq(prev.o.x, ctx->o.x)
-				|| neq(prev.o.y, ctx->o.y)
-				|| (prev.max_loop != ctx->max_loop)
-				|| (prev.color_mode != ctx->color_mode)
-				|| (prev.julia_mode != ctx->julia_mode)
-				|| (prev.fractal_type != ctx->fractal_type)
-				|| neq(prev.c_radian, ctx->c_radian));
-	initialized = true;
+	if (is_first_time)
+	{
+		is_first_time = false;
+		prev = *ctx;
+		return (true);
+	}
+	is_updated = (
+			(prev.win_mouse_pnt.x != ctx->win_mouse_pnt.x)
+			|| (prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y)
+			|| neq(prev.mouse_pnt.x, ctx->mouse_pnt.x)
+			|| neq(prev.mouse_pnt.y, ctx->mouse_pnt.y)
+			|| neq(prev.step, ctx->step)
+			|| (prev.hue != ctx->hue)
+			|| neq(prev.o.x, ctx->o.x) || neq(prev.o.y, ctx->o.y)
+			|| (prev.max_loop != ctx->max_loop)
+			|| (prev.color_mode != ctx->color_mode)
+			|| (prev.julia_mode != ctx->julia_mode)
+			|| (prev.fractal_type != ctx->fractal_type)
+			|| neq(prev.c_radian, ctx->c_radian));
 	prev = *ctx;
 	return (is_updated);
 }

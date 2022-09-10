@@ -6,27 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:27:10 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:53:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
-#include "mlx.h"
 #include "mlx_keymap.h"
-
-int	close_window(t_ctx *ctx)
-{
-	mlx_key_hook(ctx->win_ptr, NULL, NULL);
-	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
-	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
-	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
-	mlx_destroy_image(ctx->mlx_ptr, ctx->fractal_img.img_ptr);
-	mlx_destroy_image(ctx->mlx_ptr, ctx->config_img.img_ptr);
-	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
-	free(ctx->mlx_ptr);
-	exit(0);
-}
 
 int	key_handler(int keycode, t_ctx *ctx)
 {
