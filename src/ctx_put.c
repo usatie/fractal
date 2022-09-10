@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 17:32:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:26:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 
 	if (is_updated(ctx))
 	{
-		clear_win_rect(ctx->mlx_ptr, ctx->win_ptr, g_rect_help);
+		clear_win_rect(ctx->mlx_ptr, ctx->win_ptr, g_rect_config);
 		height = 50;
 		ctx_put_config_fractal_mode(ctx, &height);
 		ctx_put_config_color_mode(ctx, &height);
@@ -39,7 +39,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 void	ctx_string_put(const t_ctx *ctx, int *height, char *str)
 {
 	mlx_string_put(ctx->mlx_ptr, ctx->win_ptr,
-		g_rect_help.x + 50, *height, red(), str);
+		g_rect_config.x + 50, *height, red().mlxint, str);
 	*height += 30;
 }
 

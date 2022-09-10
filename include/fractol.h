@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:07:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:33:31 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,17 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 400
-# define WIN_TITLE "fract-ol"
+# include "fractol_color.h"
 
 # define FRACT_WIDTH 400
 # define FRACT_HEIGHT 400
 
-# define HELP_WIDTH 400
-# define HELP_HEIGHT 400
+# define CONFIG_WIDTH 400
+# define CONFIG_HEIGHT 400
 
-/*
-**  HSV Color
-*/
-
-/*
-** h — Hue
-** s — Saturation
-** v — Value
-** alpha — Alpha
-*/
-typedef struct s_hsv {
-	unsigned char	h;
-	unsigned char	s;
-	unsigned char	v;
-	unsigned char	alpha;
-}	t_hsv;
-
-/*
-**  RGB Color
-*/
-
-/*
-** r — Red
-** g — Green
-** b — Blue
-** alpha — Alpha
-*/
-typedef union u_rgb {
-	struct s_rgb {
-		unsigned char	b:8;
-		unsigned char	g:8;
-		unsigned char	r:8;
-		unsigned char	alpha:8;
-	} rgb;
-	int	mlxint;
-}	t_rgb;
-
-t_rgb			hsv2rgb(t_hsv in);
-t_rgb			rgb(unsigned char r, unsigned char g, unsigned char b,
-					unsigned char alpha);
-t_rgb			green(void);
-t_rgb			red(void);
-t_rgb			black(void);
+# define WIN_WIDTH (FRACT_WIDTH + CONFIG_WIDTH)
+# define WIN_HEIGHT 400
+# define WIN_TITLE "fract-ol"
 
 /*
 **  Complex number
@@ -135,8 +92,8 @@ typedef struct s_rect {
 typedef unsigned int	t_speeds[400][400];
 static const t_rect		g_rect_fractal
 	= (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
-static const t_rect		g_rect_help
-	= (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT};
+static const t_rect		g_rect_config
+	= (t_rect){FRACT_WIDTH, 0, CONFIG_WIDTH, CONFIG_HEIGHT};
 bool			rect_contains(t_int_point p, t_rect rect);
 
 /*
@@ -187,12 +144,10 @@ typedef struct s_ctx {
 	double			c_radian;
 	t_complex		c;
 	t_img			fractal_img;
-	t_img			help_img;
+	t_img			config_img;
 	t_double_point	o;
 }	t_ctx;
 	//enum			fractal_type;
-
-bool			is_equal(t_ctx l, t_ctx r);
 
 // Returns img_ptr
 unsigned int	divergence_speed(t_complex z, t_complex c,

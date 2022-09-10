@@ -6,14 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 17:41:07 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:30:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_util.h"
 #include "fractol_ctx.h"
-#include "mlx.h"
 #include <math.h>
 
 static t_double_point	calc_origin(t_int_point win_mouse_pnt,

@@ -6,13 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 17:21:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:29:09 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_util.h"
-#include "mlx.h"
 #include <math.h>
 
 void	draw_fractal(const t_ctx *ctx)
