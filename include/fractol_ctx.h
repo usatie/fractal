@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:06:12 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:37:27 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // custom types
 typedef struct s_ctx		t_ctx;
 typedef struct s_img		t_img;
-typedef enum e_mode			t_mode;
-typedef enum e_fractal_type	t_fractal_type;
+typedef enum e_mode { normal, psyc }	t_mode;
+typedef enum e_fractal_type { mandelbrot, julia, barnsley }	t_fractal_type;
 
 // ctx.c
 void	ctx_on_update(t_ctx *ctx);
@@ -57,9 +57,6 @@ struct s_img {
 	int		size_line;
 	int		endian;
 };
-
-enum e_mode { normal, psyc };
-enum e_fractal_type { mandelbrot, julia, barnsley };
 
 /*
     Fract-ol Context

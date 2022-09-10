@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:14:57 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:48:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ t_rgb	hsv2rgb(t_hsv in)
 	q = (in.v * (255 - ((in.s * remainder) >> 8))) >> 8;
 	t = (in.v * (255 - ((in.s * (255 - remainder)) >> 8))) >> 8;
 	if (region == 0)
-		return ((t_rgb){{in.v, t, p, in.alpha}});
+		return (rgb(in.v, t, p, in.alpha));
 	else if (region == 1)
-		return ((t_rgb){{q, in.v, p, in.alpha}});
+		return (rgb(q, in.v, p, in.alpha));
 	else if (region == 2)
-		return ((t_rgb){{p, in.v, t, in.alpha}});
+		return (rgb(p, in.v, t, in.alpha));
 	else if (region == 3)
-		return ((t_rgb){{p, q, in.v, in.alpha}});
+		return (rgb(p, q, in.v, in.alpha));
 	else if (region == 4)
-		return ((t_rgb){{t, p, in.v, in.alpha}});
+		return (rgb(t, p, in.v, in.alpha));
 	else
-		return ((t_rgb){{in.v, p, q, in.alpha}});
+		return (rgb(in.v, p, q, in.alpha));
 }
 
 t_rgb	green(void)
@@ -65,5 +65,5 @@ t_rgb	rgb(uint8_t r, uint8_t g, uint8_t b,
 	struct s_rgb	color;
 
 	color = (struct s_rgb){.r = r, .g = g, .b = b, .alpha = alpha};
-	return ((t_rgb)color);
+	return ((t_rgb){color});
 }

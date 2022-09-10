@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:08 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:13:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:51:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_julia(const t_ctx *ctx)
 		while (++p.x < FRACT_WIDTH)
 		{
 			speed = speeds[p.x][p.y];
-			hsv = (t_hsv){ctx->hue, 255, 150 * speed / 255, 0};
+			hsv = (t_hsv){ctx->hue, 255, (uint8_t)(150 * speed / 255), 0};
 			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, hsv2rgb(hsv).mlxint);
 		}
 	}

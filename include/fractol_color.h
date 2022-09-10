@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:14:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:14:25 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 00:48:07 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef union u_rgb {
 		uint8_t	r:8;
 		uint8_t	alpha:8;
 	} rgb;
-	int	mlxint;
+	int32_t	mlxint;
 }	t_rgb;
 
 t_rgb	hsv2rgb(t_hsv in);
