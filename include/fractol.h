@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 20:19:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 21:07:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ typedef union u_rgb {
 }	t_rgb;
 
 t_rgb			hsv2rgb(t_hsv in);
-int				hsv2mlxint(t_hsv hsv);
+t_rgb			rgb(unsigned char r, unsigned char g, unsigned char b,
+					unsigned char alpha);
+t_rgb			green(void);
+t_rgb			red(void);
+t_rgb			black(void);
+
 /*
 **  Complex number
 */
@@ -217,7 +222,4 @@ t_ctx			argparse(int argc, char **argv);
 bool			need_fractal_update(const t_ctx *ctx);
 
 void			put_ctx_to_window(t_ctx *ctx);
-
-int				green(void);
-int				red(void);
 #endif

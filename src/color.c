@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 20:20:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 21:07:19 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_rgb	hsv2rgb(t_hsv in)
 	unsigned char	t;
 
 	if (in.s == 0)
-		return ((t_rgb){{in.v, in.v, in.v, in.alpha}});
+		return (rgb(in.v, in.v, in.v, in.alpha));
 	region = in.h / 43;
 	remainder = (in.h - (region * 43)) * 6;
 	p = (in.v * (255 - in.s)) >> 8;
@@ -44,17 +44,26 @@ t_rgb	hsv2rgb(t_hsv in)
 		return ((t_rgb){{in.v, p, q, in.alpha}});
 }
 
-int	hsv2mlxint(t_hsv hsv)
+t_rgb	green(void)
 {
-	return (hsv2rgb(hsv).mlxint);
+	return (rgb(0, 255, 0, 0));
 }
 
-int	green(void)
+t_rgb	red(void)
 {
-	return (((t_rgb){{0, 255, 0, 0}}).mlxint);
+	return (rgb(255, 0, 0, 0));
 }
 
-int	red(void)
+t_rgb	black(void)
 {
-	return (((t_rgb){{255, 0, 0, 0}}).mlxint);
+	return (rgb(0, 0, 0, 0));
+}
+
+t_rgb	rgb(unsigned char r, unsigned char g, unsigned char b,
+				unsigned char alpha)
+{
+	struct s_rgb	color;
+
+	color = (struct s_rgb){.r = r, .g = g, .b = b, .alpha = alpha};
+	return ((t_rgb)color);
 }

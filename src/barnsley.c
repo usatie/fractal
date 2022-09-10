@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 15:41:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 21:07:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_barnsley(const t_ctx *ctx)
 		c = barnsley_next(c);
 		p = to_window_coord(c, ctx);
 		if (rect_contains(p, g_rect_fractal))
-			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, green());
+			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, green().mlxint);
 	}
 }
 
