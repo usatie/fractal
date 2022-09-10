@@ -18,6 +18,7 @@ LIBFT		=	$(LIBFTDIR)/libft.a
 
 LIBS		=	-lmlx -lXext -lX11 -lft -lm
 MLX_DIR		=	minilibx-linux
+MLX		=	$(MLX_DIR)/mlx.a
 LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
 INCLUDE		=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
@@ -65,12 +66,15 @@ OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBPATH) $(FRAMEWORK) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $^ $(CFLAGS) -c -o $@
+
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFTDIR)
