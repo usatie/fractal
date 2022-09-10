@@ -6,16 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:41:32 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:38:33 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "ft_printf.h"
 
-static void	update_mandelbrot(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
-				t_ctx *ctx);
+static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx);
 
-void	draw_mandelbrot(t_ctx *ctx)
+void	draw_mandelbrot(const t_ctx *ctx)
 {
 	t_int_point			p;
 	t_hsv				hsv;
@@ -31,14 +31,19 @@ void	draw_mandelbrot(t_ctx *ctx)
 		while (++p.x < FRACT_WIDTH)
 		{
 			speed = speeds[p.x][p.y];
-			hsv = (t_hsv){(unsigned char)(ctx->hue + speed), 255, 150, 0};
+			hsv = (t_hsv){
+				(unsigned char)(ctx->hue + 255 * speed / ctx->max_loop),
+				255 * speed / ctx->max_loop,
+				150 * speed / ctx->max_loop,
+				0};
+			if (speed == 0)
+				hsv = (t_hsv){0};
 			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, hsv2mlxint(hsv));
 		}
 	}
 }
 
-static void	update_mandelbrot(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
-		t_ctx *ctx)
+static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx)
 {
 	t_int_point		p;
 	unsigned int	speed;
@@ -54,7 +59,6 @@ static void	update_mandelbrot(unsigned int speeds[FRACT_WIDTH][FRACT_HEIGHT],
 					complex_new(ctx->o.x + ctx->step * (double)p.x,
 						ctx->o.y - ctx->step * (double)p.y),
 					ctx->max_loop);
-			speed = speed * 256 / ctx->max_loop;
 			speeds[p.x][p.y] = speed;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:38:04 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:42:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	destroy_img(t_img *img)
 }
 */
 
-void	put_pixel_in_img(t_img *img, int x, int y, int color)
+void	put_pixel_in_img(const t_img *img, int x, int y, int color)
 {
 	int	idx;
 
@@ -43,7 +43,7 @@ void	put_pixel_in_img(t_img *img, int x, int y, int color)
 	ft_memmove(&img->data[idx], &color, sizeof(int));
 }
 
-void	clear_img_rect(t_img *img, t_rect rect)
+void	clear_img_rect(const t_img *img, t_rect rect)
 {
 	int		x;
 	int		y;

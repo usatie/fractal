@@ -6,15 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:27:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:23:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_util.h"
 #include "mlx.h"
 #include <math.h>
-
-bool	not_equal(double a, double b);
 
 static t_double_point	calc_origin(t_int_point win_mouse_pnt,
 		t_double_point mouse_pnt, double step)
@@ -45,9 +44,9 @@ void	ctx_on_update(t_ctx *ctx)
 	}
 	if (prev.step_n != ctx->step_n || !initialized)
 		ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
-	if (not_equal(prev.step, ctx->step)
-		|| not_equal(prev.mouse_pnt.x, ctx->mouse_pnt.x)
-		|| not_equal(prev.mouse_pnt.y, ctx->mouse_pnt.y)
+	if (neq(prev.step, ctx->step)
+		|| neq(prev.mouse_pnt.x, ctx->mouse_pnt.x)
+		|| neq(prev.mouse_pnt.y, ctx->mouse_pnt.y)
 		|| prev.win_mouse_pnt.x != ctx->win_mouse_pnt.x
 		|| prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y
 		|| !initialized)

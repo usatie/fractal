@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/08/27 20:57:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:42:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,11 @@ typedef struct s_rect {
 	int	height;
 }	t_rect;
 
-static const t_rect	g_rect_fractal
+typedef unsigned int	t_speeds[400][400];
+static const t_rect		g_rect_fractal
 	= (t_rect){0, 0, FRACT_WIDTH, FRACT_HEIGHT};
-static const t_rect	g_rect_help
+static const t_rect		g_rect_help
 	= (t_rect){FRACT_WIDTH, 0, HELP_WIDTH, HELP_HEIGHT};
-
 bool			rect_contains(t_int_point p, t_rect rect);
 
 /*
@@ -191,7 +191,7 @@ bool			is_equal(t_ctx l, t_ctx r);
 // Returns img_ptr
 unsigned int	divergence_speed(t_complex z, t_complex c,
 					unsigned int max_loop);
-void			draw_fractal(t_ctx *ctx);
+void			draw_fractal(const t_ctx *ctx);
 int				key_handler(int keycode, t_ctx *ctx);
 int				mouse_handler(int button, int x, int y, t_ctx *ctx);
 int				loop_handler(t_ctx *ctx);
@@ -203,11 +203,11 @@ void			print_keycode(int keycode);
 int				close_window(t_ctx *ctx);
 void			init_img(t_img *img, void *mlx_ptr, int width, int height);
 void			clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
-void			clear_img_rect(t_img *img, t_rect rect);
-void			put_pixel_in_img(t_img *img, int x, int y, int color);
-void			draw_mandelbrot(t_ctx *ctx);
-void			draw_julia(t_ctx *ctx);
-void			draw_barnsley(t_ctx *ctx);
+void			clear_img_rect(const t_img *img, t_rect rect);
+void			put_pixel_in_img(const t_img *img, int x, int y, int color);
+void			draw_mandelbrot(const t_ctx *ctx);
+void			draw_julia(const t_ctx *ctx);
+void			draw_barnsley(const t_ctx *ctx);
 unsigned int	mandelbrot_div_speed(t_complex z, t_complex c,
 					unsigned int max_loop);
 
@@ -219,7 +219,7 @@ void			ctx_next_julia_mode(t_ctx *ctx);
 void			ctx_next_fractal_type(t_ctx *ctx);
 void			ctx_on_update(t_ctx *ctx);
 bool			ctx_is_updated(t_ctx *ctx);
-bool			need_fractal_update(t_ctx *ctx);
+bool			need_fractal_update(const t_ctx *ctx);
 
 void			put_ctx_to_window(t_ctx *ctx);
 

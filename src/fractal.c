@@ -6,17 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/08/16 21:40:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:21:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "fractol_util.h"
 #include "mlx.h"
 #include <math.h>
 
-bool	not_equal(double a, double b);
-
-void	draw_fractal(t_ctx *ctx)
+void	draw_fractal(const t_ctx *ctx)
 {
 	if (ctx->fractal_type == Mandelbrot)
 		draw_mandelbrot(ctx);
@@ -26,7 +25,7 @@ void	draw_fractal(t_ctx *ctx)
 		draw_barnsley(ctx);
 }
 
-bool	need_fractal_update(t_ctx *ctx)
+bool	need_fractal_update(const t_ctx *ctx)
 {
 	static bool		initialized;
 	static t_ctx	prev;
@@ -35,11 +34,11 @@ bool	need_fractal_update(t_ctx *ctx)
 	if (!initialized)
 		is_updated = true;
 	else
-		is_updated = (not_equal(prev.step, ctx->step)
-				|| not_equal(prev.o.x, ctx->o.x)
-				|| not_equal(prev.o.y, ctx->o.y)
+		is_updated = (neq(prev.step, ctx->step)
+				|| neq(prev.o.x, ctx->o.x)
+				|| neq(prev.o.y, ctx->o.y)
 				|| (prev.max_loop != ctx->max_loop)
-				|| not_equal(prev.c_radian, ctx->c_radian)
+				|| neq(prev.c_radian, ctx->c_radian)
 				|| (prev.fractal_type != ctx->fractal_type));
 	initialized = true;
 	prev = *ctx;

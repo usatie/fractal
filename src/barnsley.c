@@ -6,17 +6,17 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/07/29 19:26:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:41:56 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <math.h>
 
-static t_int_point		calc_xy_in_window(t_double_point point, t_ctx *ctx);
+static t_int_point		to_window_coord(t_double_point point, const t_ctx *ctx);
 static t_double_point	barnsley_next(t_double_point p);
 
-void	draw_barnsley(t_ctx *ctx)
+void	draw_barnsley(const t_ctx *ctx)
 {
 	t_double_point	c;
 	t_int_point		p;
@@ -30,7 +30,7 @@ void	draw_barnsley(t_ctx *ctx)
 	while (++i < pow(10, 4 + (double)ctx->max_loop / 100))
 	{
 		c = barnsley_next(c);
-		p = calc_xy_in_window(c, ctx);
+		p = to_window_coord(c, ctx);
 		if (rect_contains(p, g_rect_fractal))
 			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, green());
 	}
@@ -54,7 +54,7 @@ static t_double_point	barnsley_next(t_double_point p)
 			-0.04 * p.x + 0.85 * p.y + 1.6});
 }
 
-static t_int_point	calc_xy_in_window(t_double_point point, t_ctx *ctx)
+static t_int_point	to_window_coord(t_double_point point, const t_ctx *ctx)
 {
 	t_int_point	ret;
 
