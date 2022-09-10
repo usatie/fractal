@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:00:19 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:14:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx);
 
 void	draw_mandelbrot(const t_ctx *ctx)
 {
-	t_int_point			p;
-	t_hsv				hsv;
-	unsigned int		speed;
-	static unsigned int	speeds[FRACT_WIDTH][FRACT_HEIGHT];
+	t_ipoint		p;
+	t_hsv			hsv;
+	uint32_t		speed;
+	static t_speeds	speeds;
 
 	if (need_fractal_update(ctx))
 		update_mandelbrot(speeds, ctx);
@@ -32,7 +32,7 @@ void	draw_mandelbrot(const t_ctx *ctx)
 		{
 			speed = speeds[p.x][p.y];
 			hsv = (t_hsv){
-				(unsigned char)(ctx->hue + 255 * speed / ctx->max_loop),
+				(uint8_t)(ctx->hue + 255 * speed / ctx->max_loop),
 				255 * speed / ctx->max_loop,
 				150 * speed / ctx->max_loop,
 				0};
@@ -45,8 +45,8 @@ void	draw_mandelbrot(const t_ctx *ctx)
 
 static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx)
 {
-	t_int_point		p;
-	unsigned int	speed;
+	t_ipoint	p;
+	uint32_t	speed;
 
 	p.y = -1;
 	while (++p.y < FRACT_HEIGHT)

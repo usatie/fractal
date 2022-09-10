@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:29:09 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:12:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ bool	need_fractal_update(const t_ctx *ctx)
 	return (is_updated);
 }
 
-unsigned int	mandelbrot_div_speed(t_complex z, t_complex c,
-		unsigned int max_loop)
+uint32_t	mandelbrot_div_speed(t_complex z, t_complex c,
+		uint32_t max_loop)
 {
-	unsigned int	i;
+	uint32_t	i;
 
 	i = 0;
 	while (i < max_loop)

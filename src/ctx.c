@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:30:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:45:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "fractol_ctx.h"
 #include <math.h>
 
-static t_double_point	calc_origin(t_int_point win_mouse_pnt,
-							t_double_point mouse_pnt, double step);
+static t_dpoint	calc_origin(t_ipoint win_mouse_pnt,
+					t_dpoint mouse_pnt, double step);
 
 void	ctx_on_update(t_ctx *ctx)
 {
@@ -27,9 +27,9 @@ void	ctx_on_update(t_ctx *ctx)
 	{
 		ctx->julia_mode = Normal;
 		ctx->max_loop = 100;
-		ctx->mouse_pnt = (t_double_point){0, 0};
+		ctx->mouse_pnt = (t_dpoint){0, 0};
 		if (ctx->fractal_type == Barnsley)
-			ctx->mouse_pnt = (t_double_point){0.5, 5};
+			ctx->mouse_pnt = (t_dpoint){0.5, 5};
 		ctx->step_n = 0;
 		if (ctx->fractal_type == Barnsley)
 			ctx->step_n = 40;
@@ -60,17 +60,17 @@ void	ctx_next_julia_mode(t_ctx *ctx)
 void	ctx_next_fractal_type(t_ctx *ctx)
 {
 	ctx->fractal_type = (ctx->fractal_type + 1) % 3;
-	ctx->win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
+	ctx->win_mouse_pnt = (t_ipoint){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
 	ctx_on_update(ctx);
 }
 
-static t_double_point	calc_origin(t_int_point win_mouse_pnt,
-		t_double_point mouse_pnt, double step)
+static t_dpoint	calc_origin(t_ipoint win_mouse_pnt,
+		t_dpoint mouse_pnt, double step)
 {
 	double	x;
 	double	y;
 
 	x = mouse_pnt.x - step * win_mouse_pnt.x;
 	y = mouse_pnt.y + step * win_mouse_pnt.y;
-	return ((t_double_point){x, y});
+	return ((t_dpoint){x, y});
 }

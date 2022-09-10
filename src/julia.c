@@ -6,23 +6,23 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:08 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:00:37 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:13:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "ft_printf.h"
 
-static void			update(t_speeds speeds, const t_ctx *ctx);
-static void			normalize_speeds(t_speeds speeds);
-static unsigned int	min(unsigned int a, unsigned int b);
-static unsigned int	max(unsigned int a, unsigned int b);
+static void		update(t_speeds speeds, const t_ctx *ctx);
+static void		normalize_speeds(t_speeds speeds);
+static uint32_t	min(uint32_t a, uint32_t b);
+static uint32_t	max(uint32_t a, uint32_t b);
 
 void	draw_julia(const t_ctx *ctx)
 {
-	t_int_point		p;
+	t_ipoint		p;
 	t_hsv			hsv;
-	unsigned int	speed;
+	uint32_t		speed;
 	static t_speeds	speeds;
 
 	if (need_fractal_update(ctx))
@@ -40,14 +40,14 @@ void	draw_julia(const t_ctx *ctx)
 	}
 }
 
-static unsigned int	min(unsigned int a, unsigned int b)
+static uint32_t	min(uint32_t a, uint32_t b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-static unsigned int	max(unsigned int a, unsigned int b)
+static uint32_t	max(uint32_t a, uint32_t b)
 {
 	if (a > b)
 		return (a);
@@ -57,8 +57,8 @@ static unsigned int	max(unsigned int a, unsigned int b)
 // Update julia speeds
 static void	update(t_speeds speeds, const t_ctx *ctx)
 {
-	t_int_point		p;
-	unsigned int	speed;
+	t_ipoint	p;
+	uint32_t	speed;
 
 	p.y = -1;
 	while (++p.y < FRACT_HEIGHT)
@@ -79,9 +79,9 @@ static void	update(t_speeds speeds, const t_ctx *ctx)
 // normalize to 0-255
 static void	normalize_speeds(t_speeds speeds)
 {
-	t_int_point		p;
-	unsigned int	max_speed;
-	unsigned int	min_speed;
+	t_ipoint	p;
+	uint32_t	max_speed;
+	uint32_t	min_speed;
 
 	max_speed = speeds[0][0];
 	min_speed = speeds[0][0];

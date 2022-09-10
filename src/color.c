@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:07:19 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:14:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 // https://stackoverflow.com/a/14733008
 t_rgb	hsv2rgb(t_hsv in)
 {
-	unsigned char	region;
-	unsigned char	remainder;
-	unsigned char	p;
-	unsigned char	q;
-	unsigned char	t;
+	uint8_t	region;
+	uint8_t	remainder;
+	uint8_t	p;
+	uint8_t	q;
+	uint8_t	t;
 
 	if (in.s == 0)
 		return (rgb(in.v, in.v, in.v, in.alpha));
@@ -59,8 +59,8 @@ t_rgb	black(void)
 	return (rgb(0, 0, 0, 0));
 }
 
-t_rgb	rgb(unsigned char r, unsigned char g, unsigned char b,
-				unsigned char alpha)
+t_rgb	rgb(uint8_t r, uint8_t g, uint8_t b,
+				uint8_t alpha)
 {
 	struct s_rgb	color;
 

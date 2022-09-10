@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:14:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:15:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 23:14:25 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 ** alpha — Alpha
 */
 typedef struct s_hsv {
-	unsigned char	h;
-	unsigned char	s;
-	unsigned char	v;
-	unsigned char	alpha;
+	uint8_t	h;
+	uint8_t	s;
+	uint8_t	v;
+	uint8_t	alpha;
 }	t_hsv;
 
 /*
@@ -42,17 +42,17 @@ typedef struct s_hsv {
 */
 typedef union u_rgb {
 	struct s_rgb {
-		unsigned char	b:8;
-		unsigned char	g:8;
-		unsigned char	r:8;
-		unsigned char	alpha:8;
+		uint8_t	b:8;
+		uint8_t	g:8;
+		uint8_t	r:8;
+		uint8_t	alpha:8;
 	} rgb;
 	int	mlxint;
 }	t_rgb;
 
 t_rgb	hsv2rgb(t_hsv in);
-t_rgb	rgb(unsigned char r, unsigned char g, unsigned char b,
-			unsigned char alpha);
+t_rgb	rgb(uint8_t r, uint8_t g, uint8_t b,
+			uint8_t alpha);
 t_rgb	green(void);
 t_rgb	red(void);
 t_rgb	black(void);

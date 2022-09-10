@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 20:21:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:46:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_ctx	argparse(int argc, char **argv)
 	if (argc != 2)
 		usage_err();
 	ctx = (t_ctx){0};
-	ctx.win_mouse_pnt = (t_int_point){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
-	ctx.mouse_pnt = (t_double_point){0, 0};
+	ctx.win_mouse_pnt = (t_ipoint){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
+	ctx.mouse_pnt = (t_dpoint){0, 0};
 	ctx.max_loop = 50;
 	ctx.color_mode = Normal;
 	ctx.julia_mode = Normal;
