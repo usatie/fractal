@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:34:31 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 22:30:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:08:58 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	parse_width(t_fmt *fmt);
 void	parse_precision(t_fmt *fmt);
 void	parse_conversion_spec(t_fmt *fmt);
 
-#define N_CONVERSIONS 10
-
 void	printf_percent(t_fmt *fmt);
 void	printf_c(t_fmt *fmt);
 void	printf_s(t_fmt *fmt);
@@ -32,30 +30,30 @@ void	printf_x_lower(t_fmt *fmt);
 void	printf_x_upper(t_fmt *fmt);
 void	printf_f(t_fmt *fmt);
 
-static const char	g_conversions[N_CONVERSIONS] = {
-	'%',
-	'c',
-	's',
-	'p',
-	'd',
-	'i',
-	'u',
-	'x',
-	'X',
-	'f'
-};
-static void			(*g_conversion_funcs[N_CONVERSIONS])(t_fmt *) = {
-	printf_percent,
-	printf_c,
-	printf_s,
-	printf_p,
-	printf_di,
-	printf_di,
-	printf_u,
-	printf_x_lower,
-	printf_x_upper,
-	printf_f
-};
+typedef void	t_conv_f(t_fmt *);
+
+static t_conv_f	*conversion_func(char c)
+{
+	if (c == '%')
+		return (printf_percent);
+	else if (c == 'c')
+		return (printf_c);
+	else if (c == 's')
+		return (printf_s);
+	else if (c == 'p')
+		return (printf_p);
+	else if (c == 'd' || c == 'i')
+		return (printf_di);
+	else if (c == 'u')
+		return (printf_u);
+	else if (c == 'x')
+		return (printf_x_lower);
+	else if (c == 'X')
+		return (printf_x_upper);
+	else if (c == 'f')
+		return (printf_f);
+	return (NULL);
+}
 
 /*	Overview of conversion specifiers
  
@@ -145,8 +143,8 @@ void	parse_precision(t_fmt *fmt)
 
 void	parse_conversion_spec(t_fmt *fmt)
 {
-	char	c;
-	int		i;
+	char		c;
+	t_conv_f	*f;
 
 	c = *(fmt->format);
 	if (c == 'l')
@@ -155,15 +153,9 @@ void	parse_conversion_spec(t_fmt *fmt)
 		(fmt->format)++;
 		c = *(fmt->format);
 	}
-	i = 0;
-	while (i < N_CONVERSIONS)
-	{
-		if (c == g_conversions[i])
-		{
-			fmt->conversion = c;
-			g_conversion_funcs[i](fmt);
-			return ;
-		}
-		i++;
-	}
+	f = conversion_func(c);
+	if (f == NULL)
+		return ;
+	fmt->conversion = c;
+	f(fmt);
 }

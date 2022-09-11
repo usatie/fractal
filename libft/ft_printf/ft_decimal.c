@@ -6,12 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:06:03 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 22:47:42 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:11:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "ft_decimal.h"
+#include "libft.h"
 
 static t_decimal	round_fract(t_decimal decimal, int precision);
 
@@ -21,7 +22,7 @@ t_decimal	new_decimal(unsigned long long num)
 	t_decimal	decimal;
 	size_t		i;
 
-	decimal = (t_decimal){0};
+	ft_memset(&decimal, 0, sizeof(t_decimal));
 	i = 0;
 	while (i < DOUBLE_MAX_INT && num > 0)
 	{

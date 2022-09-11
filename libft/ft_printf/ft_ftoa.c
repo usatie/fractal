@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:26:29 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 16:41:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:18:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_ieee754.h"
 #include "ft_decimal.h"
 
+void				ftoa(float f, char *res, int width, int precision);
 static void			padzero(int pad, char *res);
 static t_decimal	ieee754_float_to_decimal(t_ieee754_float *f);
 
@@ -47,7 +48,7 @@ void	ftoa(float f, char *res, int width, int precision)
 	}
 	decimal = ieee754_float_to_decimal(ieee_f);
 	decimal_to_str(decimal, res, precision);
-	padzero(width - ft_strlen(res), res);
+	padzero(width - (int)ft_strlen(res), res);
 }
 
 // Convert number from ieee754_float to t_decimal without losing precision

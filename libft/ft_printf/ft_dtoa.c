@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:42:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/09 22:00:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:18:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_ieee754.h"
 #include "ft_decimal.h"
 
+void				dtoa(double f, char *res, int width, int precision);
 static t_decimal	ieee754_double_to_decimal(t_ieee754_double *f);
 static void			parse_ieee754_double(t_ieee754_double *d,
 						t_decimal *decimal, int *exponent);
@@ -49,7 +50,7 @@ void	dtoa(double d, char *res, int width, int precision)
 	}
 	decimal = ieee754_double_to_decimal(ieee_d);
 	decimal_to_str(decimal, res, precision);
-	padzero(width - ft_strlen(res), res);
+	padzero(width - (int)ft_strlen(res), res);
 }
 
 // Convert number from ieee754_double to t_decimal without losing precision
@@ -79,7 +80,7 @@ static t_decimal	ieee754_double_to_decimal(t_ieee754_double *d)
 static void	parse_ieee754_double(t_ieee754_double *d, t_decimal *decimal,
 		int *exponent)
 {
-	long long	mantissa;
+	unsigned long long	mantissa;
 
 	mantissa = d->ieee.mantissa;
 	if (is_d_denormalized(*d))

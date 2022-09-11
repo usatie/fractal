@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/10 17:36:40 by susami           ###   ########.fr        #
+#    Updated: 2022/09/11 15:11:08 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,15 @@ fclean: clean
 
 re: fclean all
 
-debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-poison-system-directories -Wno-packed
+# x86 mac
+ifeq ($(UNAME_S),Darwin)
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
+endif
+
+# ARM mac
+ifneq ($(filter arm%, $(UNAME_P)),)
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
+endif
+
 debug: re
 	norminette $(SRC_DIR) $(INCLUDE_DIR)

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:04:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 22:32:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:19:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	ftoa(float f, char *res, int width, int precision);
 void	dtoa(double f, char *res, int width, int precision);
 void	print(t_fmt *fmt, char *str, size_t len);
+
+void	printf_f(t_fmt *fmt);
 
 #define BUF_SIZE	1500
 #define DEFAULT_PRECISION	6
