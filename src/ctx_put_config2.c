@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 17:36:01 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 15:26:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	ctx_put_config_radian(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
-	ft_sprintf(str, "c_radian: %lfpi",
-		(ctx->c_radian / M_PI - (double)(int)(ctx->c_radian / M_PI / 2) * 2));
+	ft_sprintf(str, "c_radian: %lfpi", fmod(ctx->c_radian / M_PI, 2));
 	ctx_string_put(ctx, height, str);
 }
 
