@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 07:33:20 by susami            #+#    #+#              #
-#    Updated: 2022/09/02 19:05:30 by susami           ###   ########.fr        #
+#    Updated: 2022/09/11 15:33:18 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,7 +115,16 @@ $(OBJDIR)/%.o: %.c
 
 bonus: all
 
-debug: CFLAGS += -Weverything -Wno-poison-system-directories -Wno-cast-qual -Wno-padded
+# x86 mac
+ifeq ($(UNAME_S),Darwin)
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
+endif
+
+# ARM mac
+ifneq ($(filter arm%, $(UNAME_P)),)
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
+endif
+
 debug: re
 	norminette include ft_*.c ft_error_functions ft_argparse ft_printf
 
