@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:37:27 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 16:58:11 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ struct s_ctx {
 	double			c_radian;
 	t_complex		c;
 	t_img			fractal_img;
-	t_img			config_img;
+	t_img			config_clear_img;
 	t_dpoint		o;
 };
 #endif

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 21:08:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 16:58:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,4 @@ void	clear_img_rect(const t_img *img, t_rect rect)
 		while (++x < rect.width)
 			put_pixel_in_img(img, x, y, black().mlxint);
 	}
-}
-
-void	clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect)
-{
-	int		x;
-	int		y;
-	t_img	img;
-
-	init_img(&img, mlx_ptr, rect.width, rect.height);
-	y = -1;
-	while (++y < rect.height)
-	{
-		x = -1;
-		while (++x < rect.width)
-			put_pixel_in_img(&img, x, y, black().mlxint);
-	}
-	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, rect.x, rect.y);
 }

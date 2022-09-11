@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:03:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 16:58:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		draw_barnsley(const t_ctx *ctx);
 
 // img.c
 void		init_img(t_img *img, void *mlx_ptr, int width, int height);
-void		clear_win_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
 void		clear_img_rect(const t_img *img, t_rect rect);
 void		put_pixel_in_img(const t_img *img, int x, int y, int color);
 

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:16:19 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/11 16:57:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "mlx.h"
 
 static bool	is_updated(const t_ctx *ctx);
+static void	clear_config_rect(const t_ctx *ctx);
 
 void	put_ctx_to_window(t_ctx *ctx)
 {
@@ -22,7 +23,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 
 	if (is_updated(ctx))
 	{
-		clear_win_rect(ctx->mlx_ptr, ctx->win_ptr, g_rect_config);
+		clear_config_rect(ctx);
 		height = 50;
 		ctx_put_config_fractal_mode(ctx, &height);
 		ctx_put_config_color_mode(ctx, &height);
@@ -69,4 +70,14 @@ static bool	is_updated(const t_ctx *ctx)
 			|| neq(prev.c_radian, ctx->c_radian));
 	prev = *ctx;
 	return (is_updated);
+}
+
+static void	clear_config_rect(const t_ctx *ctx)
+{
+	mlx_put_image_to_window(
+		ctx->mlx_ptr,
+		ctx->win_ptr,
+		ctx->config_clear_img.img_ptr,
+		g_rect_config.x,
+		g_rect_config.y);
 }
