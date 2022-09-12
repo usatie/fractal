@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:16:46 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:36:39 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:14:33 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 #include "libft.h"
 #include "math.h"
 
-#include <stdio.h>
-
 t_fractal_type	parse_fractal_type(const char *arg);
 int				parse_julia_param(const char *v, t_ctx *ctx);
 
 t_fractal_type	parse_fractal_type(const char *arg)
 {
-	printf("parse_fractal_type: %s\n", arg);
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
 		return (mandelbrot);
 	else if (ft_strcmp(arg, "Julia") == 0)

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 16:59:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:16:51 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "mlx.h"
 #include <X11/X.h>
 
-#include <libc.h>
-
 /*
+#include <stdlib.h>
+
 __attribute__((destructor))
 static void	destructor(void) {
 	system("leaks -q fractol");
