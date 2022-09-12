@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/11 15:11:08 by susami           ###   ########.fr        #
+#    Updated: 2022/09/12 15:37:51 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,10 +46,12 @@ SRCS		=	src/main.c \
 			src/color.c \
 			src/mlx_util.c \
 			src/ctx.c \
+			src/ctx_util.c \
 			src/ctx_put.c \
 			src/ctx_put_config.c \
 			src/ctx_put_config2.c \
 			src/argparse.c \
+			src/argparse_flag.c \
 			src/key_handler.c \
 			src/mouse_handler.c \
 			src/loop_handler.c \
@@ -59,6 +61,7 @@ SRCS		=	src/main.c \
 			src/mandelbrot.c \
 			src/julia.c \
 			src/barnsley.c \
+			src/speeds.c \
 			src/double_util.c \
 
 OBJ_DIR		=	objs

@@ -6,14 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:51:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 15:29:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "ft_printf.h"
 
-static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx);
+static void	update(t_speeds speeds, const t_ctx *ctx);
 
 void	draw_mandelbrot(const t_ctx *ctx)
 {
@@ -23,7 +23,7 @@ void	draw_mandelbrot(const t_ctx *ctx)
 	static t_speeds	speeds;
 
 	if (need_fractal_update(ctx))
-		update_mandelbrot(speeds, ctx);
+		update(speeds, ctx);
 	p.y = -1;
 	while (++p.y < FRACT_HEIGHT)
 	{
@@ -39,7 +39,7 @@ void	draw_mandelbrot(const t_ctx *ctx)
 	}
 }
 
-static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx)
+static void	update(t_speeds speeds, const t_ctx *ctx)
 {
 	t_ipoint	p;
 	uint32_t	speed;
@@ -58,4 +58,5 @@ static void	update_mandelbrot(t_speeds speeds, const t_ctx *ctx)
 			speeds[p.x][p.y] = speed;
 		}
 	}
+	normalize_speeds(speeds);
 }

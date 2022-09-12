@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 16:58:42 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 15:28:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			close_window(t_ctx *ctx);
 
 // argparse.c
 t_ctx		argparse(int argc, char **argv);
+void		usage_err(void) __attribute__((noreturn));
 
 // key_handler.c
 int			key_handler(int keycode, t_ctx *ctx);
@@ -74,6 +75,8 @@ void		draw_mandelbrot(const t_ctx *ctx);
 void		draw_julia(const t_ctx *ctx);
 // barnsley.c
 void		draw_barnsley(const t_ctx *ctx);
+// speeds.c
+void		normalize_speeds(t_speeds speeds);
 
 // img.c
 void		init_img(t_img *img, void *mlx_ptr, int width, int height);

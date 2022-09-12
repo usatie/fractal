@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 16:58:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 15:36:51 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef enum e_mode { normal, psyc }	t_mode;
 typedef enum e_fractal_type { mandelbrot, julia, barnsley }	t_fractal_type;
 
 // ctx.c
+void	init_ctx(t_ctx *ctx);
 void	ctx_on_update(t_ctx *ctx);
 void	ctx_next_color_mode(t_ctx *ctx);
 void	ctx_next_julia_mode(t_ctx *ctx);
@@ -74,7 +75,6 @@ struct s_ctx {
 	t_mode			julia_mode;
 	t_fractal_type	fractal_type;
 	double			c_radian;
-	t_complex		c;
 	t_img			fractal_img;
 	t_img			config_clear_img;
 	t_dpoint		o;

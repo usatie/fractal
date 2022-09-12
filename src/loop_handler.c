@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:59:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 15:37:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ int	loop_handler(t_ctx *ctx)
 	if (ctx->color_mode == psyc)
 		ctx->hue += 4;
 	if (ctx->julia_mode == psyc)
-	{
 		ctx->c_radian += M_PI / 60;
-		ctx->c = cmul(complex_new(0.7885, 0),
-				complex_new(cos(ctx->c_radian), sin(ctx->c_radian)));
-	}
 	draw_fractal(ctx);
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr,
 		ctx->fractal_img.img_ptr, 0, 0);
