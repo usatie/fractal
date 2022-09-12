@@ -6,12 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:14:09 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 17:30:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <math.h>
+
+static t_complex	to_complex(t_ipoint p, t_dpoint o, double step);
+static void			update(t_div_f f, t_speeds speeds, const t_ctx *ctx);
 
 void	draw_fractal(const t_ctx *ctx)
 {
@@ -45,18 +48,57 @@ bool	need_fractal_update(const t_ctx *ctx)
 	return (is_updated);
 }
 
-uint32_t	mandelbrot_div_speed(t_complex z, t_complex c,
-		uint32_t max_loop)
+void	draw_complex_iteration_fractal(t_div_f f, const t_ctx *ctx)
 {
-	uint32_t	i;
+	t_ipoint		p;
+	t_hsv			hsv;
+	uint32_t		speed;
+	static t_speeds	speeds;
 
-	i = 0;
-	while (i < max_loop)
+	if (need_fractal_update(ctx))
+		update(f, speeds, ctx);
+	p.y = -1;
+	while (++p.y < FRACT_HEIGHT)
 	{
-		z = cadd(cmul(z, z), c);
-		if (isinf(z.re) || isinf(z.im))
-			return (i);
-		i++;
+		p.x = -1;
+		while (++p.x < FRACT_WIDTH)
+		{
+			speed = speeds[p.x][p.y];
+			hsv = (t_hsv){ctx->hue, 255, (uint8_t)(150 * speed / 255), 0};
+			put_pixel_in_img(&ctx->fractal_img, p.x, p.y, hsv2rgb(hsv).mlxint);
+		}
 	}
-	return (i);
+}
+
+// Update speeds using f
+static void	update(t_div_f f, t_speeds speeds, const t_ctx *ctx)
+{
+	t_ipoint	p;
+	uint32_t	speed;
+
+	p.y = -1;
+	while (++p.y < FRACT_HEIGHT)
+	{
+		p.x = -1;
+		while (++p.x < FRACT_WIDTH)
+		{
+			speed = f(
+					to_complex(p, ctx->o, ctx->step),
+					ctx->max_loop,
+					ctx);
+			speeds[p.x][p.y] = speed;
+		}
+	}
+	normalize_speeds(speeds);
+}
+
+// Calculate the (x, y) coordinate from window's o and coordinate in the window.
+static t_complex	to_complex(t_ipoint p, t_dpoint o, double step)
+{
+	t_complex	c;
+
+	c = complex_new(
+			o.x + step * (double)p.x,
+			o.y - step * (double)p.y);
+	return (c);
 }

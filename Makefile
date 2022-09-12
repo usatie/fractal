@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/12 15:37:51 by susami           ###   ########.fr        #
+#    Updated: 2022/09/12 16:25:21 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,27 +42,27 @@ endif
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
-			src/complex.c \
-			src/color.c \
-			src/mlx_util.c \
-			src/ctx.c \
-			src/ctx_util.c \
-			src/ctx_put.c \
-			src/ctx_put_config.c \
-			src/ctx_put_config2.c \
-			src/argparse.c \
-			src/argparse_flag.c \
-			src/key_handler.c \
-			src/mouse_handler.c \
-			src/loop_handler.c \
-			src/img.c \
-			src/fractal.c \
-			src/rect.c \
-			src/mandelbrot.c \
-			src/julia.c \
-			src/barnsley.c \
-			src/speeds.c \
-			src/double_util.c \
+				src/double_util.c \
+				src/ctx/ctx.c \
+				src/ctx/ctx_util.c \
+				src/ctx/ctx_put.c \
+				src/ctx/ctx_put_config.c \
+				src/ctx/ctx_put_config2.c \
+				src/argparse/argparse.c \
+				src/argparse/argparse_flag.c \
+				src/mlx/color.c \
+				src/mlx/mlx_util.c \
+				src/mlx/key_handler.c \
+				src/mlx/mouse_handler.c \
+				src/mlx/loop_handler.c \
+				src/mlx/img.c \
+				src/mlx/rect.c \
+				src/fractal/complex.c \
+				src/fractal/fractal.c \
+				src/fractal/mandelbrot.c \
+				src/fractal/julia.c \
+				src/fractal/barnsley.c \
+				src/fractal/speeds.c \
 
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -73,7 +73,7 @@ $(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBPATH) $(FRAMEWORK) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	mkdir -p $$(dirname $@)
 	$(CC) $^ $(CFLAGS) -c -o $@
 
 $(MLX):

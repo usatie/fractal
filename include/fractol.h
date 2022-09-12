@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:28:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 17:20:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static const t_rect			g_rect_config = (t_rect){
 
 // custom type
 typedef uint32_t			t_speeds[400][400];
+typedef uint32_t			t_div_f(t_complex point, uint32_t max_loop,
+		const t_ctx *ctx);
 
 // main.c
 int			main(int argc, char **argv);
@@ -66,8 +68,8 @@ int			loop_handler(t_ctx *ctx);
 
 // fractal.c
 void		draw_fractal(const t_ctx *ctx);
-uint32_t	mandelbrot_div_speed(t_complex z, t_complex c, uint32_t max_loop);
 bool		need_fractal_update(const t_ctx *ctx);
+void		draw_complex_iteration_fractal(t_div_f f, const t_ctx *ctx);
 
 // mandelbrot.c
 void		draw_mandelbrot(const t_ctx *ctx);
@@ -76,6 +78,7 @@ void		draw_julia(const t_ctx *ctx);
 // barnsley.c
 void		draw_barnsley(const t_ctx *ctx);
 // speeds.c
+uint32_t	complex_iteration_div(t_complex z, t_complex c, uint32_t max_loop);
 void		normalize_speeds(t_speeds speeds);
 
 // img.c
