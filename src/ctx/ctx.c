@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:52:02 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/12 19:14:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	init_ctx(t_ctx *ctx)
 	ctx->win_mouse_pnt = (t_ipoint){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
 	ctx->color_mode = normal;
 	ctx->julia_mode = normal;
-	ctx->hue = 128;
+	ctx->hue = 0;
 	ctx->step_n = 0;
 	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
-	ctx->c_radian = M_PI / 180 * 120;
+	ctx->c_radian = M_PI * 150 / 180;
 	ctx->o = calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt, ctx->step);
 }
 
