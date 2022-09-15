@@ -6,9 +6,13 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/13 13:42:36 by susami           ###   ########.fr        #
+#    Updated: 2022/09/15 16:23:59 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#############
+# Variables #
+#############
 
 CC			=	cc
 NAME		=	fractol
@@ -21,24 +25,8 @@ MLX_DIR		=	minilibx-linux
 MLX		=	$(MLX_DIR)/libmlx.a
 LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
-INCLUDE		=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE)
-
-# LINUX | OSX | ARM
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-	CFLAGS += -D LINUX
-else
-	FRAMEWORK = -framework OpenGL -framework AppKit
-endif
-ifeq ($(UNAME_S),Darwin)
-	CFLAGS += -D OSX
-endif
-
-UNAME_P := $(shell uname -p)
-ifneq ($(filter arm%, $(UNAME_P)),)
-	CFLAGS += -D ARM
-endif
+INCLUDES	=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
+CFLAGS		=	-Wall -Werror -Wextra
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
@@ -64,26 +52,50 @@ SRCS		=	src/main.c \
 				src/fractal/barnsley.c \
 				src/fractal/speeds.c \
 
+
 OBJ_DIR		=	objs
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEPS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)
+.PHONY: $(DEPS)
+
+##########################
+# Platform Compatibility #
+##########################
+
+# LINUX | OSX | ARM
+UNAME_S := $(shell uname -s)
+UNAME_P := $(shell uname -p)
+
+# Linux
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -D LINUX
+endif
+
+# macos x86
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -D OSX
+	FRAMEWORK = -framework OpenGL -framework AppKit
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
+endif
+
+# macos ARM (m1/m2...)
+ifneq ($(filter arm%, $(UNAME_P)),)
+	CFLAGS += -D ARM
+	FRAMEWORK = -framework OpenGL -framework AppKit
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
+endif
+
+#################
+# General rules #
+#################
 
 all: $(NAME)
 
 $(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBPATH) $(FRAMEWORK) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $$(dirname $@)
-	$(CC) $^ $(CFLAGS) -c -o $@
-
-$(MLX):
-	$(MAKE) -C $(MLX_DIR)
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFTDIR)
-
 clean:
-	$(RM) *.o *.out $(OBJ_DIR)/*.o
+	$(RM) -rf *.o *.out $(OBJ_DIR)
 	$(MAKE) -C $(LIBFTDIR) clean
 
 fclean: clean
@@ -92,15 +104,18 @@ fclean: clean
 
 re: fclean all
 
-# x86 mac
-ifeq ($(UNAME_S),Darwin)
-debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
-endif
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $$(dirname $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
 
-# ARM mac
-ifneq ($(filter arm%, $(UNAME_P)),)
-debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
-endif
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFTDIR)
 
 debug: re
 	norminette $(SRC_DIR) $(INCLUDE_DIR)
+
+.PHONY: all clean fclean re bonus debug
+-include $(DEPS)
