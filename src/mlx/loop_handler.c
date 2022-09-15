@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:37:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:09:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	loop_handler(t_ctx *ctx)
 	if (cnt++ % 1000 != 0 || lock)
 		return (0);
 	lock = true;
-	if (ctx->color_mode == psyc)
+	if (ctx->color_mode == PSYCHEDELIC_MODE)
 		ctx->hue += 4;
-	if (ctx->julia_mode == psyc)
+	if (ctx->julia_mode == PSYCHEDELIC_MODE)
 		ctx->c_radian += M_PI / 60;
 	draw_fractal(ctx);
 	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr,

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 18:31:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:11:50 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void			update(t_div_f f, t_speeds speeds, const t_ctx *ctx);
 
 void	draw_fractal(const t_ctx *ctx)
 {
-	if (ctx->fractal_type == mandelbrot)
+	if (ctx->fractal_type == MANDELBROT)
 		draw_mandelbrot(ctx);
-	else if (ctx->fractal_type == julia)
+	else if (ctx->fractal_type == JULIA)
 		draw_julia(ctx);
-	else if (ctx->fractal_type == barnsley)
+	else if (ctx->fractal_type == BARNSLEY)
 		draw_barnsley(ctx);
 }
 

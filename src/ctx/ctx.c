@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 16:59:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:10:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_ctx(t_ctx *ctx)
 	ctx->max_loop = 100;
 	ctx->mouse_pnt = (t_dpoint){0, 0};
 	ctx->win_mouse_pnt = (t_ipoint){FRACT_WIDTH / 2, FRACT_HEIGHT / 2};
-	ctx->color_mode = normal;
-	ctx->julia_mode = normal;
+	ctx->color_mode = NORMAL_MODE;
+	ctx->julia_mode = NORMAL_MODE;
 	ctx->hue = 0;
 	ctx->step_n = 0;
 	ctx->step = 0.01 * pow(2, (double)ctx->step_n / 10);
@@ -41,7 +41,7 @@ void	ctx_on_update(t_ctx *ctx)
 		if (prev.fractal_type != ctx->fractal_type)
 		{
 			init_ctx(ctx);
-			if (ctx->fractal_type == barnsley)
+			if (ctx->fractal_type == BARNSLEY)
 			{
 				ctx->mouse_pnt = (t_dpoint){0.5, 5};
 				ctx->step_n = 40;
@@ -62,27 +62,27 @@ void	ctx_on_update(t_ctx *ctx)
 
 void	ctx_next_color_mode(t_ctx *ctx)
 {
-	if (ctx->color_mode == normal)
-		ctx->color_mode = psyc;
-	else if (ctx->color_mode == psyc)
-		ctx->color_mode = normal;
+	if (ctx->color_mode == NORMAL_MODE)
+		ctx->color_mode = PSYCHEDELIC_MODE;
+	else if (ctx->color_mode == PSYCHEDELIC_MODE)
+		ctx->color_mode = NORMAL_MODE;
 }
 
 void	ctx_next_julia_mode(t_ctx *ctx)
 {
-	if (ctx->julia_mode == normal)
-		ctx->julia_mode = psyc;
-	else if (ctx->julia_mode == psyc)
-		ctx->julia_mode = normal;
+	if (ctx->julia_mode == NORMAL_MODE)
+		ctx->julia_mode = PSYCHEDELIC_MODE;
+	else if (ctx->julia_mode == PSYCHEDELIC_MODE)
+		ctx->julia_mode = NORMAL_MODE;
 }
 
 void	ctx_next_fractal_type(t_ctx *ctx)
 {
-	if (ctx->fractal_type == mandelbrot)
-		ctx->fractal_type = julia;
-	else if (ctx->fractal_type == julia)
-		ctx->fractal_type = barnsley;
-	else if (ctx->fractal_type == barnsley)
-		ctx->fractal_type = mandelbrot;
+	if (ctx->fractal_type == MANDELBROT)
+		ctx->fractal_type = JULIA;
+	else if (ctx->fractal_type == JULIA)
+		ctx->fractal_type = BARNSLEY;
+	else if (ctx->fractal_type == BARNSLEY)
+		ctx->fractal_type = MANDELBROT;
 	ctx_on_update(ctx);
 }

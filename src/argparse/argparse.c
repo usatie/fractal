@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 15:09:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:11:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ctx	argparse(int argc, char **argv)
 	init_ctx(&ctx);
 	next_arg(&argc, &argv);
 	parse_flags(argc, argv, &ctx);
-	if (ctx.fractal_type == barnsley)
+	if (ctx.fractal_type == BARNSLEY)
 	{
 		ctx.mouse_pnt = (t_dpoint){0.5, 5};
 		ctx.step_n = 40;

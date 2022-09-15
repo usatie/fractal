@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:36:51 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:09:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // custom types
 typedef struct s_ctx		t_ctx;
 typedef struct s_img		t_img;
-typedef enum e_mode { normal, psyc }	t_mode;
-typedef enum e_fractal_type { mandelbrot, julia, barnsley }	t_fractal_type;
+typedef enum e_mode { NORMAL_MODE, PSYCHEDELIC_MODE }	t_mode;
+typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
 
 // ctx.c
 void	init_ctx(t_ctx *ctx);

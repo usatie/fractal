@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:16:46 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 15:52:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 17:11:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static bool		contains_numeric(const char *s);
 t_fractal_type	parse_fractal_type(const char *arg)
 {
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
-		return (mandelbrot);
+		return (MANDELBROT);
 	else if (ft_strcmp(arg, "Julia") == 0)
-		return (julia);
+		return (JULIA);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
-		return (barnsley);
+		return (BARNSLEY);
 	else
 		usage_err();
 }
