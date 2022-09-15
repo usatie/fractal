@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 07:33:20 by susami            #+#    #+#              #
-#    Updated: 2022/09/11 15:33:18 by susami           ###   ########.fr        #
+#    Updated: 2022/09/14 21:53:32 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ PRINTF_SRCS	=	ft_printf/ft_printf.c			\
 				ft_printf/ft_printf_px.c		\
 				ft_printf/ft_printf_f.c			\
 				ft_printf/ft_decimal.c			\
+				ft_printf/ft_decimal_to_str.c	\
 				ft_printf/ft_ieee754_float.c	\
 				ft_printf/ft_ieee754_double.c	\
 				ft_printf/ft_ftoa.c				\
@@ -116,15 +117,16 @@ $(OBJDIR)/%.o: %.c
 bonus: all
 
 # x86 mac
+UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
 endif
 
 # ARM mac
+UNAME_P := $(shell uname -p)
 ifneq ($(filter arm%, $(UNAME_P)),)
 debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
 endif
-
 debug: re
 	norminette include ft_*.c ft_error_functions ft_argparse ft_printf
 

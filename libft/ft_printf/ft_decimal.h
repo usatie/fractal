@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:03:51 by susami            #+#    #+#             */
-/*   Updated: 2022/09/02 16:55:27 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/14 20:52:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_decimal {
 	char	int_digits[DOUBLE_MAX_INT];
 	char	fract_digits[DOUBLE_MAX_FRACT];
+	int		precision;
 }	t_decimal;
 
 t_decimal	new_decimal(unsigned long long num);
