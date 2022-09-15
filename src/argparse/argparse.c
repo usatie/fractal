@@ -6,16 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 15:52:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:09:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
-#include "ft_printf.h"
+#include "ft_error_functions.h"
 #include "libft.h"
-// STDERR_FILENO
-#include <unistd.h>
 
 // argparse_flag.c
 t_fractal_type	parse_fractal_type(const char *arg);
@@ -47,21 +45,14 @@ t_ctx	argparse(int argc, char **argv)
 
 void	usage_err(void)
 {
-	ft_dprintf(STDERR_FILENO,
-		"Usage: ./fractol [options] fractal_type\n");
-	ft_dprintf(STDERR_FILENO,
-		"options:\n");
-	ft_dprintf(STDERR_FILENO,
-		"    -j <angle>      Julia set parameter. <0-359>\n");
-	ft_dprintf(STDERR_FILENO,
-		"fractal_type:\n");
-	ft_dprintf(STDERR_FILENO,
-		"    Mandelbrot\n");
-	ft_dprintf(STDERR_FILENO,
-		"    Julia\n");
-	ft_dprintf(STDERR_FILENO,
+	err_exit(
+		"Usage: ./fractol [options] fractal_type\n"
+		"options:\n"
+		"    -j <angle>      Julia set parameter. <0-359>\n"
+		"fractal_type:\n"
+		"    Mandelbrot\n"
+		"    Julia\n"
 		"    Barnsley\n");
-	exit(EXIT_FAILURE);
 }
 
 static void	parse_flags(int argc, char **argv, t_ctx *ctx)

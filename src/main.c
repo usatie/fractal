@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 14:09:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:16:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "mlx.h"
 #include <X11/X.h>
+#include "mlx.h"
+#include "fractol.h"
+#include "ft_error_functions.h"
 
 /*
 #include <stdlib.h>
@@ -36,13 +37,24 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/*
+    Initialize mlx related pointers and handle errors.
+*/
 static void	init_mlx_ptrs(t_ctx *ctx)
 {
 	ctx->mlx_ptr = mlx_init();
-	ctx->win_ptr = mlx_new_window(ctx->mlx_ptr, WIN_WIDTH,
-			WIN_HEIGHT, WIN_TITLE);
+	if (ctx->mlx_ptr == NULL)
+		err_exit("mlx_init");
+	ctx->win_ptr
+		= mlx_new_window(ctx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	if (ctx->win_ptr == NULL)
+		err_exit("mlx_new_window");
 	init_img(&ctx->fractal_img, ctx->mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
+	if (ctx->fractal_img.img_ptr == NULL)
+		err_exit("init_img");
 	init_img(&ctx->config_clear_img, ctx->mlx_ptr, CONFIG_WIDTH, CONFIG_HEIGHT);
+	if (ctx->config_clear_img.img_ptr == NULL)
+		err_exit("init_img");
 	clear_img_rect(&ctx->config_clear_img, g_rect_config);
 }
 

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 16:58:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 14:34:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_img(t_img *img, void *mlx_ptr, int width, int height)
 
 	img->mlx_ptr = mlx_ptr;
 	img->img_ptr = mlx_new_image(mlx_ptr, width, height);
+	if (img->img_ptr == NULL)
+		return ;
 	img->data = mlx_get_data_addr(img->img_ptr, &bpp, &size_line, &endian);
 	img->bpp = bpp;
 	img->size_line = size_line;
