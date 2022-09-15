@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 19:14:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 16:59:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,27 @@ void	ctx_on_update(t_ctx *ctx)
 
 void	ctx_next_color_mode(t_ctx *ctx)
 {
-	ctx->color_mode = (ctx->color_mode + 1) % 2;
+	if (ctx->color_mode == normal)
+		ctx->color_mode = psyc;
+	else if (ctx->color_mode == psyc)
+		ctx->color_mode = normal;
 }
 
 void	ctx_next_julia_mode(t_ctx *ctx)
 {
-	ctx->julia_mode = (ctx->julia_mode + 1) % 2;
+	if (ctx->julia_mode == normal)
+		ctx->julia_mode = psyc;
+	else if (ctx->julia_mode == psyc)
+		ctx->julia_mode = normal;
 }
 
 void	ctx_next_fractal_type(t_ctx *ctx)
 {
-	ctx->fractal_type = (ctx->fractal_type + 1) % 3;
+	if (ctx->fractal_type == mandelbrot)
+		ctx->fractal_type = julia;
+	else if (ctx->fractal_type == julia)
+		ctx->fractal_type = barnsley;
+	else if (ctx->fractal_type == barnsley)
+		ctx->fractal_type = mandelbrot;
 	ctx_on_update(ctx);
 }
