@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/15 16:23:59 by susami           ###   ########.fr        #
+#    Updated: 2022/09/15 16:56:06 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,20 +69,22 @@ UNAME_P := $(shell uname -p)
 # Linux
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -D LINUX
+debug: CFLAGS += -Wno-conversion -Wno-double-promotion
+debug: CC = clang
 endif
 
 # macos x86
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -D OSX
 	FRAMEWORK = -framework OpenGL -framework AppKit
-debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-reserved-id-macro
+debug: CFLAGS += -Wno-reserved-id-macro
 endif
 
 # macos ARM (m1/m2...)
 ifneq ($(filter arm%, $(UNAME_P)),)
 	CFLAGS += -D ARM
 	FRAMEWORK = -framework OpenGL -framework AppKit
-debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed -Wno-poison-system-directories
+debug: CFLAGS += -Wno-poison-system-directories
 endif
 
 #################
@@ -114,6 +116,7 @@ $(MLX):
 $(LIBFT):
 	$(MAKE) -C $(LIBFTDIR)
 
+debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed
 debug: re
 	norminette $(SRC_DIR) $(INCLUDE_DIR)
 
