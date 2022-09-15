@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 17:20:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:18:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,8 @@
 # define WIN_TITLE "fract-ol"
 
 // const values
-static const t_rect			g_rect_fractal = (t_rect){
-	0,
-	0,
-	FRACT_WIDTH,
-	FRACT_HEIGHT
-};
-static const t_rect			g_rect_config = (t_rect){
-	FRACT_WIDTH,
-	0,
-	CONFIG_WIDTH,
-	CONFIG_HEIGHT
-};
+extern const t_rect			g_rect_fractal;
+extern const t_rect			g_rect_config;
 
 // custom type
 typedef uint32_t			t_speeds[400][400];

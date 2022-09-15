@@ -6,11 +6,25 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 22:49:57 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 22:47:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:20:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+const t_rect	g_rect_fractal = (t_rect){
+	.x = 0,
+	.y = 0,
+	.width = FRACT_WIDTH,
+	.height = FRACT_HEIGHT
+};
+
+const t_rect	g_rect_config = (t_rect){
+	.x = FRACT_WIDTH,
+	.y = 0,
+	.width = CONFIG_WIDTH,
+	.height = CONFIG_HEIGHT
+};
 
 bool	rect_contains(t_ipoint p, t_rect rect)
 {
