@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:16:46 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 21:14:33 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:52:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 t_fractal_type	parse_fractal_type(const char *arg);
 int				parse_julia_param(const char *v, t_ctx *ctx);
+static bool		contains_numeric(const char *s);
 
 t_fractal_type	parse_fractal_type(const char *arg)
 {
@@ -35,6 +36,8 @@ int	parse_julia_param(const char *v, t_ctx *ctx)
 	long	res;
 	char	*endptr;
 
+	if (!contains_numeric(v))
+		usage_err();
 	errno = 0;
 	res = ft_strtol(v, &endptr, 10);
 	if (errno != 0)
@@ -45,4 +48,15 @@ int	parse_julia_param(const char *v, t_ctx *ctx)
 		usage_err();
 	ctx->c_radian = M_PI / 180 * (double)res;
 	return (0);
+}
+
+static bool	contains_numeric(const char *s)
+{
+	while (*s)
+	{
+		if (ft_isdigit(*s))
+			return (true);
+		s++;
+	}
+	return (false);
 }
