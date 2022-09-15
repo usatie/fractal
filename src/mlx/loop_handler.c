@@ -6,31 +6,41 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:09:16 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 18:26:51 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
-#include "mlx.h"
 #include <math.h>
+
+#define LOOP_PER_FRAME 1000
+#define HUE_INCREASE_PER_FRAME 4
+#define JULIA_DEGREE_INCREASE_PER_FRAME 60
+
+static void	update_ctx_in_loop(t_ctx *ctx);
 
 int	loop_handler(t_ctx *ctx)
 {
 	static bool		lock;
 	static size_t	cnt;
+	const bool		skip_upadte = ((cnt % LOOP_PER_FRAME) != 0 || lock);
 
-	if (cnt++ % 1000 != 0 || lock)
+	cnt++;
+	if (skip_upadte)
 		return (0);
 	lock = true;
-	if (ctx->color_mode == PSYCHEDELIC_MODE)
-		ctx->hue += 4;
-	if (ctx->julia_mode == PSYCHEDELIC_MODE)
-		ctx->c_radian += M_PI / 60;
+	update_ctx_in_loop(ctx);
 	draw_fractal(ctx);
-	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr,
-		ctx->fractal_img.img_ptr, 0, 0);
 	put_ctx_to_window(ctx);
 	lock = false;
 	return (0);
+}
+
+static void	update_ctx_in_loop(t_ctx *ctx)
+{
+	if (ctx->color_mode == PSYCHEDELIC_MODE)
+		ctx->hue += HUE_INCREASE_PER_FRAME;
+	if (ctx->julia_mode == PSYCHEDELIC_MODE)
+		ctx->c_radian += M_PI / JULIA_DEGREE_INCREASE_PER_FRAME;
 }

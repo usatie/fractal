@@ -6,12 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:11:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/15 18:18:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
 #include <math.h>
+#include "mlx.h"
+#include "fractol.h"
 
 static t_complex	to_complex(t_ipoint p, t_dpoint o, double step);
 static void			update(t_div_f f, t_speeds speeds, const t_ctx *ctx);
@@ -24,6 +25,8 @@ void	draw_fractal(const t_ctx *ctx)
 		draw_julia(ctx);
 	else if (ctx->fractal_type == BARNSLEY)
 		draw_barnsley(ctx);
+	mlx_put_image_to_window(ctx->mlx_ptr, ctx->win_ptr,
+		ctx->fractal_img.img_ptr, 0, 0);
 }
 
 bool	need_fractal_update(const t_ctx *ctx)
