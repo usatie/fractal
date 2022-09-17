@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:09:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:45:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
 
 // ctx.c
 void	init_ctx(t_ctx *ctx);
-void	ctx_on_update(t_ctx *ctx);
 void	ctx_next_color_mode(t_ctx *ctx);
 void	ctx_next_julia_mode(t_ctx *ctx);
 void	ctx_next_fractal_type(t_ctx *ctx);
+double	step(int step_n);
 
 // ctx_put.c
 void	put_ctx_to_window(t_ctx *ctx);
@@ -68,7 +68,6 @@ struct s_ctx {
 	t_ipoint		win_mouse_pnt;
 	t_dpoint		mouse_pnt;
 	int				step_n;
-	double			step;
 	uint8_t			hue;
 	uint32_t		max_loop;
 	t_mode			color_mode;

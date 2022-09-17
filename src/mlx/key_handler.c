@@ -6,13 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:53:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:44:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
 #include "mlx_keymap.h"
+
+t_dpoint	calc_origin(t_ipoint win_mouse_pnt, t_dpoint mouse_pnt,
+				double step);
 
 int	key_handler(int keycode, t_ctx *ctx)
 {
@@ -37,8 +40,7 @@ int	key_handler(int keycode, t_ctx *ctx)
 		ctx_next_julia_mode(ctx);
 	else if (keycode == MK_F)
 		ctx_next_fractal_type(ctx);
-	else
-		return (0);
-	ctx_on_update(ctx);
+	ctx->o = calc_origin(ctx->win_mouse_pnt, ctx->mouse_pnt,
+			step(ctx->step_n));
 	return (0);
 }

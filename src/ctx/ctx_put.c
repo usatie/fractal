@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 16:57:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:22:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool	is_updated(const t_ctx *ctx)
 			|| (prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y)
 			|| neq(prev.mouse_pnt.x, ctx->mouse_pnt.x)
 			|| neq(prev.mouse_pnt.y, ctx->mouse_pnt.y)
-			|| neq(prev.step, ctx->step)
+			|| prev.step_n != ctx->step_n
 			|| (prev.hue != ctx->hue)
 			|| neq(prev.o.x, ctx->o.x) || neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)

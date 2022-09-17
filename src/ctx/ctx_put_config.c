@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:30:53 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:11:02 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:23:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	ctx_put_config_step(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
-	ft_sprintf(str, "step[= 1 pixel] : %.20f", ctx->step);
+	ft_sprintf(str, "step[= 1 pixel] : %.20f", step(ctx->step_n));
 	ctx_string_put(ctx, height, str);
 }

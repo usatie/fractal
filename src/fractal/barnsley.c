@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/09/10 23:11:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:26:55 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_ipoint	to_window_coord(t_dpoint point, const t_ctx *ctx)
 {
 	t_ipoint	ret;
 
-	ret.x = (int)((point.x - ctx->o.x) / ctx->step);
-	ret.y = (int)((ctx->o.y - point.y) / ctx->step);
+	ret.x = (int)((point.x - ctx->o.x) / step(ctx->step_n));
+	ret.y = (int)((ctx->o.y - point.y) / step(ctx->step_n));
 	return (ret);
 }

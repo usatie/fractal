@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:11:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:39:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_ctx	argparse(int argc, char **argv)
 		ctx.mouse_pnt = (t_dpoint){0.5, 5};
 		ctx.step_n = 40;
 	}
-	ctx_on_update(&ctx);
 	return (ctx);
 }
 

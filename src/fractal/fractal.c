@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 18:18:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:26:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	need_fractal_update(const t_ctx *ctx)
 		prev = *ctx;
 		return (true);
 	}
-	is_updated = (neq(prev.step, ctx->step)
+	is_updated = (prev.step_n != ctx->step_n
 			|| neq(prev.o.x, ctx->o.x)
 			|| neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)
@@ -86,7 +86,7 @@ static void	update(t_div_f f, t_speeds speeds, const t_ctx *ctx)
 		while (++p.x < FRACT_WIDTH)
 		{
 			speed = f(
-					to_complex(p, ctx->o, ctx->step),
+					to_complex(p, ctx->o, step(ctx->step_n)),
 					ctx->max_loop,
 					ctx);
 			speeds[p.x][p.y] = speed;
