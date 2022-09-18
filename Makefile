@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/15 16:56:06 by susami           ###   ########.fr        #
+#    Updated: 2022/09/18 14:05:11 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC_DIR		=	src
 SRCS		=	src/main.c \
 				src/double_util.c \
 				src/ctx/ctx.c \
-				src/ctx/ctx_util.c \
 				src/ctx/ctx_put.c \
 				src/ctx/ctx_put_config.c \
 				src/ctx/ctx_put_config2.c \

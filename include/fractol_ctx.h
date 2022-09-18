@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:45:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 14:27:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ctx_put_config_max_loop(const t_ctx *ctx, int *height);
 void	ctx_put_config_step(const t_ctx *ctx, int *height);
 void	ctx_put_config_hue(const t_ctx *ctx, int *height);
 void	ctx_put_config_radian(const t_ctx *ctx, int *height);
-void	ctx_put_config_mouse_point(const t_ctx *ctx, int *height);
+void	ctx_put_config_o(const t_ctx *ctx, int *height);
 
 // custom type definitions
 /*
@@ -65,8 +65,6 @@ struct s_img {
 struct s_ctx {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	t_ipoint		win_mouse_pnt;
-	t_dpoint		mouse_pnt;
 	int				step_n;
 	uint8_t			hue;
 	uint32_t		max_loop;

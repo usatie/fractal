@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:22:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 14:27:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 		ctx_put_config_step(ctx, &height);
 		ctx_put_config_hue(ctx, &height);
 		ctx_put_config_radian(ctx, &height);
-		ctx_put_config_mouse_point(ctx, &height);
+		ctx_put_config_o(ctx, &height);
 	}
 }
 
@@ -56,11 +56,7 @@ static bool	is_updated(const t_ctx *ctx)
 		return (true);
 	}
 	is_updated = (
-			(prev.win_mouse_pnt.x != ctx->win_mouse_pnt.x)
-			|| (prev.win_mouse_pnt.y != ctx->win_mouse_pnt.y)
-			|| neq(prev.mouse_pnt.x, ctx->mouse_pnt.x)
-			|| neq(prev.mouse_pnt.y, ctx->mouse_pnt.y)
-			|| prev.step_n != ctx->step_n
+			prev.step_n != ctx->step_n
 			|| (prev.hue != ctx->hue)
 			|| neq(prev.o.x, ctx->o.x) || neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)

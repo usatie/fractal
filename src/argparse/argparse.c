@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:39:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 14:33:49 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		parse_flags(int argc, char **argv, t_ctx *ctx);
 static bool		parse_one(int *argc, char ***argv, t_ctx *ctx);
 static char		*next_arg(int *argc, char ***argv);
 
+// (0.5, 5.0) should be center for Barnsley
 t_ctx	argparse(int argc, char **argv)
 {
 	t_ctx	ctx;
@@ -36,8 +37,9 @@ t_ctx	argparse(int argc, char **argv)
 	parse_flags(argc, argv, &ctx);
 	if (ctx.fractal_type == BARNSLEY)
 	{
-		ctx.mouse_pnt = (t_dpoint){0.5, 5};
 		ctx.step_n = 40;
+		ctx.o.x = 0.5 - step(ctx.step_n) * FRACT_WIDTH / 2;
+		ctx.o.y = 5.0 + step(ctx.step_n) * FRACT_WIDTH / 2;
 	}
 	return (ctx);
 }

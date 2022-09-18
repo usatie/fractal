@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:26:55 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 14:38:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,25 @@ static t_dpoint	barnsley_next(t_dpoint p)
 
 	rng = rand() / (float)RAND_MAX;
 	if (rng <= 0.01f)
-		return ((t_dpoint){0, 0.16 * p.y});
-	else if (rng <= 0.06f)
-		return ((t_dpoint){-0.15 * p.x + 0.28 * p.y,
-			0.26 * p.x + 0.24 * p.y + 0.44});
-	else if (rng <= 0.06f)
-		return ((t_dpoint){0.2 * p.x + -0.26 * p.y,
-			0.23 * p.x + 0.22 * p.y + 1.6});
+		return ((t_dpoint){
+			.x = 0,
+			.y = 0.16 * p.y
+		});
+	else if (rng <= 0.08f)
+		return ((t_dpoint){
+			.x = -0.15 * p.x + 0.28 * p.y,
+			.y = 0.26 * p.x + 0.24 * p.y + 0.44
+		});
+	else if (rng <= 0.15f)
+		return ((t_dpoint){
+			.x = 0.2 * p.x + -0.26 * p.y,
+			.y = 0.23 * p.x + 0.22 * p.y + 1.6
+		});
 	else
-		return ((t_dpoint){0.85 * p.x + 0.04 * p.y,
-			-0.04 * p.x + 0.85 * p.y + 1.6});
+		return ((t_dpoint){
+			.x = 0.85 * p.x + 0.04 * p.y,
+			.y = -0.04 * p.x + 0.85 * p.y + 1.6
+		});
 }
 
 static t_ipoint	to_window_coord(t_dpoint point, const t_ctx *ctx)

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 15:26:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 14:27:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,10 @@ void	ctx_put_config_radian(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_mouse_point(const t_ctx *ctx, int *height)
+void	ctx_put_config_o(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
-	ft_sprintf(str, "mouse_pnt in xy: (%lf, %lf)",
-		ctx->mouse_pnt.x, ctx->mouse_pnt.y);
-	ctx_string_put(ctx, height, str);
-	ft_sprintf(str, "mouse_pnt in window: (%d, %d)",
-		ctx->win_mouse_pnt.x, ctx->win_mouse_pnt.y);
+	ft_sprintf(str, "o: (%f, %f)", ctx->o.x, ctx->o.y);
 	ctx_string_put(ctx, height, str);
 }
