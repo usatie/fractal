@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 14:34:24 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 22:08:05 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,7 @@ void	init_img(t_img *img, void *mlx_ptr, int width, int height)
 	img->endian = endian;
 }
 
-/*
-void	destroy_img(t_img *img)
-{
-	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
-}
-*/
-
+// Update img data
 void	put_pixel_in_img(const t_img *img, int x, int y, int color)
 {
 	int	idx;
@@ -45,16 +39,30 @@ void	put_pixel_in_img(const t_img *img, int x, int y, int color)
 	ft_memmove(&img->data[idx], &color, sizeof(int));
 }
 
+/*
+   Clear the rect in img.
+
+   img
+   o--------------------------------o
+   |                                |
+   |         (x,y)                  |
+   |           o--------------o     |
+   |    height |     rect     |     |
+   |           o--------------o     |
+   |                 width          |
+   o--------------------------------o
+
+*/
 void	clear_img_rect(const t_img *img, t_rect rect)
 {
 	int		x;
 	int		y;
 
 	y = rect.y - 1;
-	while (++y < rect.height)
+	while (++y < rect.y + rect.height)
 	{
 		x = rect.x - 1;
-		while (++x < rect.width)
+		while (++x < rect.x + rect.width)
 			put_pixel_in_img(img, x, y, black().mlxint);
 	}
 }
