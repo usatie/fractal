@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 21:48:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 22:01:48 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,14 @@ static void	init_mlx_ptrs(t_ctx *ctx)
 	init_img(&ctx->config_clear_img, ctx->mlx_ptr, CONFIG_WIDTH, CONFIG_HEIGHT);
 	if (ctx->config_clear_img.img_ptr == NULL)
 		err_exit("init_img");
-	clear_img_rect(&ctx->config_clear_img, g_rect_config);
+	clear_img_rect(
+		&ctx->config_clear_img,
+		(t_rect){
+		.x = 0,
+		.y = 0,
+		.width = CONFIG_WIDTH,
+		.height = CONFIG_HEIGHT
+	});
 }
 
 /*
