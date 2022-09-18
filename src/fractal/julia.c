@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:08 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 17:43:53 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:10:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,23 @@ void	draw_julia(const t_ctx *ctx)
 // z0 : (x, y)
 // c  : some const value
 //
-// Initial prev is nan(0.0 / 0.0).
+// Initial degree is zero.
 static uint32_t	div_f(t_complex z0, uint32_t max_loop, const t_ctx *ctx)
 {
-	static double		prev = 0.0 / 0.0;
-	static t_complex	c;
+	static int			degree = 0;
+	static t_complex	c = (t_complex){JULIA_LEN, 0};
 	uint32_t			speed;
 
-	if (neq(prev, ctx->c_radian) || isnan(prev))
+	if (degree != ctx->julia_degree)
+	{
+		degree = ctx->julia_degree;
 		c = complex_new(
-				JULIA_LEN * cos(ctx->c_radian),
-				JULIA_LEN * sin(ctx->c_radian));
+				JULIA_LEN * cos(M_PI * (double)degree / 180),
+				JULIA_LEN * sin(M_PI * (double)degree / 180));
+	}
 	speed = complex_iteration_div(
 			z0,
 			c,
 			max_loop);
-	prev = ctx->c_radian;
 	return (speed);
 }

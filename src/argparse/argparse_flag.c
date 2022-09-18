@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:16:46 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 17:11:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:25:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	parse_julia_param(const char *v, t_ctx *ctx)
 		usage_err();
 	if (res < 0 || res >= 360)
 		usage_err();
-	ctx->c_radian = M_PI / 180 * (double)res;
+	ctx->julia_degree = (int)res;
 	return (0);
 }
 

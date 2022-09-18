@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:26:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:11:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	need_fractal_update(const t_ctx *ctx)
 			|| neq(prev.o.x, ctx->o.x)
 			|| neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)
-			|| neq(prev.c_radian, ctx->c_radian)
+			|| neq(prev.julia_degree, ctx->julia_degree)
 			|| (prev.fractal_type != ctx->fractal_type));
 	prev = *ctx;
 	return (is_updated);

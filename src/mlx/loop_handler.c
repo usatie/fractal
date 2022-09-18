@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 18:26:51 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:24:02 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define LOOP_PER_FRAME 1000
 #define HUE_INCREASE_PER_FRAME 4
-#define JULIA_DEGREE_INCREASE_PER_FRAME 60
+#define JULIA_DEGREE_INCREASE_PER_FRAME 3
 
 static void	update_ctx_in_loop(t_ctx *ctx);
 
@@ -42,5 +42,8 @@ static void	update_ctx_in_loop(t_ctx *ctx)
 	if (ctx->color_mode == PSYCHEDELIC_MODE)
 		ctx->hue += HUE_INCREASE_PER_FRAME;
 	if (ctx->julia_mode == PSYCHEDELIC_MODE)
-		ctx->c_radian += M_PI / JULIA_DEGREE_INCREASE_PER_FRAME;
+	{
+		ctx->julia_degree += JULIA_DEGREE_INCREASE_PER_FRAME;
+		ctx->julia_degree %= 360;
+	}
 }

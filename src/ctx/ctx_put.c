@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 14:27:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:21:52 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	put_ctx_to_window(t_ctx *ctx)
 		ctx_put_config_max_loop(ctx, &height);
 		ctx_put_config_step(ctx, &height);
 		ctx_put_config_hue(ctx, &height);
-		ctx_put_config_radian(ctx, &height);
+		ctx_put_config_julia_degree(ctx, &height);
 		ctx_put_config_o(ctx, &height);
 	}
 }
@@ -63,7 +63,7 @@ static bool	is_updated(const t_ctx *ctx)
 			|| (prev.color_mode != ctx->color_mode)
 			|| (prev.julia_mode != ctx->julia_mode)
 			|| (prev.fractal_type != ctx->fractal_type)
-			|| neq(prev.c_radian, ctx->c_radian));
+			|| prev.julia_degree != ctx->julia_degree);
 	prev = *ctx;
 	return (is_updated);
 }

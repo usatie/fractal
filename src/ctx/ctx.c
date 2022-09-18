@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 15:26:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:04:11 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_ctx(t_ctx *ctx)
 	ctx->color_mode = NORMAL_MODE;
 	ctx->julia_mode = NORMAL_MODE;
 	ctx->hue = 0;
-	ctx->c_radian = M_PI / 180 * INITIAL_JULIA_DEGREE;
+	ctx->julia_degree = INITIAL_JULIA_DEGREE;
 	if (ctx->fractal_type == BARNSLEY)
 	{
 		ctx->step_n = 40;

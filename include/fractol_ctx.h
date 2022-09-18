@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 14:27:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:22:08 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ctx_put_config_julia_mode(const t_ctx *ctx, int *height);
 void	ctx_put_config_max_loop(const t_ctx *ctx, int *height);
 void	ctx_put_config_step(const t_ctx *ctx, int *height);
 void	ctx_put_config_hue(const t_ctx *ctx, int *height);
-void	ctx_put_config_radian(const t_ctx *ctx, int *height);
+void	ctx_put_config_julia_degree(const t_ctx *ctx, int *height);
 void	ctx_put_config_o(const t_ctx *ctx, int *height);
 
 // custom type definitions
@@ -71,7 +71,7 @@ struct s_ctx {
 	t_mode			color_mode;
 	t_mode			julia_mode;
 	t_fractal_type	fractal_type;
-	double			c_radian;
+	int				julia_degree;
 	t_img			fractal_img;
 	t_img			config_clear_img;
 	t_dpoint		o;
