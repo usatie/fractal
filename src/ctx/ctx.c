@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 14:44:48 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 15:26:50 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 
 double	step(int step_n)
 {
-	return (0.01 * pow(2, (double)step_n / 10));
+	static int		prev_n = 0;
+	static double	cache = 0.01;
+
+	if (prev_n == step_n)
+		return (cache);
+	prev_n = step_n;
+	cache = 0.01 * pow(2, (double)step_n / 10);
+	return (cache);
 }
 
 /*
