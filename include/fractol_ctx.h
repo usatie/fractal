@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:22:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:25:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ctx_next_fractal_type(t_ctx *ctx);
 double	step(int step_n);
 
 // ctx_put.c
-void	put_ctx_to_window(t_ctx *ctx);
+void	draw_ctx(t_ctx *ctx, bool force_update);
 void	ctx_string_put(const t_ctx *ctx, int *height, char *str);
 
 // ctx_put_config.c

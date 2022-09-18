@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:21:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:25:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 static bool	is_updated(const t_ctx *ctx);
 static void	clear_config_rect(const t_ctx *ctx);
 
-void	put_ctx_to_window(t_ctx *ctx)
+void	draw_ctx(t_ctx *ctx, bool force_update)
 {
 	int	height;
 
-	if (is_updated(ctx))
+	if (force_update || is_updated(ctx))
 	{
 		clear_config_rect(ctx);
 		height = 50;

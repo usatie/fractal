@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:08:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:24:02 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:23:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	loop_handler(t_ctx *ctx)
 	lock = true;
 	update_ctx_in_loop(ctx);
 	draw_fractal(ctx);
-	put_ctx_to_window(ctx);
+	draw_ctx(ctx, false);
 	lock = false;
 	return (0);
 }

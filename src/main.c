@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 15:16:26 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:48:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static void	init_mlx_ptrs(t_ctx *ctx)
 	   This is for main event loop. (for drawing fractals etc.)
 	4. mlx_hook(_, ClientMessage, StructureNotifyMask, _, _)
 	   This is for closing window when X button is pressed.
+	5. mlx_expose_hook()
+	   This is for triggering the window refresh from X server.
+	   e.g. Minimize the window and return.
 */
 static void	setup_mlx_hooks(t_ctx *ctx)
 {
@@ -76,6 +79,7 @@ static void	setup_mlx_hooks(t_ctx *ctx)
 	mlx_loop_hook(ctx->mlx_ptr, loop_handler, ctx);
 	mlx_hook(ctx->win_ptr, ClientMessage, StructureNotifyMask,
 		close_window, ctx);
+	mlx_expose_hook(ctx->win_ptr, expose_handler, ctx);
 	mlx_loop(ctx->mlx_ptr);
 }
 
@@ -93,6 +97,5 @@ int	close_window(t_ctx *ctx)
 	mlx_destroy_image(ctx->mlx_ptr, ctx->config_clear_img.img_ptr);
 	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
 	mlx_destroy_display(ctx->mlx_ptr);
-	free(ctx->mlx_ptr);
 	exit(0);
 }

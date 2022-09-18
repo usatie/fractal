@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/18 14:05:11 by susami           ###   ########.fr        #
+#    Updated: 2022/09/18 21:36:02 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS		=	src/main.c \
 				src/mlx/mlx_util.c \
 				src/mlx/key_handler.c \
 				src/mlx/mouse_handler.c \
+				src/mlx/expose_handler.c \
 				src/mlx/loop_handler.c \
 				src/mlx/img.c \
 				src/mlx/rect.c \

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/15 15:18:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/18 21:26:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int			mouse_handler(int button, int x, int y, t_ctx *ctx);
 
 // loop_handler.c
 int			loop_handler(t_ctx *ctx);
+
+// expose_handler.c
+int			expose_handler(t_ctx *ctx);
 
 // fractal.c
 void		draw_fractal(const t_ctx *ctx);
