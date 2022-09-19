@@ -6,12 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 15:38:09 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:09:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
+#include "fractol_color.h"
+
 #include "mlx.h"
 
 static bool	is_updated(const t_ctx *ctx);

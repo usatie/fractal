@@ -6,12 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:46:01 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:10:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+// rand()
+#include <stdlib.h>
 #include <math.h>
+#include "fractol.h"
+#include "fractol_ctx.h"
+#include "fractol_color.h"
 
 static t_ipoint	to_window_coord(t_dpoint point, const t_ctx *ctx);
 static t_dpoint	barnsley_next(t_dpoint p);

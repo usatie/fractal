@@ -6,12 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:14:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:48:07 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:51:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_COLOR_H
 # define FRACTOL_COLOR_H
+
+# include "fractol.h"
 
 /*
 **  HSV Color

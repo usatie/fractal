@@ -6,13 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 15:09:33 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:09:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "mlx.h"
 #include "fractol.h"
+#include "fractol_ctx.h"
+
+#include "fractol_color.h"
 
 static t_complex	to_complex(int x, int y,
 						t_dpoint center, double pixel_width);

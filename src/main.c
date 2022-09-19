@@ -6,14 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:59:20 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:11:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <X11/X.h>
 #include "mlx.h"
-#include "fractol.h"
 #include "ft_error_functions.h"
+#include "fractol.h"
+#include "fractol_ctx.h"
 
 /*
 #include <stdlib.h>

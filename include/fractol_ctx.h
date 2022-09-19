@@ -6,19 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 15:37:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:51:48 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_CTX_H
 # define FRACTOL_CTX_H
-# include "fractol.h"
 
-// custom types
-typedef struct s_ctx		t_ctx;
-typedef struct s_img		t_img;
-typedef enum e_mode { NORMAL_MODE, PSYCHEDELIC_MODE }	t_mode;
-typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
+# include "fractol.h"
 
 // ctx.c
 void	init_ctx(t_ctx *ctx);

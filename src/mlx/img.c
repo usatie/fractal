@@ -6,13 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:49 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 22:08:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:04:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fractol.h"
 #include "mlx.h"
+#include "fractol.h"
+#include "fractol_ctx.h"
+#include "fractol_color.h"
 
 void	init_img(t_img *img, void *mlx_ptr, int width, int height)
 {

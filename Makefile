@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/19 10:56:15 by susami           ###   ########.fr        #
+#    Updated: 2022/09/19 16:11:04 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ debug: re norm
 
 norm:
 	norminette $(LIBFTDIR) $(SRC_DIR) $(INCLUDE_DIR)
+	@echo "norminette OK :D"
 
 .PHONY: all clean fclean re bonus debug norm
 -include $(DEPS)

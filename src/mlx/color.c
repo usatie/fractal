@@ -6,12 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:59:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/11 00:48:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:03:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fractol.h"
+#include "fractol_color.h"
 
 // Looked up this conversion code from here
 // https://stackoverflow.com/a/14733008
