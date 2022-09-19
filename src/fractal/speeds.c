@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:27:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 19:22:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:12:07 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ void	normalize_speeds(t_speeds speeds)
 	uint32_t	min_s;
 
 	get_range(speeds, &min_s, &max_s);
-	y = -1;
-	while (++y < FRACT_HEIGHT)
+	y = 0;
+	while (y < FRACT_HEIGHT)
 	{
-		x = -1;
-		while (++x < FRACT_WIDTH)
+		x = 0;
+		while (x < FRACT_WIDTH)
 		{
 			speeds[x][y] -= min_s;
 			if (max_s > min_s)
 				speeds[x][y] = 255 * speeds[x][y] / (max_s - min_s);
+			x++;
 		}
+		y++;
 	}
 }
 
@@ -72,15 +74,17 @@ static void	get_range(const t_speeds speeds, uint32_t *min_s, uint32_t *max_s)
 
 	*min_s = speeds[0][0];
 	*max_s = speeds[0][0];
-	y = -1;
-	while (++y < FRACT_HEIGHT)
+	y = 0;
+	while (y < FRACT_HEIGHT)
 	{
-		x = -1;
-		while (++x < FRACT_WIDTH)
+		x = 0;
+		while (x < FRACT_WIDTH)
 		{
 			*max_s = max(*max_s, speeds[x][y]);
 			*min_s = min(*min_s, speeds[x][y]);
+			x++;
 		}
+		y++;
 	}
 }
 
