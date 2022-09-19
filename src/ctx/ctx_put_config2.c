@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:35:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	put_o(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
-	ft_sprintf(str, "o: (%f, %f)", ctx->o.x, ctx->o.y);
+	ft_sprintf(str, "center: (%f, %f)", ctx->center.x, ctx->center.y);
 	ctx_string_put(ctx, height, str);
 }

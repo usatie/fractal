@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:36:22 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:25:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:50:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ o:
 
                 (0,0)                        (x, 0)
    this point -> o-----------------------------*-------------------.
+	             | window                                          |
 	             |                                                 |
 	             |                                                 |
-	             |                                                 |
-	             |                                                 |
-	             |                     window                      |
+	             |                     center (width/2, height/2)  |
+	             |                        *                        |
 	             |                                                 |
 	      (0, y) *                             *                   |
 	             |                           mouse (x, y)          |
@@ -37,14 +37,14 @@ o:
 
 
 before zoom :
-	mouse_before = o + pixel_width * (x, -y)
+	mouse_before = center + pixel_width * (x-w/2, -(y-h/2))
 
 zoom :
 	pixel_width is updated.
 
 after zooom : 
-	o is updated.
-	o = mouse_before - pixel_width * (x, -y)
+	center is updated.
+	center = mouse_before - pixel_width * (x-w/2, -(y-h/2))
 
 * Note that y axis is upside down.
 
@@ -59,6 +59,8 @@ int	mouse_handler(int button, int x, int y, t_ctx *ctx)
 	double	next_pixel_width;
 	double	prev_pixel_width;
 
+	x -= FRACT_WIDTH / 2;
+	y -= FRACT_HEIGHT / 2;
 	prev_pixel_width = pixel_width(ctx->zoom_level);
 	if (button == MOUSE_WHEEL_UP)
 		ctx->zoom_level--;
@@ -67,7 +69,7 @@ int	mouse_handler(int button, int x, int y, t_ctx *ctx)
 	else
 		return (0);
 	next_pixel_width = pixel_width(ctx->zoom_level);
-	ctx->o.x += (double)x * (prev_pixel_width - next_pixel_width);
-	ctx->o.y -= (double)y * (prev_pixel_width - next_pixel_width);
+	ctx->center.x += (double)x * (prev_pixel_width - next_pixel_width);
+	ctx->center.y -= (double)y * (prev_pixel_width - next_pixel_width);
 	return (0);
 }

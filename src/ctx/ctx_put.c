@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:25:39 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:35:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static bool	is_updated(const t_ctx *ctx)
 	is_updated = (
 			prev.zoom_level != ctx->zoom_level
 			|| (prev.hue != ctx->hue)
-			|| neq(prev.o.x, ctx->o.x) || neq(prev.o.y, ctx->o.y)
+			|| neq(prev.center.x, ctx->center.x)
+			|| neq(prev.center.y, ctx->center.y)
 			|| (prev.max_loop != ctx->max_loop)
 			|| (prev.color_mode != ctx->color_mode)
 			|| (prev.julia_mode != ctx->julia_mode)

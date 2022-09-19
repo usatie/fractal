@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:25:39 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:52:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 double	pixel_width(int zoom_level)
 {
-	static int		prev_n = 0;
+	static int		prev_zoom_level = 0;
 	static double	cache = 0.01;
 
-	if (prev_n == zoom_level)
+	if (prev_zoom_level == zoom_level)
 		return (cache);
-	prev_n = zoom_level;
+	prev_zoom_level = zoom_level;
 	cache = 0.01 * pow(2, (double)zoom_level / 10);
 	return (cache);
 }
@@ -43,14 +43,12 @@ void	init_ctx(t_ctx *ctx)
 	if (ctx->fractal_type == BARNSLEY)
 	{
 		ctx->zoom_level = 40;
-		ctx->o.x = 0.5 - pixel_width(ctx->zoom_level) * FRACT_WIDTH / 2;
-		ctx->o.y = 5.0 + pixel_width(ctx->zoom_level) * FRACT_WIDTH / 2;
+		ctx->center = (t_dpoint){0.5, 5.0};
 	}
 	else
 	{
 		ctx->zoom_level = 0;
-		ctx->o.x = 0.0 - pixel_width(ctx->zoom_level) * FRACT_WIDTH / 2;
-		ctx->o.y = 0.0 + pixel_width(ctx->zoom_level) * FRACT_HEIGHT / 2;
+		ctx->center = (t_dpoint){0, 0};
 	}
 }
 

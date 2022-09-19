@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:26:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:33:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ struct s_ctx {
 	t_img			clear_img;
 
 	int				zoom_level;
-	t_dpoint		o;
+	t_dpoint		center;
 
 	uint32_t		max_loop;
 
