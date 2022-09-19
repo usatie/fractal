@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:35:39 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:38:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	put_julia_degree(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	put_o(const t_ctx *ctx, int *height)
+void	put_center(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 

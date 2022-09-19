@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:33:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:37:56 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	put_max_loop(const t_ctx *ctx, int *height);
 void	put_pixel_width(const t_ctx *ctx, int *height);
 void	put_hue(const t_ctx *ctx, int *height);
 void	put_julia_degree(const t_ctx *ctx, int *height);
-void	put_o(const t_ctx *ctx, int *height);
+void	put_center(const t_ctx *ctx, int *height);
 
 // custom type definitions
 /*

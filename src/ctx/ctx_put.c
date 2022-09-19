@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:35:20 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:38:09 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_ctx(t_ctx *ctx, bool force_update)
 		put_pixel_width(ctx, &height);
 		put_hue(ctx, &height);
 		put_julia_degree(ctx, &height);
-		put_o(ctx, &height);
+		put_center(ctx, &height);
 	}
 }
 
