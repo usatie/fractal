@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 14:33:49 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:25:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_ctx	argparse(int argc, char **argv)
 	parse_flags(argc, argv, &ctx);
 	if (ctx.fractal_type == BARNSLEY)
 	{
-		ctx.step_n = 40;
-		ctx.o.x = 0.5 - step(ctx.step_n) * FRACT_WIDTH / 2;
-		ctx.o.y = 5.0 + step(ctx.step_n) * FRACT_WIDTH / 2;
+		ctx.zoom_level = 40;
+		ctx.o.x = 0.5 - pixel_width(ctx.zoom_level) * FRACT_WIDTH / 2;
+		ctx.o.y = 5.0 + pixel_width(ctx.zoom_level) * FRACT_WIDTH / 2;
 	}
 	return (ctx);
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:30:53 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:27:17 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,13 @@ void	put_max_loop(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	put_step(const t_ctx *ctx, int *height)
+void	put_pixel_width(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
-	ft_sprintf(str, "step[= 1 pixel] : %.20f", step(ctx->step_n));
+	ft_sprintf(
+		str,
+		"pixel_width[= 1 pixel] : %.20f",
+		pixel_width(ctx->zoom_level));
 	ctx_string_put(ctx, height, str);
 }

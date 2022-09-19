@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:59:33 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:25:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_ctx(t_ctx *ctx, bool force_update)
 		put_color_mode(ctx, &height);
 		put_julia_mode(ctx, &height);
 		put_max_loop(ctx, &height);
-		put_step(ctx, &height);
+		put_pixel_width(ctx, &height);
 		put_hue(ctx, &height);
 		put_julia_degree(ctx, &height);
 		put_o(ctx, &height);
@@ -56,7 +56,7 @@ static bool	is_updated(const t_ctx *ctx)
 		return (true);
 	}
 	is_updated = (
-			prev.step_n != ctx->step_n
+			prev.zoom_level != ctx->zoom_level
 			|| (prev.hue != ctx->hue)
 			|| neq(prev.o.x, ctx->o.x) || neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)

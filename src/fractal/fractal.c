@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:11:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:25:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include "fractol.h"
 
-static t_complex	to_complex(t_ipoint p, t_dpoint o, double step);
+static t_complex	to_complex(t_ipoint p, t_dpoint o, double pixel_width);
 static void			update(t_div_f f, t_speeds speeds, const t_ctx *ctx);
 
 void	draw_fractal(const t_ctx *ctx)
@@ -41,7 +41,7 @@ bool	need_fractal_update(const t_ctx *ctx)
 		prev = *ctx;
 		return (true);
 	}
-	is_updated = (prev.step_n != ctx->step_n
+	is_updated = (prev.zoom_level != ctx->zoom_level
 			|| neq(prev.o.x, ctx->o.x)
 			|| neq(prev.o.y, ctx->o.y)
 			|| (prev.max_loop != ctx->max_loop)
@@ -86,7 +86,7 @@ static void	update(t_div_f f, t_speeds speeds, const t_ctx *ctx)
 		while (++p.x < FRACT_WIDTH)
 		{
 			speed = f(
-					to_complex(p, ctx->o, step(ctx->step_n)),
+					to_complex(p, ctx->o, pixel_width(ctx->zoom_level)),
 					ctx->max_loop,
 					ctx);
 			speeds[p.x][p.y] = speed;
@@ -96,12 +96,12 @@ static void	update(t_div_f f, t_speeds speeds, const t_ctx *ctx)
 }
 
 // Calculate the (x, y) coordinate from window's o and coordinate in the window.
-static t_complex	to_complex(t_ipoint p, t_dpoint o, double step)
+static t_complex	to_complex(t_ipoint p, t_dpoint o, double pixel_width)
 {
 	t_complex	c;
 
 	c = complex_new(
-			o.x + step * (double)p.x,
-			o.y - step * (double)p.y);
+			o.x + pixel_width * (double)p.x,
+			o.y - pixel_width * (double)p.y);
 	return (c);
 }

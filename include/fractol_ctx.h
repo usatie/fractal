@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:58:56 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:26:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_ctx(t_ctx *ctx);
 void	next_color_mode(t_ctx *ctx);
 void	next_julia_mode(t_ctx *ctx);
 void	next_fractal(t_ctx *ctx);
-double	step(int step_n);
+double	pixel_width(int step_n);
 
 // ctx_put.c
 void	draw_ctx(t_ctx *ctx, bool force_update);
@@ -37,7 +37,7 @@ void	put_fractal_type(const t_ctx *ctx, int *height);
 void	put_color_mode(const t_ctx *ctx, int *height);
 void	put_julia_mode(const t_ctx *ctx, int *height);
 void	put_max_loop(const t_ctx *ctx, int *height);
-void	put_step(const t_ctx *ctx, int *height);
+void	put_pixel_width(const t_ctx *ctx, int *height);
 void	put_hue(const t_ctx *ctx, int *height);
 void	put_julia_degree(const t_ctx *ctx, int *height);
 void	put_o(const t_ctx *ctx, int *height);
@@ -68,7 +68,7 @@ struct s_ctx {
 	t_img			fractal_img;
 	t_img			clear_img;
 
-	int				step_n;
+	int				zoom_level;
 	t_dpoint		o;
 
 	uint32_t		max_loop;
