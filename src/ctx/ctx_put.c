@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 21:25:10 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	draw_ctx(t_ctx *ctx, bool force_update)
 	{
 		clear_config_rect(ctx);
 		height = 50;
-		ctx_put_config_fractal_mode(ctx, &height);
-		ctx_put_config_color_mode(ctx, &height);
-		ctx_put_config_julia_mode(ctx, &height);
-		ctx_put_config_max_loop(ctx, &height);
-		ctx_put_config_step(ctx, &height);
-		ctx_put_config_hue(ctx, &height);
-		ctx_put_config_julia_degree(ctx, &height);
-		ctx_put_config_o(ctx, &height);
+		put_fractal_type(ctx, &height);
+		put_color_mode(ctx, &height);
+		put_julia_mode(ctx, &height);
+		put_max_loop(ctx, &height);
+		put_step(ctx, &height);
+		put_hue(ctx, &height);
+		put_julia_degree(ctx, &height);
+		put_o(ctx, &height);
 	}
 }
 

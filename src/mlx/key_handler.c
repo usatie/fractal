@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 11:27:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:11:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	key_handler(int keycode, t_ctx *ctx)
 	else if (keycode == MK_DOWN)
 		ctx->o.y -= step(ctx->step_n) * 10;
 	else if (keycode == MK_C)
-		ctx_next_color_mode(ctx);
+		next_color_mode(ctx);
 	else if (keycode == MK_J)
-		ctx_next_julia_mode(ctx);
+		next_julia_mode(ctx);
 	else if (keycode == MK_F)
-		ctx_next_fractal_type(ctx);
+		next_fractal(ctx);
 	return (0);
 }

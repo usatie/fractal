@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 21:25:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
 
 // ctx.c
 void	init_ctx(t_ctx *ctx);
-void	ctx_next_color_mode(t_ctx *ctx);
-void	ctx_next_julia_mode(t_ctx *ctx);
-void	ctx_next_fractal_type(t_ctx *ctx);
+void	next_color_mode(t_ctx *ctx);
+void	next_julia_mode(t_ctx *ctx);
+void	next_fractal(t_ctx *ctx);
 double	step(int step_n);
 
 // ctx_put.c
@@ -33,14 +33,14 @@ void	ctx_string_put(const t_ctx *ctx, int *height, char *str);
 
 // ctx_put_config.c
 // ctx_put_config2.c
-void	ctx_put_config_fractal_mode(const t_ctx *ctx, int *height);
-void	ctx_put_config_color_mode(const t_ctx *ctx, int *height);
-void	ctx_put_config_julia_mode(const t_ctx *ctx, int *height);
-void	ctx_put_config_max_loop(const t_ctx *ctx, int *height);
-void	ctx_put_config_step(const t_ctx *ctx, int *height);
-void	ctx_put_config_hue(const t_ctx *ctx, int *height);
-void	ctx_put_config_julia_degree(const t_ctx *ctx, int *height);
-void	ctx_put_config_o(const t_ctx *ctx, int *height);
+void	put_fractal_type(const t_ctx *ctx, int *height);
+void	put_color_mode(const t_ctx *ctx, int *height);
+void	put_julia_mode(const t_ctx *ctx, int *height);
+void	put_max_loop(const t_ctx *ctx, int *height);
+void	put_step(const t_ctx *ctx, int *height);
+void	put_hue(const t_ctx *ctx, int *height);
+void	put_julia_degree(const t_ctx *ctx, int *height);
+void	put_o(const t_ctx *ctx, int *height);
 
 // custom type definitions
 /*
@@ -65,15 +65,20 @@ struct s_img {
 struct s_ctx {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	int				step_n;
-	uint8_t			hue;
-	uint32_t		max_loop;
-	t_mode			color_mode;
-	t_mode			julia_mode;
-	t_fractal_type	fractal_type;
-	int				julia_degree;
 	t_img			fractal_img;
 	t_img			config_clear_img;
+
+	int				step_n;
 	t_dpoint		o;
+
+	uint32_t		max_loop;
+
+	t_fractal_type	fractal_type;
+
+	t_mode			color_mode;
+	uint8_t			hue;
+
+	t_mode			julia_mode;
+	int				julia_degree;
 };
 #endif

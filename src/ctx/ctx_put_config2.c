@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:21:18 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // M_PI is defined in math.h
 #include <math.h>
 
-void	ctx_put_config_hue(const t_ctx *ctx, int *height)
+void	put_hue(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -24,7 +24,7 @@ void	ctx_put_config_hue(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_julia_degree(const t_ctx *ctx, int *height)
+void	put_julia_degree(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -32,7 +32,7 @@ void	ctx_put_config_julia_degree(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_o(const t_ctx *ctx, int *height)
+void	put_o(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:02:42 by susami            #+#    #+#             */
-/*   Updated: 2022/09/18 18:04:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:11:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_ctx(t_ctx *ctx)
 	}
 }
 
-void	ctx_next_color_mode(t_ctx *ctx)
+void	next_color_mode(t_ctx *ctx)
 {
 	if (ctx->color_mode == NORMAL_MODE)
 		ctx->color_mode = PSYCHEDELIC_MODE;
@@ -62,7 +62,7 @@ void	ctx_next_color_mode(t_ctx *ctx)
 		ctx->color_mode = NORMAL_MODE;
 }
 
-void	ctx_next_julia_mode(t_ctx *ctx)
+void	next_julia_mode(t_ctx *ctx)
 {
 	if (ctx->julia_mode == NORMAL_MODE)
 		ctx->julia_mode = PSYCHEDELIC_MODE;
@@ -70,7 +70,7 @@ void	ctx_next_julia_mode(t_ctx *ctx)
 		ctx->julia_mode = NORMAL_MODE;
 }
 
-void	ctx_next_fractal_type(t_ctx *ctx)
+void	next_fractal(t_ctx *ctx)
 {
 	if (ctx->fractal_type == MANDELBROT)
 		ctx->fractal_type = JULIA;

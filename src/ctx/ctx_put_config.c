@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:30:53 by susami            #+#    #+#             */
-/*   Updated: 2022/09/17 22:23:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "fractol_ctx.h"
 #include "ft_printf.h"
 
-void	ctx_put_config_fractal_mode(const t_ctx *ctx, int *height)
+void	put_fractal_type(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -29,7 +29,7 @@ void	ctx_put_config_fractal_mode(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_color_mode(const t_ctx *ctx, int *height)
+void	put_color_mode(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -42,7 +42,7 @@ void	ctx_put_config_color_mode(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_julia_mode(const t_ctx *ctx, int *height)
+void	put_julia_mode(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -55,7 +55,7 @@ void	ctx_put_config_julia_mode(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_max_loop(const t_ctx *ctx, int *height)
+void	put_max_loop(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
@@ -63,7 +63,7 @@ void	ctx_put_config_max_loop(const t_ctx *ctx, int *height)
 	ctx_string_put(ctx, height, str);
 }
 
-void	ctx_put_config_step(const t_ctx *ctx, int *height)
+void	put_step(const t_ctx *ctx, int *height)
 {
 	char	str[128];
 
