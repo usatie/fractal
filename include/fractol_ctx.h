@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:27:36 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:58:56 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ struct s_ctx {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_img			fractal_img;
-	t_img			config_clear_img;
+	t_img			clear_img;
 
 	int				step_n;
 	t_dpoint		o;

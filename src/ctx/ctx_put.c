@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:22:58 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 13:16:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:59:33 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	clear_config_rect(const t_ctx *ctx)
 	mlx_put_image_to_window(
 		ctx->mlx_ptr,
 		ctx->win_ptr,
-		ctx->config_clear_img.img_ptr,
+		ctx->clear_img.img_ptr,
 		g_rect_config.x,
 		g_rect_config.y);
 }
