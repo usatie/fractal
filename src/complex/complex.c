@@ -6,11 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:04:20 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:10:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:45:17 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "complex.h"
 
 t_complex	complex_new(double re, double im)
 {

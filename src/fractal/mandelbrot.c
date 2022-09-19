@@ -6,11 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:04 by susami            #+#    #+#             */
-/*   Updated: 2022/09/12 17:39:27 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:45:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "complex.h"
 #include "ft_printf.h"
 
 static uint32_t	div_f(t_complex point, uint32_t max_loop, const t_ctx *ctx);

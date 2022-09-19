@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:14 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:10:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:45:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "fractol.h"
+#include "complex.h"
 #include "fractol_ctx.h"
 #include "fractol_color.h"
 

@@ -6,15 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:18:25 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 18:35:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:45:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "mlx.h"
 #include "fractol.h"
+#include "complex.h"
 #include "fractol_ctx.h"
-
 #include "fractol_color.h"
 
 static t_complex	to_complex(int x, int y,

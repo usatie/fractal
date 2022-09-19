@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:15:08 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:10:30 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:45:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_printf.h"
 #include "fractol.h"
+#include "complex.h"
 #include "fractol_ctx.h"
 
 #define JULIA_LEN 0.7885

@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/19 19:43:10 by susami           ###   ########.fr        #
+#    Updated: 2022/09/19 21:48:40 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MLX_DIR		=	minilibx-linux
 MLX		=	$(MLX_DIR)/libmlx.a
 LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
-INCLUDES	=	-I$(INCLUDE_DIR) -I src/argparse -I$(MLX_DIR) -I/usr/X11R6/include
+INCLUDES	=	-I$(INCLUDE_DIR) -I src/argparse -I src/complex -I$(MLX_DIR) -I/usr/X11R6/include
 CFLAGS		=	-Wall -Werror -Wextra
 
 SRC_DIR		=	src
@@ -44,7 +44,7 @@ SRCS		=	src/main.c \
 				src/mlx/loop_handler.c \
 				src/mlx/img.c \
 				src/mlx/rect.c \
-				src/fractal/complex.c \
+				src/complex/complex.c \
 				src/fractal/fractal.c \
 				src/fractal/mandelbrot.c \
 				src/fractal/julia.c \
