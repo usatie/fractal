@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_buttonmap.h                                    :+:      :+:    :+:   */
+/*   fractol_mousemap.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:23:12 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:25:27 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:28:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_BUTTONMAP_H
-# define MLX_BUTTONMAP_H
+#ifndef FRACTOL_MOUSEMAP_H
+# define FRACTOL_MOUSEMAP_H
 
 # if defined(LINUX)
 #  define MOUSE_WHEEL_UP 5

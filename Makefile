@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/19 16:11:04 by susami           ###   ########.fr        #
+#    Updated: 2022/09/19 17:27:43 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SRCS		=	src/main.c \
 				src/argparse/argparse.c \
 				src/argparse/argparse_flag.c \
 				src/mlx/color.c \
-				src/mlx/mlx_util.c \
 				src/mlx/key_handler.c \
 				src/mlx/mouse_handler.c \
 				src/mlx/expose_handler.c \

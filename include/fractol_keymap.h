@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_keymap.h                                       :+:      :+:    :+:   */
+/*   fractol_keymap.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:02:58 by susami            #+#    #+#             */
-/*   Updated: 2022/08/27 22:20:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:28:53 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_KEYMAP_H
-# define MLX_KEYMAP_H
+#ifndef FRACTOL_KEYMAP_H
+# define FRACTOL_KEYMAP_H
 
 # if defined(LINUX) || defined(ARM)
 // import from keysymdef.h

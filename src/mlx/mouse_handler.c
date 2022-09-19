@@ -6,14 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:36:22 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:26:04 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:28:02 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fractol.h"
 #include "fractol_ctx.h"
-#include "mlx_buttonmap.h"
+#include "fractol_mousemap.h"
 
 /*
 

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:08:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:27:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,6 @@ bool		rect_contains(t_ipoint p, t_rect rect);
 
 // double_util.c
 bool		neq(double a, double b);
-
-// mlx_util.c
-void		print_keycode(int keycode);
 
 /*
    Complex number

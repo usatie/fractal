@@ -6,17 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:35:45 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:36:36 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:27:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "fractol_ctx.h"
-#include "mlx_keymap.h"
+#include "fractol_keymap.h"
 
 int	key_handler(int keycode, t_ctx *ctx)
 {
-	print_keycode(keycode);
 	if (keycode == MK_ESCAPE)
 		close_window(ctx);
 	else if (keycode == MK_BRACKETLEFT && ctx->max_loop > 10)
