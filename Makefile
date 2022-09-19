@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/18 21:36:02 by susami           ###   ########.fr        #
+#    Updated: 2022/09/19 10:56:15 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,8 +117,10 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFTDIR)
 
 debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed
-debug: re
-	norminette $(SRC_DIR) $(INCLUDE_DIR)
+debug: re norm
 
-.PHONY: all clean fclean re bonus debug
+norm:
+	norminette $(LIBFTDIR) $(SRC_DIR) $(INCLUDE_DIR)
+
+.PHONY: all clean fclean re bonus debug norm
 -include $(DEPS)
