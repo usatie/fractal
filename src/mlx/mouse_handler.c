@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:36:22 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:50:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:26:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fractol.h"
 #include "fractol_ctx.h"
+#include "mlx_buttonmap.h"
 
 /*
 
@@ -49,9 +50,6 @@ after zooom :
 * Note that y axis is upside down.
 
 */
-
-#define MOUSE_WHEEL_UP 4
-#define MOUSE_WHEEL_DOWN 5
 
 // zoom in/out can be done by updating `zoom_level` and `o`
 int	mouse_handler(int button, int x, int y, t_ctx *ctx)
