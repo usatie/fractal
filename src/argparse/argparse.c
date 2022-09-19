@@ -6,41 +6,29 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:27:47 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 14:36:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:11:47 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "fractol_ctx.h"
+#include <stdbool.h>
 #include "ft_error_functions.h"
 #include "libft.h"
-
-// argparse_flag.c
-t_fractal_type	parse_fractal_type(const char *arg);
-int				parse_julia_param(const char *v, t_ctx *ctx);
+#include "argparse.h"
 
 // argparse.c
-static void		parse_flags(int argc, char **argv, t_ctx *ctx);
-static bool		parse_one(int *argc, char ***argv, t_ctx *ctx);
+static void		parse(int argc, char **argv, t_args *args);
+static bool		parse_one(int *argc, char ***argv, t_args *args);
 static char		*next_arg(int *argc, char ***argv);
 
-// (0.5, 5.0) should be center for Barnsley
-t_ctx	argparse(int argc, char **argv)
+t_args	argparse(int argc, char **argv)
 {
-	t_ctx	ctx;
+	t_args	args;
 
 	if (argc < 2)
 		usage_err();
-	ft_memset(&ctx, 0, sizeof(t_ctx));
-	init_ctx(&ctx);
-	next_arg(&argc, &argv);
-	parse_flags(argc, argv, &ctx);
-	if (ctx.fractal_type == BARNSLEY)
-	{
-		ctx.zoom_level = 40;
-		ctx.center = (t_dpoint){0.5, 5.0};
-	}
-	return (ctx);
+	ft_memset(&args, 0, sizeof(t_args));
+	parse(argc - 1, argv + 1, &args);
+	return (args);
 }
 
 void	usage_err(void)
@@ -55,16 +43,16 @@ void	usage_err(void)
 		"    Barnsley\n");
 }
 
-static void	parse_flags(int argc, char **argv, t_ctx *ctx)
+static void	parse(int argc, char **argv, t_args *args)
 {
 	while (argc > 1)
 	{
-		if (parse_one(&argc, &argv, ctx) == false)
+		if (parse_one(&argc, &argv, args) == false)
 			break ;
 	}
 	if (argc != 1)
 		usage_err();
-	ctx->fractal_type = parse_fractal_type(argv[0]);
+	args->fractal = parse_fractal_type(argv[0]);
 }
 
 // Return Value:
@@ -73,7 +61,7 @@ static void	parse_flags(int argc, char **argv, t_ctx *ctx)
 //
 // parse_one() consumes argc and argv.
 // (i.e. argc--, argv+)
-static bool	parse_one(int *argc, char ***argv, t_ctx *ctx)
+static bool	parse_one(int *argc, char ***argv, t_args *args)
 {
 	char	*s;
 	char	*v;
@@ -84,7 +72,7 @@ static bool	parse_one(int *argc, char ***argv, t_ctx *ctx)
 	v = next_arg(argc, argv);
 	if (ft_strcmp(s, "-j") == 0)
 	{
-		parse_julia_param(v, ctx);
+		args->julia_degree = parse_julia_degree(v);
 		return (true);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 23:00:10 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 17:27:34 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:12:56 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,17 @@ typedef struct s_img		t_img;
 typedef uint32_t			t_speeds[400][400];
 typedef uint32_t			t_div_f(t_complex point, uint32_t max_loop,
 		const t_ctx *ctx);
-typedef enum e_mode { NORMAL_MODE, PSYCHEDELIC_MODE }	t_mode;
-typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
+typedef enum e_mode {
+	NORMAL_MODE,
+	PSYCHEDELIC_MODE
+}	t_mode;
+typedef enum e_fractal_type {
+	MANDELBROT,
+	JULIA,
+	BARNSLEY
+}	t_fractal_type;
+
+//typedef enum e_fractal_type { MANDELBROT, JULIA, BARNSLEY }	t_fractal_type;
 
 // const values
 extern const t_rect			g_rect_fractal;
@@ -47,10 +56,6 @@ extern const t_rect			g_rect_config;
 // main.c
 int			main(int argc, char **argv);
 int			close_window(t_ctx *ctx);
-
-// argparse.c
-t_ctx		argparse(int argc, char **argv);
-void		usage_err(void) __attribute__((noreturn));
 
 // key_handler.c
 int			key_handler(int keycode, t_ctx *ctx);

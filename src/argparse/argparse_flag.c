@@ -6,49 +6,46 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:16:46 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:03:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:11:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include "fractol.h"
-#include "fractol_ctx.h"
+#include <stdbool.h>
+#include "argparse.h"
 #include "libft.h"
 #include "math.h"
 
-t_fractal_type	parse_fractal_type(const char *arg);
-int				parse_julia_param(const char *v, t_ctx *ctx);
-static bool		contains_numeric(const char *s);
+static bool	contains_numeric(const char *s);
 
-t_fractal_type	parse_fractal_type(const char *arg)
+char	*parse_fractal_type(char *arg)
 {
 	if (ft_strcmp(arg, "Mandelbrot") == 0)
-		return (MANDELBROT);
+		return (arg);
 	else if (ft_strcmp(arg, "Julia") == 0)
-		return (JULIA);
+		return (arg);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
-		return (BARNSLEY);
+		return (arg);
 	else
 		usage_err();
 }
 
-int	parse_julia_param(const char *v, t_ctx *ctx)
+int	parse_julia_degree(const char *s)
 {
 	long	res;
 	char	*endptr;
 
-	if (!contains_numeric(v))
+	if (!contains_numeric(s))
 		usage_err();
 	errno = 0;
-	res = ft_strtol(v, &endptr, 10);
+	res = ft_strtol(s, &endptr, 10);
 	if (errno != 0)
 		usage_err();
 	if (*endptr != '\0')
 		usage_err();
 	if (res < 0 || res >= 360)
 		usage_err();
-	ctx->julia_degree = (int)res;
-	return (0);
+	return ((int)res);
 }
 
 static bool	contains_numeric(const char *s)

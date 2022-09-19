@@ -6,14 +6,16 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 18:45:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/19 16:11:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:21:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <X11/X.h>
 #include "mlx.h"
+#include "libft.h"
 #include "ft_error_functions.h"
+#include "argparse.h"
 #include "fractol.h"
 #include "fractol_ctx.h"
 
@@ -26,17 +28,53 @@ static void	destructor(void) {
 }
 */
 
-static void	init_mlx_ptrs(t_ctx *ctx);
-static void	setup_mlx_hooks(t_ctx *ctx);
+static t_ctx	new_ctx(t_args args);
+static void		init_mlx_ptrs(t_ctx *ctx);
+static void		setup_mlx_hooks(t_ctx *ctx);
 
 int	main(int argc, char **argv)
 {
+	t_args	args;
 	t_ctx	ctx;
 
-	ctx = argparse(argc, argv);
+	args = argparse(argc, argv);
+	ctx = new_ctx(args);
 	init_mlx_ptrs(&ctx);
 	setup_mlx_hooks(&ctx);
 	return (0);
+}
+
+/*
+ * Disable hooks before destroy, to avoid calling hooks
+ * after some images/windows/displays are destroyed.
+*/
+int	close_window(t_ctx *ctx)
+{
+	mlx_key_hook(ctx->win_ptr, NULL, NULL);
+	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
+	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
+	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
+	mlx_destroy_image(ctx->mlx_ptr, ctx->fractal_img.img_ptr);
+	mlx_destroy_image(ctx->mlx_ptr, ctx->clear_img.img_ptr);
+	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
+	mlx_destroy_display(ctx->mlx_ptr);
+	exit(0);
+}
+
+static t_ctx	new_ctx(t_args args)
+{
+	t_ctx	ctx;
+
+	ft_memset(&ctx, 0, sizeof(t_ctx));
+	if (ft_strcmp(args.fractal, "Mandelbrot") == 0)
+		ctx.fractal_type = MANDELBROT;
+	else if (ft_strcmp(args.fractal, "Julia") == 0)
+		ctx.fractal_type = JULIA;
+	else if (ft_strcmp(args.fractal, "Barnsley") == 0)
+		ctx.fractal_type = BARNSLEY;
+	init_ctx(&ctx);
+	ctx.julia_degree = args.julia_degree;
+	return (ctx);
 }
 
 /*
@@ -90,21 +128,4 @@ static void	setup_mlx_hooks(t_ctx *ctx)
 		close_window, ctx);
 	mlx_expose_hook(ctx->win_ptr, expose_handler, ctx);
 	mlx_loop(ctx->mlx_ptr);
-}
-
-/*
- * Disable hooks before destroy, to avoid calling hooks
- * after some images/windows/displays are destroyed.
-*/
-int	close_window(t_ctx *ctx)
-{
-	mlx_key_hook(ctx->win_ptr, NULL, NULL);
-	mlx_mouse_hook(ctx->win_ptr, NULL, NULL);
-	mlx_expose_hook(ctx->win_ptr, NULL, NULL);
-	mlx_loop_hook(ctx->mlx_ptr, NULL, NULL);
-	mlx_destroy_image(ctx->mlx_ptr, ctx->fractal_img.img_ptr);
-	mlx_destroy_image(ctx->mlx_ptr, ctx->clear_img.img_ptr);
-	mlx_destroy_window(ctx->mlx_ptr, ctx->win_ptr);
-	mlx_destroy_display(ctx->mlx_ptr);
-	exit(0);
 }
