@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   instant_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 15:08:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 15:23:33 by susami           ###   ########.fr       */
+/*   Created: 2022/09/23 15:48:38 by susami            #+#    #+#             */
+/*   Updated: 2022/09/23 15:49:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "complex.h"
+#include "color.h"
 
-t_complex	complex_new(double re, double im)
+t_rgb	red(void)
 {
-	t_complex	c;
-
-	c.re = re;
-	c.im = im;
-	return (c);
+	return (rgb(255, 0, 0, 0));
 }
 
-t_complex	cadd(t_complex lhs, t_complex rhs)
+t_rgb	green(void)
 {
-	t_complex	c;
-
-	c.re = lhs.re + rhs.re;
-	c.im = lhs.im + rhs.im;
-	return (c);
+	return (rgb(0, 255, 0, 0));
 }
 
-t_complex	cmul(t_complex lhs, t_complex rhs)
+t_rgb	blue(void)
 {
-	t_complex	c;
+	return (rgb(0, 0, 255, 0));
+}
 
-	c.re = lhs.re * rhs.re - lhs.im * rhs.im;
-	c.im = lhs.re * rhs.im + lhs.im * rhs.re;
-	return (c);
+t_rgb	black(void)
+{
+	return (rgb(0, 0, 0, 0));
 }
