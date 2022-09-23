@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 12:11:38 by susami           ###   ########.fr        #
+#    Updated: 2022/09/23 15:10:25 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 
 SRC_DIR		=	src
 SRCS		=	src/main.c \
+				src/complex/complex.c\
 
 
 OBJ_DIR		=	objs

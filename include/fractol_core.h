@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 15:03:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 15:15:05 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ enum e_fractal {
 	BARNSLEY
 };
 
+/*
+   Complex number
+   re — real part
+   im — imaginary part
+*/
 struct s_complex {
 	double	re;
 	double	im;
