@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 15:52:10 by susami           ###   ########.fr        #
+#    Updated: 2022/09/23 17:00:07 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS		=	src/main.c 					\
 				src/complex/complex.c		\
 				src/color/color.c			\
 				src/color/instant_colors.c	\
+				src/img/img.c				\
 
 
 OBJ_DIR		=	objs

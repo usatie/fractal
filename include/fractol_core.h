@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 15:23:09 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 16:44:41 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ struct s_dpoint {
    endian      —   endian (0 = little endian, 1 = big endian)
 */
 struct s_img {
+	void	*mlx_ptr;
 	void	*ptr;
 	char	*data;
-	int		*bpp;
-	int		*size_line;
-	int		*endian;
+	int		bits_per_pixel;
+	int		bytes_per_pixel;
+	int		bytes_per_line;
+	int		endian;
 };
 
 struct s_mandelbrot_ctx {
