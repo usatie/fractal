@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:07:02 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 16:56:38 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:50:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "mlx.h"
 #include "fractol_core.h"
+#include "img.h"
 
 static char	get_n_th_byte(int x, int n);
 
@@ -43,10 +44,10 @@ void	*init_img(void *mlx_ptr, int width, int height)
 // Update img data
 void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 {
-	uint32_t	x_color;
-	int			head;
-	int			i;
-	int			index;
+	int	x_color;
+	int	head;
+	int	i;
+	int	index;
 
 	x_color = mlx_get_color_value(img->mlx_ptr, mlx_color);
 	head = (x * img->bytes_per_pixel) + (y * img->bytes_per_line);
@@ -70,10 +71,10 @@ static char	get_n_th_byte(int x, int n)
 {
 	const int	size = 8;
 	const int	index = n * size;
-	uint32_t	mask;
-	int			ret;
+	int			mask;
+	char		ret;
 
 	mask = ((n << size) - 1) << index;
-	ret = (x & mask) >> index;
+	ret = (char)((x & mask) >> index);
 	return (ret);
 }

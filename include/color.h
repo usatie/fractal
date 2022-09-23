@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:20:57 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 15:42:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:48:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ typedef union u_rgb		t_rgb;
 
 t_rgb	hsv2rgb(t_hsv in);
 t_rgb	rgb(uint8_t r, uint8_t g, uint8_t b, uint8_t alpha);
+
+t_rgb	red(void);
+t_rgb	green(void);
+t_rgb	blue(void);
+t_rgb	black(void);
 
 /*
    HSV Color

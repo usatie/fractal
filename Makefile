@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 17:00:07 by susami           ###   ########.fr        #
+#    Updated: 2022/09/23 18:26:47 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,13 @@ INCLUDES	=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
 CFLAGS		=	-Wall -Werror -Wextra
 
 SRC_DIR		=	src
-SRCS		=	src/main.c 					\
-				src/complex/complex.c		\
-				src/color/color.c			\
-				src/color/instant_colors.c	\
-				src/img/img.c				\
+SRCS		=	src/color/instant_colors.c		\
+				src/color/color.c		\
+				src/img/img.c		\
+				src/main.c		\
+				src/hooks/loop_handler.c		\
+				src/hooks/close_window.c		\
+				src/hooks/custom_hooks.c		\
 
 
 OBJ_DIR		=	objs

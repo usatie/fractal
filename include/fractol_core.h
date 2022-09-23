@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 16:44:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:00:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_CORE_H
 # define FRACTOL_CORE_H
 
+# include <stddef.h>
 # include <stdbool.h>
 # include <stdint.h>
 
@@ -28,6 +29,8 @@ typedef struct s_point				t_point;
 typedef struct s_dpoint				t_dpoint;
 typedef struct s_img				t_img;
 typedef struct s_mandelbrot_ctx		t_mandelbrot_ctx;
+typedef struct s_window				t_window;
+typedef struct s_env				t_env;
 
 enum e_fractal {
 	MANDELBROT,
@@ -71,6 +74,19 @@ struct s_mandelbrot_ctx {
 	uint32_t		max_loop;
 
 	bool			psychedelic_color_enabled;
+};
+
+struct s_window {
+	void	*ptr;
+	int		width;
+	int		height;
+	char	*title;
+};
+
+struct s_env {
+	void			*mlx_ptr;
+	struct s_window	*fractal_win;
+	t_img			*fractal_img;
 };
 
 #endif
