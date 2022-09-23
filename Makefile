@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 18:26:47 by susami           ###   ########.fr        #
+#    Updated: 2022/09/23 19:28:05 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS		=	src/color/instant_colors.c		\
 				src/img/img.c		\
 				src/main.c		\
 				src/hooks/loop_handler.c		\
+				src/hooks/key_handler.c		\
 				src/hooks/close_window.c		\
 				src/hooks/custom_hooks.c		\
 
