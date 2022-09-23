@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:37:17 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 22:53:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #define DEFAULT_PIXEL_WIDTH 0.01
 #define ZOOM_LEVEL_PER_2X 10
 
-bool	mandelbrot(t_fractal *f);
-
 bool	draw_fractal_to_img(t_fractal *f)
 {
 	bool	updated;
 
-	updated = mandelbrot(f);
+	updated = false;
+	if (f->type == MANDELBROT)
+		updated = mandelbrot(f);
 	return (updated);
 }
 
@@ -42,10 +42,8 @@ double	pixel_width(int zoom_level)
 	return (cache);
 }
 
-bool	mandelbrot(t_fractal *f)
+void	put_speeds_to_img(t_fractal *f)
 {
-	const t_complex	z = (t_complex){0};
-	t_complex		c;
 	int				x;
 	int				y;
 
@@ -55,12 +53,9 @@ bool	mandelbrot(t_fractal *f)
 		x = 0;
 		while (x < FRACT_WIDTH)
 		{
-			c = win_to_complex(x, y, f->center, pixel_width(f->zoom_level));
-			f->speeds[x][y] = complex_iteration(z, c, f->max_loop);
 			put_pixel(f->img, x, y, f->speeds[x][y]);
 			x++;
 		}
 		y++;
 	}
-	return (true);
 }
