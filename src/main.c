@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 19:28:27 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 19:38:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static void	init_env(t_env *e)
 static void	setup_hooks(t_env *e)
 {
 	mlx_keydown_hook(e->fractal_win->ptr, key_handler, e);
-	//mlx_mouse_hook();
+	mlx_mouse_hook(e->fractal_win->ptr, mouse_handler, e);
 	mlx_loop_hook(e->mlx_ptr, loop_handler, e);
 	mlx_closebutton_hook(e->fractal_win->ptr, close_window, e);
-	//mlx_expose_hook();
+	mlx_expose_hook(e->fractal_win->ptr, expose_handler, e);
 	mlx_loop(e->mlx_ptr);
 }
