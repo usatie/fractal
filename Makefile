@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 19:39:26 by susami           ###   ########.fr        #
+#    Updated: 2022/09/23 22:19:25 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,10 @@ SRCS		=	src/color/instant_colors.c		\
 				src/hooks/mouse_handler.c		\
 				src/hooks/close_window.c		\
 				src/hooks/custom_hooks.c		\
+				src/complex/complex.c			\
+				src/complex/complex_iteration.c			\
+				src/fractals/win_to_complex.c			\
+				src/fractals/draw.c				\
 
 
 OBJ_DIR		=	objs

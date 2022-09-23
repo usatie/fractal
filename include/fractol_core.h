@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 18:00:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/23 22:08:55 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@
 # define FRACT_WIDTH 400
 # define FRACT_HEIGHT 400
 
-# define CONFIG_WIDTH 400
-# define CONFIG_HEIGHT 400
-
 # define WIN_TITLE "fract-ol"
 
-typedef struct s_point				t_point;
-typedef struct s_dpoint				t_dpoint;
-typedef struct s_img				t_img;
-typedef struct s_mandelbrot_ctx		t_mandelbrot_ctx;
-typedef struct s_window				t_window;
-typedef struct s_env				t_env;
+typedef int					t_speeds[400][400];
+typedef struct s_point		t_point;
+typedef struct s_dpoint		t_dpoint;
+typedef struct s_img		t_img;
+typedef struct s_fractal	t_fractal;
+typedef struct s_window		t_window;
+typedef struct s_env		t_env;
 
 enum e_fractal {
 	MANDELBROT,
@@ -50,10 +48,11 @@ struct s_dpoint {
 
 /*
    minilibx img container
-   bpp         —   bits per pixel
-   size_line   —   the number of bytes used to store one line of the image 
-                   in memory (size_line = bpp * img_width)
-   endian      —   endian (0 = little endian, 1 = big endian)
+   bits_per_pixel  —   bits per pixel to store color for one pixel.
+   bytes_per_pixel —   [bits_per_pixel / 8]
+   bytes_per_line  —   the number of bytes used to store one line of the image 
+                       in memory. [bytes_per_pixel * img_width]
+   endian          —   endian (0 = little endian, 1 = big endian)
 */
 struct s_img {
 	void	*mlx_ptr;
@@ -65,28 +64,28 @@ struct s_img {
 	int		endian;
 };
 
-struct s_mandelbrot_ctx {
-	t_img			fractal_img;
+struct s_fractal {
+	enum e_fractal	type;
+
+	void			*win_ptr;
+	t_img			*img;
+
 	int32_t			zoom_level;
-	struct s_dpoint	center;
+	t_dpoint		center;
 
 	uint8_t			hue;
 	uint32_t		max_loop;
 
-	bool			psychedelic_color_enabled;
-};
+	bool			color_rotation_enabled;
 
-struct s_window {
-	void	*ptr;
-	int		width;
-	int		height;
-	char	*title;
+	t_speeds		speeds;
+	bool			julia_rotation_enabled;
+	uint32_t		julia_degree;
 };
 
 struct s_env {
-	void			*mlx_ptr;
-	struct s_window	*fractal_win;
-	t_img			*fractal_img;
+	void		*mlx_ptr;
+	t_fractal	*fractal;
 };
 
 #endif
