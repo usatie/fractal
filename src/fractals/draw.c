@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:53:16 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/24 14:24:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	put_speeds_to_img(t_fractal *f)
 		x = 0;
 		while (x < FRACT_WIDTH)
 		{
-			put_pixel(f->img, x, y, f->speeds[x][y]);
+			put_pixel(f->img, x, y, (int)f->speeds[x][y]);
 			x++;
 		}
 		y++;

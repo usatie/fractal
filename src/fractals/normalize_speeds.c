@@ -6,12 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 22:57:31 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:58:01 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/24 14:24:50 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "fractol_core.h"
+#include "draw.h"
 
 static void		get_range(const t_speeds speeds,
 					uint32_t *min_s, uint32_t *max_s);

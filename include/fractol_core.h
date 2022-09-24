@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:08:55 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/24 14:24:01 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIN_TITLE "fract-ol"
 
-typedef int					t_speeds[400][400];
+typedef uint32_t			t_speeds[400][400];
 typedef struct s_point		t_point;
 typedef struct s_dpoint		t_dpoint;
 typedef struct s_img		t_img;

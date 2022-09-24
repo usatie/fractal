@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 22:38:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:58:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/24 14:25:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ bool	mandelbrot(t_fractal *f)
 		{
 			c = win_to_complex(x, y, f->center, pixel_width(f->zoom_level));
 			f->speeds[x][y] = complex_iteration(z, c, f->max_loop);
-			put_pixel(f->img, x, y, f->speeds[x][y]);
 			x++;
 		}
 		y++;
