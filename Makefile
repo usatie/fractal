@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/23 22:58:25 by susami           ###   ########.fr        #
+#    Updated: 2022/09/26 15:21:18 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,10 @@ SRCS		=	src/color/instant_colors.c		\
 				src/hooks/custom_hooks.c		\
 				src/complex/complex.c			\
 				src/complex/complex_iteration.c			\
-				src/fractals/win_to_complex.c			\
-				src/fractals/draw.c				\
-				src/fractals/normalize_speeds.c				\
-				src/fractals/mandelbrot.c				\
+				src/draw/win_to_complex.c			\
+				src/draw/draw.c				\
+				src/draw/normalize_speeds.c				\
+				src/draw/mandelbrot.c				\
 
 
 OBJ_DIR		=	objs
