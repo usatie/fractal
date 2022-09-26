@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/24 14:24:01 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 14:45:01 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ struct s_fractal {
 	bool			color_rotation_enabled;
 
 	t_speeds		speeds;
+	bool			force_update_flag;
+
 	bool			julia_rotation_enabled;
 	uint32_t		julia_degree;
 };

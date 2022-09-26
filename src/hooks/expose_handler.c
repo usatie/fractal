@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:34:51 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 19:41:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 14:59:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	expose_handler(t_env *e)
 {
-	(void)e;
+	e->fractal->force_update_flag = true;
 	return (0);
 }

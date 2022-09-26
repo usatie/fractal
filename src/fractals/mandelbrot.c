@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 22:38:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 14:37:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 14:58:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "img.h"
 #include "draw.h"
 
-static bool	is_cache_available(t_fractal *f);
+static bool	need_to_update(t_fractal *f);
 static void	update_mandelbrot_speeds(t_fractal *f);
 
 // Returns true if img is updated
 bool	mandelbrot(t_fractal *f)
 {
-	if (is_cache_available(f))
+	if (!need_to_update(f))
 		return (false);
 	update_mandelbrot_speeds(f);
 	normalize_speeds(f->speeds);
@@ -50,17 +50,22 @@ static void	update_mandelbrot_speeds(t_fractal *f)
 	}
 }
 
-static bool	is_cache_available(t_fractal *f)
+static bool	need_to_update(t_fractal *f)
 {
 	static t_fractal	prev;
-	bool				need_to_update;
+	bool				is_f_updated;
 
-	need_to_update = (
+	if (f->force_update_flag)
+	{
+		prev = *f;
+		return (true);
+	}
+	is_f_updated = (
 			prev.win_ptr == NULL
 			|| prev.zoom_level != f->zoom_level
 			|| prev.max_loop != f->max_loop
 			|| prev.type != f->type
 			);
 	prev = *f;
-	return (need_to_update);
+	return (is_f_updated);
 }
