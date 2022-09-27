@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/09/27 09:47:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/27 11:01:03 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,31 @@
 #include "affine.h"
 #include "draw.h"
 
+/*
+Barnsley's fern uses four affine transformations. 
+The formula for one transformation is the following:
+
+          ┌     ┐ ┌   ┐     ┌   ┐
+f(x, y) = │ a b │ │ x │  +  │ e │  
+          │ c d │ │ y │     │ f │
+          └     ┘ └   ┘     └   ┘
+
+Barnsley shows the IFS code for his Black Spleenwort fern fractal as a matrix of
+values shown in a table. In the table, the columns "a" through "f" are the
+coefficients of the equation, and "p" represents the probability factor.
+
+w	| a		| b		| c		| d		| e		| f		| p		|
+ƒ1	| 0		| 0		| 0		| 0.16	| 0		| 0		| 0.01	|
+ƒ2	| 0.85	| 0.04	| −0.04	| 0.85	| 0		| 1.60	| 0.85	|
+ƒ3	| 0.20	| −0.26	| 0.23	| 0.22	| 0		| 1.60	| 0.07	|
+ƒ4	| −0.15	| 0.28	| 0.26	| 0.24	| 0		| 0.44	| 0.07	|
+
+w	| Portion generated
+ƒ1	| Stem
+ƒ2	| Successively smaller leaflets
+ƒ3	| Largest left-hand leaflet
+ƒ4	| Largest right-hand leaflet
+*/
 static const t_ifs_config	g_trans[4] = {
 	(t_ifs_config){.affine = (t_affine){
 	.a = 0, .b = 0, .c = 0, .d = 0.16, .e = 0, .f = 0}, .p = 0.01},
