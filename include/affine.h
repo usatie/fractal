@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:01:11 by susami            #+#    #+#             */
-/*   Updated: 2022/09/27 09:47:31 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/27 13:36:25 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,10 @@ struct s_ifs_config {
 	t_affine	affine;
 	double		p;
 };
+
+extern const t_ifs_config	g_barnsley_config[4];
+extern const t_ifs_config	g_cyclosorus_config[4];
+extern const t_ifs_config	g_fractal_tree_config[4];
+extern const t_ifs_config	g_golden_bee_config[4];
+
 #endif
