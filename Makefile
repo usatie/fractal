@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/26 15:21:18 by susami           ###   ########.fr        #
+#    Updated: 2022/09/26 20:58:07 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,9 @@ SRCS		=	src/color/instant_colors.c		\
 				src/draw/draw.c				\
 				src/draw/normalize_speeds.c				\
 				src/draw/mandelbrot.c				\
+				src/draw/julia.c				\
+				src/draw/barnsley.c				\
+				src/draw/affine_iteration.c				\
 
 
 OBJ_DIR		=	objs

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 18:05:37 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:37:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 15:56:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 #include "draw.h"
 
 #define LOOP_PER_FRAME 1000
+#define HUE_INCREASE_PER_FRAME 4
+#define JULIA_DEGREE_INCREASE_PER_FRAME 3
+
+static void	update_env(t_env *e);
 
 int	loop_handler(t_env *e)
 {
@@ -29,6 +33,7 @@ int	loop_handler(t_env *e)
 	if (skip_upadte)
 		return (0);
 	lock = true;
+	update_env(e);
 	updated = draw_fractal_to_img(e->fractal);
 	if (updated)
 	{
@@ -37,4 +42,17 @@ int	loop_handler(t_env *e)
 	}
 	lock = false;
 	return (0);
+}
+
+static void	update_env(t_env *e)
+{
+	if (e->fractal->color_rotation_enabled)
+	{
+		e->fractal->hue += HUE_INCREASE_PER_FRAME;
+	}
+	if (e->fractal->julia_rotation_enabled)
+	{
+		e->fractal->julia_degree += JULIA_DEGREE_INCREASE_PER_FRAME;
+		e->fractal->julia_degree %= 360;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/24 14:24:26 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 16:02:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ bool	draw_fractal_to_img(t_fractal *f)
 	updated = false;
 	if (f->type == MANDELBROT)
 		updated = mandelbrot(f);
+	else if (f->type == JULIA)
+		updated = julia(f);
+	else if (f->type == BARNSLEY)
+		updated = barnsley(f);
 	return (updated);
 }
 

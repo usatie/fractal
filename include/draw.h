@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:06:35 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:58:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 17:17:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 
 // mandelbrot.c
 bool		mandelbrot(t_fractal *f);
+
+// julia.c
+bool		julia(t_fractal *f);
+
+// barnsley.c
+bool		barnsley(t_fractal *f);
 
 // draw.c
 double		pixel_width(int zoom_level);

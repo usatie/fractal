@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:07:02 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 18:50:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/09/26 21:10:57 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	*init_img(void *mlx_ptr, int width, int height)
 }
 
 // Update img data
+// If endian is little endian, write from head,
+// Else write from tail.
 void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 {
 	int	x_color;
@@ -64,6 +66,27 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 		}
 		img->data[index] = get_n_th_byte(x_color, i);
 		i++;
+	}
+}
+
+// Clear img data
+#define CLEAR_COLOR 0
+
+void	clear_img(t_img *img, int width, int height)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			put_pixel(img, x, y, CLEAR_COLOR);
+			x++;
+		}
+		y++;
 	}
 }
 
