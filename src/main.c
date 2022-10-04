@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:31:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:43:08 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 #include "img.h"
 #include "hooks.h"
-#include "fractol_core.h"
 
 static void	init_env(t_env *e);
 static void	init_fractal(t_fractal *f, void *mlx_ptr);

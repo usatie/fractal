@@ -6,11 +6,10 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 18:07:03 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:42:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol_core.h"
 #include "keymap.h"
 #include "draw.h"
 #include "hooks.h"

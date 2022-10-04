@@ -6,14 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:01:11 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 13:42:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:40:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AFFINE_H
 # define AFFINE_H
 
-# include "fractol_core.h"
+# include "fractol.h"
 
 typedef struct s_affine		t_affine;
 typedef struct s_ifs_config	t_ifs_config;

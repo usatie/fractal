@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:06:35 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 17:17:24 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:40:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DRAW_H
 
 # include <stdbool.h>
-# include "fractol_core.h"
+# include "fractol.h"
 # include "complex.h"
 
 // mandelbrot.c

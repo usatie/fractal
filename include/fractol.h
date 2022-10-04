@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_core.h                                     :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 21:00:57 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:40:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_CORE_H
-# define FRACTOL_CORE_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
 # include <stddef.h>
 # include <stdbool.h>

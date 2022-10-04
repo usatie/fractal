@@ -6,14 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:07:02 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 21:10:57 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:43:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 #include "mlx.h"
-#include "fractol_core.h"
 #include "img.h"
 
 static char	get_n_th_byte(int x, int n);

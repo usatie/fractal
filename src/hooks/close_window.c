@@ -6,13 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 18:21:49 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 22:09:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:42:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
-#include "fractol_core.h"
 #include "hooks.h"
 
 /*

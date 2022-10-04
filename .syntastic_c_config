@@ -5,3 +5,4 @@
 -I src/complex
 -I src/affine
 -I src/draw
+-I src/hooks
