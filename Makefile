@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/09/26 20:58:07 by susami           ###   ########.fr        #
+#    Updated: 2022/10/04 13:34:24 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,32 +22,35 @@ LIBFT		=	$(LIBFTDIR)/libft.a
 
 LIBS		=	-lmlx -lXext -lX11 -lft -lm
 MLX_DIR		=	minilibx-linux
-MLX		=	$(MLX_DIR)/libmlx.a
+MLX			=	$(MLX_DIR)/libmlx.a
 LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib -L$(LIBFTDIR)
 INCLUDE_DIR	=	include
-INCLUDES	=	-I$(INCLUDE_DIR) -I$(MLX_DIR) -I/usr/X11R6/include
+INCLUDES	=	-I $(INCLUDE_DIR) -I $(MLX_DIR) -I /usr/X11R6/include
 CFLAGS		=	-Wall -Werror -Wextra
 
 SRC_DIR		=	src
-SRCS		=	src/color/instant_colors.c		\
-				src/color/color.c		\
-				src/img/img.c		\
-				src/main.c		\
-				src/hooks/loop_handler.c		\
-				src/hooks/key_handler.c		\
-				src/hooks/expose_handler.c		\
-				src/hooks/mouse_handler.c		\
-				src/hooks/close_window.c		\
-				src/hooks/custom_hooks.c		\
-				src/complex/complex.c			\
-				src/complex/complex_iteration.c			\
-				src/draw/win_to_complex.c			\
-				src/draw/draw.c				\
-				src/draw/normalize_speeds.c				\
-				src/draw/mandelbrot.c				\
-				src/draw/julia.c				\
-				src/draw/barnsley.c				\
-				src/draw/affine_iteration.c				\
+SRCDIRS		=	$(shell find $(SRC_DIR) -type d)
+INCLUDES 	+=	$(addprefix -I,$(SRCDIRS))
+
+SRCS		=	$(SRC_DIR)/color/instant_colors.c			\
+				$(SRC_DIR)/color/color.c					\
+				$(SRC_DIR)/img/img.c						\
+				$(SRC_DIR)/main.c							\
+				$(SRC_DIR)/hooks/loop_handler.c				\
+				$(SRC_DIR)/hooks/key_handler.c				\
+				$(SRC_DIR)/hooks/expose_handler.c			\
+				$(SRC_DIR)/hooks/mouse_handler.c			\
+				$(SRC_DIR)/hooks/close_window.c				\
+				$(SRC_DIR)/hooks/custom_hooks.c				\
+				$(SRC_DIR)/complex/complex.c				\
+				$(SRC_DIR)/complex/complex_iteration.c		\
+				$(SRC_DIR)/draw/win_to_complex.c			\
+				$(SRC_DIR)/draw/draw.c						\
+				$(SRC_DIR)/draw/normalize_speeds.c			\
+				$(SRC_DIR)/draw/mandelbrot.c				\
+				$(SRC_DIR)/draw/julia.c						\
+				$(SRC_DIR)/draw/barnsley.c					\
+				$(SRC_DIR)/draw/affine_iteration.c			\
 
 
 OBJ_DIR		=	objs
