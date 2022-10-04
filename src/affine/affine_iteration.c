@@ -6,14 +6,13 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:08:26 by susami            #+#    #+#             */
-/*   Updated: 2022/09/27 09:57:05 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:42:19 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // rand()
 #include <stdlib.h>
 #include <math.h>
-#include "fractol_core.h"
 #include "color.h"
 #include "img.h"
 #include "draw.h"
@@ -21,7 +20,6 @@
 
 static t_dpoint	probablistic_affine(t_dpoint v,
 					const t_ifs_config *config, int num_config);
-static t_dpoint	affine_transform(t_dpoint v, t_affine t);
 static void		put_pixel_in_window(t_dpoint v, t_fractal *f);
 
 // Iterated Fuction System.
@@ -56,23 +54,6 @@ static t_dpoint	probablistic_affine(t_dpoint v,
 		rng -= configv[i].p;
 		i++;
 	}
-}
-
-/*
-Apply Affine Transformation.
-
-          ┌     ┐ ┌   ┐     ┌   ┐
-f(x, y) = │ a b │ │ x │  +  │ e │  
-          │ c d │ │ y │     │ f │
-          └     ┘ └   ┘     └   ┘
-*/
-static t_dpoint	affine_transform(t_dpoint v, t_affine t)
-{
-	t_dpoint	ret;
-
-	ret.x = (t.a * v.x + t.b * v.y) + t.e;
-	ret.y = (t.c * v.x + t.d * v.y) + t.f;
-	return (ret);
 }
 
 // If `v` is in window, put pixel.

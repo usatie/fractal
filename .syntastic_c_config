@@ -1,2 +1,7 @@
 -I /usr/X11R6/include
 -I minilibx-linux
+-I src/color
+-I src/img
+-I src/complex
+-I src/affine
+-I src/draw

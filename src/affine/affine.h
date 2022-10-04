@@ -6,17 +6,20 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:01:11 by susami            #+#    #+#             */
-/*   Updated: 2022/09/27 13:36:25 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:42:08 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AFFINE_H
 # define AFFINE_H
 
+# include "fractol_core.h"
+
 typedef struct s_affine		t_affine;
 typedef struct s_ifs_config	t_ifs_config;
 
-void	affine_iteration(t_fractal *f, const t_ifs_config *configv);
+t_dpoint	affine_transform(t_dpoint v, t_affine t);
+void		affine_iteration(t_fractal *f, const t_ifs_config *configv);
 
 /*
 Coefficients of the Affine Transformation
