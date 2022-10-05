@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 13:57:07 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 13:57:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:42:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Original Parameters come from this website.
 https://www.chradams.co.uk/fern/maker.html
 */
 
-const t_ifs_config			g_barnsley_config[4] = {
+const t_ifs_config			g_ifs_barnsley[4] = {
 	(t_ifs_config){.affine = (t_affine){
 	.a = 0, .b = 0, .c = 0, .d = 0.16, .e = 0, .f = 0},
 	.p = 0.01},
@@ -67,7 +67,7 @@ w	| a		| b		| c		| d		| e		| f		| p		|
 ƒ3	| 0.035	| −0.2	| 0.16	| 0.04	| -0.09	| 0.02	| 0.07	|
 ƒ4	| 0.04	| 0.2	| 0.16	| 0.04	| 0.083	| 0.12	| 0.07	|
 */
-const t_ifs_config			g_cyclosorus_config[4] = {
+const t_ifs_config			g_ifs_cyclosorus[4] = {
 	(t_ifs_config){.affine = (t_affine){
 	.a = 0, .b = 0, .c = 0, .d = 0.25, .e = 0, .f = -0.4},
 	.p = 0.02},
@@ -91,7 +91,7 @@ w	| a		| b		| c		| d		| e		| f		| p		|
 ƒ3	| 0.42	| 0.42	| -0.42	| 0.42	| 0		| 0.2	| 0.4	|
 ƒ4	| 0.1	| 0		| 0		| 0.1	| 0		| 0.2	| 0.15	|
 */
-const t_ifs_config			g_fractal_tree_config[4] = {
+const t_ifs_config			g_ifs_fractal_tree[4] = {
 	(t_ifs_config){.affine = (t_affine){
 	.a = 0, .b = 0, .c = 0, .d = 0.5, .e = 0, .f = 0},
 	.p = 0.05},
@@ -115,7 +115,7 @@ w	| a		| b		| c		| d		| e		| f		| p		|
 ƒ3	| 0		| 0		| 0		| 0		| 0		| 0		| 0		|
 ƒ4	| 0		| 0		| 0		| 0		| 0		| 0		| 0		|
 */
-const t_ifs_config			g_golden_bee_config[4] = {
+const t_ifs_config			g_ifs_golden_bee[4] = {
 	(t_ifs_config){.affine = (t_affine){
 	.a = 0.6178, .b = 0, .c = 0, .d = -0.6178, .e = 0, .f = 1},
 	.p = 0.5},

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:22:18 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:41:51 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:59:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,20 @@ static void			update_julia_speeds(t_fractal *f);
 // Returns true if img is updated
 bool	julia(t_fractal *f)
 {
-	if (!need_to_update(f))
+	if (need_to_update(f))
+	{
+		update_julia_speeds(f);
+		normalize_speeds(f->speeds);
+		put_speeds_to_img(f);
+		return (true);
+	}
+	else if (f->color_rotation_enabled)
+	{
+		put_speeds_to_img(f);
+		return (true);
+	}
+	else
 		return (false);
-	update_julia_speeds(f);
-	normalize_speeds(f->speeds);
-	put_speeds_to_img(f);
-	return (true);
 }
 
 static void	update_julia_speeds(t_fractal *f)
@@ -85,7 +93,8 @@ static bool	need_to_update(t_fractal *f)
 			|| prev.zoom_level != f->zoom_level
 			|| prev.max_loop != f->max_loop
 			|| prev.type != f->type
-			|| prev.julia_degree != f->julia_degree
+			|| (f->julia_rotation_enabled
+				&& prev.julia_degree != f->julia_degree)
 			);
 	prev = *f;
 	return (is_f_updated);

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 16:02:24 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:43:11 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "draw.h"
 #include "img.h"
 #include "complex.h"
+#include "color.h"
 
 #define DEFAULT_PIXEL_WIDTH 0.01
 #define ZOOM_LEVEL_PER_2X 10
@@ -48,8 +49,9 @@ double	pixel_width(int zoom_level)
 
 void	put_speeds_to_img(t_fractal *f)
 {
-	int				x;
-	int				y;
+	int		x;
+	int		y;
+	t_hsv	hsv;
 
 	y = 0;
 	while (y < FRACT_HEIGHT)
@@ -57,7 +59,9 @@ void	put_speeds_to_img(t_fractal *f)
 		x = 0;
 		while (x < FRACT_WIDTH)
 		{
-			put_pixel(f->img, x, y, (int)f->speeds[x][y]);
+			hsv = (t_hsv){.h = f->hue, .s = 255, .v = (uint8_t)f->speeds[x][y],
+				.alpha = 0};
+			put_pixel(f->img, x, y, hsv2rgb(hsv).mlx_color);
 			x++;
 		}
 		y++;

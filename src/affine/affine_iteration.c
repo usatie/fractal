@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:08:26 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 13:42:19 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:45:38 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,34 @@
 #include <stdlib.h>
 #include <math.h>
 #include "color.h"
-#include "img.h"
 #include "draw.h"
 #include "affine.h"
 
-static t_dpoint	probablistic_affine(t_dpoint v,
+static t_dpoint	ifs_affine(t_dpoint v,
 					const t_ifs_config *config, int num_config);
-static void		put_pixel_in_window(t_dpoint v, t_fractal *f);
+static bool		put_to_speeds(t_dpoint v, t_fractal *f);
 
 // Iterated Fuction System.
 // Applies Affine Transformation iteratively.
-void	affine_iteration(t_fractal *f, const t_ifs_config *configv)
+bool	affine_iteration(t_fractal *f, const t_ifs_config *configv)
 {
 	static t_dpoint	v = (t_dpoint){.x = 0, .y = 0};
 	uint32_t		i;
+	bool			updated;
 
+	updated = false;
 	i = 0;
 	while (i < f->max_loop)
 	{
-		v = probablistic_affine(v, configv, 4);
-		put_pixel_in_window(v, f);
+		v = ifs_affine(v, configv, 4);
+		updated |= put_to_speeds(v, f);
 		i++;
 	}
+	return (updated);
 }
 
-// Apply Affine Transformation based on probabilities.
-static t_dpoint	probablistic_affine(t_dpoint v,
+// Apply Affine Transformation based on configured probabilities.
+static t_dpoint	ifs_affine(t_dpoint v,
 		const t_ifs_config *configv, int num_config)
 {
 	int		i;
@@ -56,8 +58,10 @@ static t_dpoint	probablistic_affine(t_dpoint v,
 	}
 }
 
-// If `v` is in window, put pixel.
-static void	put_pixel_in_window(t_dpoint v, t_fractal *f)
+#define MAX_SPEED 255
+
+// If `v` is in window, put to speeds.
+static bool	put_to_speeds(t_dpoint v, t_fractal *f)
 {
 	double	width;
 	int		x;
@@ -65,16 +69,19 @@ static void	put_pixel_in_window(t_dpoint v, t_fractal *f)
 
 	width = pixel_width(f->zoom_level);
 	if (fabs(v.x - f->center.x) > (double)FRACT_WIDTH * width)
-		return ;
+		return (false);
 	else if (fabs(v.y - f->center.y) > (double)FRACT_HEIGHT * width)
-		return ;
+		return (false);
 	x = FRACT_WIDTH / 2;
 	y = FRACT_HEIGHT / 2;
 	x += (int)((v.x - f->center.x) / width);
 	y -= (int)((v.y - f->center.y) / width);
 	if (x < 0 || x >= FRACT_WIDTH)
-		return ;
+		return (false);
 	else if (y < 0 || y >= FRACT_HEIGHT)
-		return ;
-	put_pixel(f->img, x, y, green().mlx_color);
+		return (false);
+	if (f->speeds[x][y] == MAX_SPEED)
+		return (false);
+	f->speeds[x][y] = MAX_SPEED;
+	return (true);
 }

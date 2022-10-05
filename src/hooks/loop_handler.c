@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 18:05:37 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:42:47 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:00:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "draw.h"
 
 #define LOOP_PER_FRAME 1000
-#define HUE_INCREASE_PER_FRAME 4
+#define HUE_INCREASE_PER_FRAME 1
 #define JULIA_DEGREE_INCREASE_PER_FRAME 3
 
 static void	update_env(t_env *e);

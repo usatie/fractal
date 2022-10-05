@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:01:11 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:40:13 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:40:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_affine		t_affine;
 typedef struct s_ifs_config	t_ifs_config;
 
 t_dpoint	affine_transform(t_dpoint v, t_affine t);
-void		affine_iteration(t_fractal *f, const t_ifs_config *configv);
+bool		affine_iteration(t_fractal *f, const t_ifs_config *configv);
 
 /*
 Coefficients of the Affine Transformation
@@ -48,9 +48,9 @@ struct s_ifs_config {
 	double		p;
 };
 
-extern const t_ifs_config	g_barnsley_config[4];
-extern const t_ifs_config	g_cyclosorus_config[4];
-extern const t_ifs_config	g_fractal_tree_config[4];
-extern const t_ifs_config	g_golden_bee_config[4];
+extern const t_ifs_config	g_ifs_barnsley[4];
+extern const t_ifs_config	g_ifs_cyclosorus[4];
+extern const t_ifs_config	g_ifs_fractal_tree[4];
+extern const t_ifs_config	g_ifs_golden_bee[4];
 
 #endif

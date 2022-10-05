@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 22:38:17 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:41:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:59:38 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,20 @@ static void	update_mandelbrot_speeds(t_fractal *f);
 // Returns true if img is updated
 bool	mandelbrot(t_fractal *f)
 {
-	if (!need_to_update(f))
+	if (need_to_update(f))
+	{
+		update_mandelbrot_speeds(f);
+		normalize_speeds(f->speeds);
+		put_speeds_to_img(f);
+		return (true);
+	}
+	else if (f->color_rotation_enabled)
+	{
+		put_speeds_to_img(f);
+		return (true);
+	}
+	else
 		return (false);
-	update_mandelbrot_speeds(f);
-	normalize_speeds(f->speeds);
-	put_speeds_to_img(f);
-	return (true);
 }
 
 static void	update_mandelbrot_speeds(t_fractal *f)
