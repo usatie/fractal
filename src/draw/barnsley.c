@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 21:06:12 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 22:06:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,55 @@
 #include "draw.h"
 #include "img.h"
 #include "affine.h"
+#include "ft_error_functions.h"
 
-static bool		need_to_update(t_fractal *f);
+static const t_ifs_config	*get_config(enum e_fractal type);
+static bool					need_to_update(t_fractal *f);
 
+// Returns true if img is updated
+// Once there is a time iteration makes no change to img, iteration stops.
 bool	barnsley(t_fractal *f)
 {
-	bool				updated;
-	const t_ifs_config	*config;
+	static bool	need_iteration = true;
 
-	updated = false;
 	if (need_to_update(f))
 	{
 		ft_memset(f->speeds, 0, sizeof(t_speeds));
 		clear_img(f->img, FRACT_WIDTH, FRACT_HEIGHT);
-		updated = true;
+		need_iteration = true;
 	}
-	if (f->type == BARNSLEY)
+	if (need_iteration)
+	{
+		if (affine_iteration(f, get_config(f->type)))
+			put_speeds_to_img(f);
+		else
+			need_iteration = false;
+		return (need_iteration);
+	}
+	else if (f->color_rotation_enabled)
+	{
+		put_speeds_to_img(f);
+		return (true);
+	}
+	else
+		return (false);
+}
+
+static const t_ifs_config	*get_config(enum e_fractal type)
+{
+	const t_ifs_config	*config;
+
+	if (type == BARNSLEY)
 		config = (const t_ifs_config *)g_ifs_barnsley;
-	else if (f->type == CYCLOSORUS)
+	else if (type == CYCLOSORUS)
 		config = (const t_ifs_config *)g_ifs_cyclosorus;
-	else if (f->type == FRACTAL_TREE)
+	else if (type == FRACTAL_TREE)
 		config = (const t_ifs_config *)g_ifs_fractal_tree;
-	else if (f->type == GOLDEN_BEE)
+	else if (type == GOLDEN_BEE)
 		config = (const t_ifs_config *)g_ifs_golden_bee;
-	updated |= affine_iteration(f, config);
-	put_speeds_to_img(f);
-	return (updated);
+	else
+		err_exit("Unexpected fractal type are passed to get_config.");
+	return (config);
 }
 
 static bool	need_to_update(t_fractal *f)
