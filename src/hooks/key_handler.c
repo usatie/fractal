@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 17:32:47 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:36:48 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "draw.h"
 #include "hooks.h"
 
-static void	change_type(int keycode, t_fractal *f);
+static void	change_type(t_fractal *f);
 static void	increase_max_loop(t_fractal *f);
 static void	decrease_max_loop(t_fractal *f);
 
@@ -38,13 +38,12 @@ int	key_handler(int keycode, t_env *e)
 		f->center.x += pixel_width(f->zoom_level) * 10;
 	else if (keycode == MK_DOWN)
 		f->center.y -= pixel_width(f->zoom_level) * 10;
-	else if (keycode == MK_J || keycode == MK_M || keycode == MK_B)
-		change_type(keycode, f);
+	else if (keycode == MK_SPACE)
+		change_type(f);
 	else if (keycode == MK_D)
 		f->julia_rotation_enabled = !f->julia_rotation_enabled;
 	else if (keycode == MK_C)
 		f->color_rotation_enabled = !f->color_rotation_enabled;
-	e->fractal->force_update_flag = true;
 	return (0);
 }
 
@@ -64,18 +63,12 @@ static void	decrease_max_loop(t_fractal *f)
 		f->max_loop = f->max_loop * 10 / 11;
 }
 
-static void	change_type(int keycode, t_fractal *f)
+static void	change_type(t_fractal *f)
 {
-	if (keycode == MK_J)
-	{
+	if (f->type == MANDELBROT)
 		setup_fractal(f, JULIA);
-	}
-	else if (keycode == MK_M)
-	{
-		setup_fractal(f, MANDELBROT);
-	}
-	else if (keycode == MK_B)
-	{
+	else if (f->type == JULIA)
 		setup_fractal(f, BARNSLEY);
-	}
+	else if (f->type == BARNSLEY)
+		setup_fractal(f, MANDELBROT);
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 17:41:22 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:20:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #define DEFAULT_PIXEL_WIDTH 0.01
 #define ZOOM_LEVEL_PER_2X 10
 
+t_fractal	g_prev = {0};
+
 bool	draw_fractal_to_img(t_fractal *f)
 {
 	bool	updated;
@@ -30,6 +32,7 @@ bool	draw_fractal_to_img(t_fractal *f)
 		updated = julia(f);
 	else if (f->type == BARNSLEY)
 		updated = barnsley(f);
+	g_prev = *f;
 	return (updated);
 }
 

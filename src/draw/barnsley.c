@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 17:12:53 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:20:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,17 @@ bool	barnsley(t_fractal *f)
 
 static bool	need_to_update(t_fractal *f)
 {
-	static t_fractal	prev;
-	bool				is_f_updated;
+	bool	is_f_updated;
 
 	if (f->force_update_flag)
 	{
-		prev = *f;
 		f->force_update_flag = false;
 		return (true);
 	}
 	is_f_updated = (
-			prev.win_ptr == NULL
-			|| prev.zoom_level != f->zoom_level
-			|| prev.type != f->type
+			g_prev.win_ptr == NULL
+			|| g_prev.zoom_level != f->zoom_level
+			|| g_prev.type != f->type
 			);
-	prev = *f;
 	return (is_f_updated);
 }

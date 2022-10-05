@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:06:35 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:40:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:19:58 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdbool.h>
 # include "fractol.h"
 # include "complex.h"
+
+extern t_fractal	g_prev;
 
 // mandelbrot.c
 bool		mandelbrot(t_fractal *f);

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:27:27 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 19:27:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:31:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 #  define MK_UP				0xff52  /* Move up, up arrow */
 #  define MK_RIGHT			0xff53  /* Move right, right arrow */
 #  define MK_DOWN			0xff54  /* Move down, down arrow */
+#  define MK_SPACE			0x0020  /* Space */
 #  define MK_F1				0xffbe
 #  define MK_F2				0xffbf
 #  define MK_F3				0xffc0
@@ -95,6 +96,8 @@
 #  define MK_BRACKETLEFT	0x0021
 #  define MK_BACKSLASH		0x002a
 #  define MK_BRACKETRIGHT	0x001e
+
+#  define MK_SPACE			0x0031
 
 #  define MK_LEFT			0x007b
 #  define MK_UP				0x007e
@@ -179,7 +182,6 @@
 # define MK_SLASH			0x002c
 # define MK_QUESTION_MARK	0x002c
 # define MK_ALT				0x0105
-# define MK_SPACE			0x0031
 # define MK_ALT_GR			0x0106
 # define MK_FN				0x0117
 # define MK_HOME			0x0073
