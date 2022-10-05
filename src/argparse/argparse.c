@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 22:52:56 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 15:27:33 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:10:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ static enum e_fractal	parse_fractal_type(char *arg)
 		return (JULIA);
 	else if (ft_strcmp(arg, "Barnsley") == 0)
 		return (BARNSLEY);
+	else if (ft_strcmp(arg, "Cyclosorus") == 0)
+		return (CYCLOSORUS);
+	else if (ft_strcmp(arg, "GoldenBee") == 0)
+		return (GOLDEN_BEE);
+	else if (ft_strcmp(arg, "FractalTree") == 0)
+		return (FRACTAL_TREE);
 	else
 		usage_err();
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 18:36:48 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 20:51:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "draw.h"
 #include "hooks.h"
 
+static void	move_center(int keycode, t_fractal *f);
 static void	change_type(t_fractal *f);
 static void	increase_max_loop(t_fractal *f);
 static void	decrease_max_loop(t_fractal *f);
@@ -30,7 +31,21 @@ int	key_handler(int keycode, t_env *e)
 		decrease_max_loop(f);
 	else if (keycode == MK_BRACKETRIGHT && f->max_loop)
 		increase_max_loop(f);
-	else if (keycode == MK_LEFT)
+	else if (keycode == MK_LEFT || keycode == MK_RIGHT
+		|| keycode == MK_UP || keycode == MK_DOWN)
+		move_center(keycode, f);
+	else if (keycode == MK_SPACE)
+		change_type(f);
+	else if (keycode == MK_J)
+		f->julia_rotation_enabled = !f->julia_rotation_enabled;
+	else if (keycode == MK_C)
+		f->color_rotation_enabled = !f->color_rotation_enabled;
+	return (0);
+}
+
+static void	move_center(int keycode, t_fractal *f)
+{
+	if (keycode == MK_LEFT)
 		f->center.x -= pixel_width(f->zoom_level) * 10;
 	else if (keycode == MK_UP)
 		f->center.y += pixel_width(f->zoom_level) * 10;
@@ -38,13 +53,7 @@ int	key_handler(int keycode, t_env *e)
 		f->center.x += pixel_width(f->zoom_level) * 10;
 	else if (keycode == MK_DOWN)
 		f->center.y -= pixel_width(f->zoom_level) * 10;
-	else if (keycode == MK_SPACE)
-		change_type(f);
-	else if (keycode == MK_D)
-		f->julia_rotation_enabled = !f->julia_rotation_enabled;
-	else if (keycode == MK_C)
-		f->color_rotation_enabled = !f->color_rotation_enabled;
-	return (0);
+	f->force_update_flag = true;
 }
 
 static void	increase_max_loop(t_fractal *f)
@@ -70,5 +79,11 @@ static void	change_type(t_fractal *f)
 	else if (f->type == JULIA)
 		setup_fractal(f, BARNSLEY);
 	else if (f->type == BARNSLEY)
+		setup_fractal(f, CYCLOSORUS);
+	else if (f->type == CYCLOSORUS)
+		setup_fractal(f, FRACTAL_TREE);
+	else if (f->type == FRACTAL_TREE)
+		setup_fractal(f, GOLDEN_BEE);
+	else if (f->type == GOLDEN_BEE)
 		setup_fractal(f, MANDELBROT);
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:08:26 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 16:45:38 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:05:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static bool		put_to_speeds(t_dpoint v, t_fractal *f);
 // Applies Affine Transformation iteratively.
 bool	affine_iteration(t_fractal *f, const t_ifs_config *configv)
 {
-	static t_dpoint	v = (t_dpoint){.x = 0, .y = 0};
-	uint32_t		i;
-	bool			updated;
+	t_dpoint	v;
+	uint32_t	i;
+	bool		updated;
 
+	v = (t_dpoint){.x = 0, .y = 0};
 	updated = false;
 	i = 0;
 	while (i < f->max_loop)

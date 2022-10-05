@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 18:20:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:06:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static bool		need_to_update(t_fractal *f);
 
 bool	barnsley(t_fractal *f)
 {
-	bool	updated;
+	bool				updated;
+	const t_ifs_config	*config;
 
 	updated = false;
 	if (need_to_update(f))
@@ -29,7 +30,15 @@ bool	barnsley(t_fractal *f)
 		clear_img(f->img, FRACT_WIDTH, FRACT_HEIGHT);
 		updated = true;
 	}
-	updated |= affine_iteration(f, (const t_ifs_config *)&g_ifs_barnsley[0]);
+	if (f->type == BARNSLEY)
+		config = (const t_ifs_config *)g_ifs_barnsley;
+	else if (f->type == CYCLOSORUS)
+		config = (const t_ifs_config *)g_ifs_cyclosorus;
+	else if (f->type == FRACTAL_TREE)
+		config = (const t_ifs_config *)g_ifs_fractal_tree;
+	else if (f->type == GOLDEN_BEE)
+		config = (const t_ifs_config *)g_ifs_golden_bee;
+	updated |= affine_iteration(f, config);
 	put_speeds_to_img(f);
 	return (updated);
 }

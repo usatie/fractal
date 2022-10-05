@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:40:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:14:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ typedef struct s_env		t_env;
 enum e_fractal {
 	MANDELBROT,
 	JULIA,
-	BARNSLEY
+	BARNSLEY,
+	CYCLOSORUS,
+	FRACTAL_TREE,
+	GOLDEN_BEE,
 };
 
 struct s_point {

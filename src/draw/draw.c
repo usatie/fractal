@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 18:20:14 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 19:01:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ bool	draw_fractal_to_img(t_fractal *f)
 		updated = mandelbrot(f);
 	else if (f->type == JULIA)
 		updated = julia(f);
-	else if (f->type == BARNSLEY)
+	else if (f->type == BARNSLEY || f->type == CYCLOSORUS
+		|| f->type == FRACTAL_TREE || f->type == GOLDEN_BEE)
 		updated = barnsley(f);
 	g_prev = *f;
 	return (updated);
