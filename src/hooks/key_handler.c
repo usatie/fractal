@@ -6,10 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:42:35 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:32:47 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "keymap.h"
 #include "draw.h"
 #include "hooks.h"
@@ -67,17 +68,14 @@ static void	change_type(int keycode, t_fractal *f)
 {
 	if (keycode == MK_J)
 	{
-		f->type = JULIA;
-		f->max_loop = 100;
+		setup_fractal(f, JULIA);
 	}
 	else if (keycode == MK_M)
 	{
-		f->type = MANDELBROT;
-		f->max_loop = 100;
+		setup_fractal(f, MANDELBROT);
 	}
 	else if (keycode == MK_B)
 	{
-		f->type = BARNSLEY;
-		f->max_loop = 100000;
+		setup_fractal(f, BARNSLEY);
 	}
 }

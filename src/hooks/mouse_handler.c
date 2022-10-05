@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:31:48 by susami            #+#    #+#             */
-/*   Updated: 2022/09/26 15:05:41 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:08:09 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	mouse_handler(int button, int x, int y, t_env *e)
 	y -= FRACT_HEIGHT / 2;
 	prev_pixel_width = pixel_width(e->fractal->zoom_level);
 	if (button == MOUSE_WHEEL_UP)
-		e->fractal->zoom_level--;
-	else if (button == MOUSE_WHEEL_DOWN)
 		e->fractal->zoom_level++;
+	else if (button == MOUSE_WHEEL_DOWN)
+		e->fractal->zoom_level--;
 	else
 		return (0);
 	next_pixel_width = pixel_width(e->fractal->zoom_level);

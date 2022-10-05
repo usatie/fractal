@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:03:17 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 15:43:11 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:41:22 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	pixel_width(int zoom_level)
 	if (prev_zoom_level == zoom_level)
 		return (cache);
 	prev_zoom_level = zoom_level;
-	zoom_factor = pow(2, (double)zoom_level / ZOOM_LEVEL_PER_2X);
+	zoom_factor = pow(2, -(double)zoom_level / ZOOM_LEVEL_PER_2X);
 	cache = DEFAULT_PIXEL_WIDTH * zoom_factor;
 	return (cache);
 }
