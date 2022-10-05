@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 22:06:21 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:59:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "draw.h"
 #include "img.h"
+#include "color.h"
 #include "affine.h"
 #include "ft_error_functions.h"
 
@@ -29,7 +30,7 @@ bool	barnsley(t_fractal *f)
 	if (need_to_update(f))
 	{
 		ft_memset(f->speeds, 0, sizeof(t_speeds));
-		clear_img(f->img, FRACT_WIDTH, FRACT_HEIGHT);
+		fill_img(f->img, FRACT_WIDTH, FRACT_HEIGHT, black().mlx_color);
 		need_iteration = true;
 	}
 	if (need_iteration)

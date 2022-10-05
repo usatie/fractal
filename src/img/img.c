@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:07:02 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:43:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:57:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 	}
 }
 
-// Clear img data
-#define CLEAR_COLOR 0
-
-void	clear_img(t_img *img, int width, int height)
+// Fill img data with color
+void	fill_img(t_img *img, int width, int height, int color)
 {
 	int	x;
 	int	y;
@@ -82,7 +80,7 @@ void	clear_img(t_img *img, int width, int height)
 		x = 0;
 		while (x < width)
 		{
-			put_pixel(img, x, y, CLEAR_COLOR);
+			put_pixel(img, x, y, color);
 			x++;
 		}
 		y++;

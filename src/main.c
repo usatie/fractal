@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 17:34:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/06 00:02:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include "ft_error_functions.h"
 #include "libft.h"
 #include "img.h"
+#include "color.h"
 #include "hooks.h"
 #include "argparse.h"
 #include "env.h"
+#include "img.h"
 
 static void	init_env(t_env *e);
 static void	init_fractal(t_fractal *f, void *mlx_ptr);
@@ -48,12 +50,16 @@ static void	init_env(t_env *e)
 static void	init_fractal(t_fractal *f, void *mlx_ptr)
 {
 	ft_memset(f, 0, sizeof(t_fractal));
-	f->win_ptr = mlx_new_window(mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT, WIN_TITLE);
+	f->win_ptr = mlx_new_window(mlx_ptr, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	if (f->win_ptr == NULL)
 		err_exit("Error: mlx_new_window()");
 	f->img = init_img(mlx_ptr, FRACT_WIDTH, FRACT_HEIGHT);
 	if (f->img == NULL)
 		err_exit("Error: init_img()");
+	f->footer_img = init_img(mlx_ptr, FOOTER_WIDTH, FOOTER_HEIGHT);
+	if (f->footer_img == NULL)
+		err_exit("Error: init_img()");
+	fill_img(f->footer_img, FOOTER_WIDTH, FOOTER_HEIGHT, white().mlx_color);
 }
 
 static void	setup_args(t_fractal *f, int argc, char *const argv[])

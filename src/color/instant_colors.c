@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:48:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 15:49:04 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:59:07 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ t_rgb	blue(void)
 t_rgb	black(void)
 {
 	return (rgb(0, 0, 0, 0));
+}
+
+t_rgb	white(void)
+{
+	return (rgb(255, 255, 255, 255));
 }

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:06:35 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 18:19:58 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:20:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ bool		julia(t_fractal *f);
 
 // barnsley.c
 bool		barnsley(t_fractal *f);
+
+// help_msg.c
+void		put_help_msg_to_window(void *mlx_ptr, void *win_ptr);
 
 // draw.c
 double		pixel_width(int zoom_level);

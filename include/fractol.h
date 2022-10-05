@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 21:14:30 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:37:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 
 # define FRACT_WIDTH 400
 # define FRACT_HEIGHT 400
+
+# define FOOTER_WIDTH 400
+# define FOOTER_HEIGHT 30
+
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 430
 
 # define WIN_TITLE "fract-ol"
 
@@ -72,6 +78,7 @@ struct s_fractal {
 
 	void			*win_ptr;
 	t_img			*img;
+	t_img			*footer_img;
 
 	int32_t			zoom_level;
 	t_dpoint		center;

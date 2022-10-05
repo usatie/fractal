@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:20:57 by susami            #+#    #+#             */
-/*   Updated: 2022/09/23 18:48:20 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:59:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_rgb	red(void);
 t_rgb	green(void);
 t_rgb	blue(void);
 t_rgb	black(void);
+t_rgb	white(void);
 
 /*
    HSV Color
