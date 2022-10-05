@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:43:08 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:22:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@
 #include "libft.h"
 #include "img.h"
 #include "hooks.h"
+#include "argparse.h"
 
 static void	init_env(t_env *e);
 static void	init_fractal(t_fractal *f, void *mlx_ptr);
+static void	setup_args(t_env *e, int argc, char*const argv[]);
 static void	setup_hooks(t_env *e);
 
-int	main(int argc, char **argv)
+int	main(int argc, char *const argv[])
 {
 	t_env	e;
 
-	(void)argc;
-	(void)argv;
 	init_env(&e);
+	setup_args(&e, argc, argv);
 	setup_hooks(&e);
 	return (0);
 }
@@ -41,6 +42,17 @@ static void	init_env(t_env *e)
 	if (e->fractal == NULL)
 		err_exit("Error: malloc()");
 	init_fractal(e->fractal, e->mlx_ptr);
+}
+
+static void	setup_args(t_env *e, int argc, char *const argv[])
+{
+	t_args	args;
+
+	args = argparse(argc, argv);
+	e->fractal->type = args.type;
+	e->fractal->julia_degree = args.julia_degree;
+	e->fractal->color_rotation_enabled = args.color_rotation_enabled;
+	e->fractal->julia_rotation_enabled = args.julia_rotation_enabled;
 }
 
 static void	init_fractal(t_fractal *f, void *mlx_ptr)

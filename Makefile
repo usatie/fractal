@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/10/04 13:58:00 by susami           ###   ########.fr        #
+#    Updated: 2022/10/05 14:40:32 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,9 @@ SRCS		=	$(SRC_DIR)/color/instant_colors.c			\
 				$(SRC_DIR)/draw/barnsley_config.c			\
 				$(SRC_DIR)/affine/affine.c					\
 				$(SRC_DIR)/affine/affine_iteration.c		\
+				$(SRC_DIR)/argparse/argparse.c				\
+				$(SRC_DIR)/argparse/ft_getopt.c				\
+				$(SRC_DIR)/argparse/usage_err.c				\
 
 
 OBJ_DIR		=	objs

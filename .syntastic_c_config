@@ -6,3 +6,4 @@
 -I src/affine
 -I src/draw
 -I src/hooks
+-I src/argparse
