@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:18:35 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 23:43:58 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:55:48 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "fractol.h"
 
+// init.c
+void	init_env(t_env *e);
+
+// env.c
 char	*get_fractal_name(enum e_fractal type);
 void	setup_fractal(t_fractal *f, enum e_fractal type);
 

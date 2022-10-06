@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 23:37:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:47:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 430
 
+# define DEBUG_WIN_W 400
+# define DEBUG_WIN_H 400
+
 # define WIN_TITLE "fract-ol"
+# define DEBUG_WIN_TITLE "debug window"
 
 typedef uint32_t			t_speeds[400][400];
 typedef struct s_point		t_point;
@@ -98,6 +102,8 @@ struct s_fractal {
 struct s_env {
 	void		*mlx_ptr;
 	t_fractal	*fractal;
+	void		*debug_win_ptr;
+	t_img		*debug_img;
 };
 
 #endif

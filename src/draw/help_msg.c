@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 22:48:02 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 23:24:06 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:43:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	put_help_msg_to_window(void *mlx_ptr, void *win_ptr)
 	while (i < NUM_MSG)
 	{
 		mlx_string_put(mlx_ptr, win_ptr,
-			FRACT_WIDTH + 30, h, blue().mlx_color, msgs[i]);
+			FRACT_WIDTH + 30, h, white().mlx_color, msgs[i]);
 		h += 20;
 		i++;
 	}
