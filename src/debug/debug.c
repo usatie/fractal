@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 11:20:56 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 18:45:17 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:12:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	clear_debug_window(t_env *e)
 void	put_debug_text_to_window(t_env *e)
 {
 	clear_debug_window(e);
-	g_debug_print_index = 0;
+	put_text_to_debug(NULL, NULL, NULL);
 	put_text_to_debug("[DEBUG INFORMATION]", e->mlx_ptr, e->debug_win_ptr);
 	put_fractal_name(e);
 	put_max_loop(e);

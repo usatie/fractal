@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 11:20:13 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 18:45:25 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:12:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 
 # define DEBUG_TEXT_JULIA_ROTATION   "  julia_rotation_enabled    : %s"
 # define DEBUG_TEXT_JULIA_DEGREE     "  julia_degree              : %d"
-
-extern int	g_debug_print_index;
 
 // debug_internal.c
 // debug_internal2.c
