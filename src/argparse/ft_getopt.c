@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 08:30:05 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 18:26:48 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 21:54:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,22 @@
 #define ERROR_INVALID_OPTION '?'
 
 // Argument to the option is returned via global variable
-char	*g_optarg = NULL;
+// char	*g_optarg = NULL;
+char	**optarg(void)
+{
+	static char	*g_optarg = NULL;
+
+	return (&g_optarg);
+}
+
 // The index of the next element to be processed in argv.
-int		g_optind = 1;
+// int		g_optind = 1;
+int	*optind(void)
+{
+	static int	g_optind = 1;
+
+	return (&g_optind);
+}
 
 static int	consume_nextchar(int argc, char *const argv[], char **nextchar);
 static char	consume_opt(char **nextchar);
@@ -72,9 +85,9 @@ static int	consume_nextchar(int argc, char *const argv[], char **nextchar)
 {
 	if (*nextchar == NULL)
 	{
-		if (g_optind >= argc)
+		if (*optind() >= argc)
 			return (ERROR);
-		*nextchar = argv[g_optind];
+		*nextchar = argv[*optind()];
 		if (ft_strcmp(*nextchar, "--") == 0 || **nextchar != '-')
 			return (ERROR);
 		(*nextchar)++;
@@ -90,7 +103,7 @@ static char	consume_opt(char **nextchar)
 	(*nextchar)++;
 	if (**nextchar == '\0')
 	{
-		g_optind++;
+		(*optind())++;
 		*nextchar = NULL;
 	}
 	return (opt);
@@ -100,18 +113,18 @@ static int	consume_arg(int argc, char *const argv[], char **nextchar)
 {
 	if (*nextchar != NULL)
 	{
-		g_optarg = *nextchar;
-		g_optind++;
+		(*optarg()) = *nextchar;
+		(*optind())++;
 		*nextchar = NULL;
 	}
-	else if (g_optind < argc)
+	else if ((*optind()) < argc)
 	{
-		g_optarg = argv[g_optind];
-		g_optind++;
+		(*optarg()) = argv[*optind()];
+		(*optind())++;
 	}
 	else
 	{
-		g_optarg = NULL;
+		(*optarg()) = NULL;
 		return (ERROR);
 	}
 	return (SUCCESS);

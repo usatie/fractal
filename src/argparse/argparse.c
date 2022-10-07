@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 22:52:56 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 21:10:54 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 21:55:28 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_args	argparse(int argc, char *const argv[])
 	while (opt != -1)
 	{
 		if (opt == 'd')
-			args.julia_degree = parse_julia_degree(g_optarg);
+			args.julia_degree = parse_julia_degree(*optarg());
 		else if (opt == 'c')
 			args.color_rotation_enabled = true;
 		else if (opt == 'j')
@@ -41,9 +41,9 @@ t_args	argparse(int argc, char *const argv[])
 			usage_err();
 		opt = ft_getopt(argc, argv);
 	}
-	if (g_optind != argc - 1)
-		err_exit("g_optind: %d\n", g_optind);
-	args.type = parse_fractal_type(argv[g_optind]);
+	if (*optind() != argc - 1)
+		err_exit("g_optind: %d\n", *optind());
+	args.type = parse_fractal_type(argv[*optind()]);
 	return (args);
 }
 
