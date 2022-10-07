@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:22:18 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 18:19:38 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:04:49 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static t_complex	julia_c(t_fractal *f)
 
 static bool	need_to_update(t_fractal *f)
 {
-	bool	is_f_updated;
+	bool			is_f_updated;
+	const t_fractal	*prev = previous_fractal();
 
 	if (f->force_update_flag)
 	{
@@ -87,12 +88,12 @@ static bool	need_to_update(t_fractal *f)
 		return (true);
 	}
 	is_f_updated = (
-			g_prev.win_ptr == NULL
-			|| g_prev.zoom_level != f->zoom_level
-			|| g_prev.max_loop != f->max_loop
-			|| g_prev.type != f->type
+			prev->win_ptr == NULL
+			|| prev->zoom_level != f->zoom_level
+			|| prev->max_loop != f->max_loop
+			|| prev->type != f->type
 			|| (f->julia_rotation_enabled
-				&& g_prev.julia_degree != f->julia_degree)
+				&& prev->julia_degree != f->julia_degree)
 			);
 	return (is_f_updated);
 }

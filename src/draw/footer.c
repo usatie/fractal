@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:55:15 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 11:05:04 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:06:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static void	put_fractal_name_to_footer(t_env *e);
 
 void	put_footer_text_to_window(t_env *e)
 {
-	const bool	is_first_time = (g_prev.win_ptr == NULL);
-	const bool	is_type_changed = (g_prev.type != e->fractal->type);
+	const t_fractal	*prev = previous_fractal();
+	const bool		is_first_time = (prev->win_ptr == NULL);
+	const bool		is_type_changed = (prev->type != e->fractal->type);
 
 	if (is_first_time || is_type_changed || e->fractal->force_update_flag)
 		put_fractal_name_to_footer(e);

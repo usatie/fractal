@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 11:17:45 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:05:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static const t_ifs_config	*get_config(enum e_fractal type)
 
 static bool	need_to_update(t_fractal *f)
 {
-	bool	is_f_updated;
+	bool			is_f_updated;
+	const t_fractal	*prev = previous_fractal();
 
 	if (f->force_update_flag)
 	{
@@ -77,10 +78,10 @@ static bool	need_to_update(t_fractal *f)
 		return (true);
 	}
 	is_f_updated = (
-			g_prev.win_ptr == NULL
-			|| g_prev.max_loop != f->max_loop
-			|| g_prev.zoom_level != f->zoom_level
-			|| g_prev.type != f->type
+			prev->win_ptr == NULL
+			|| prev->max_loop != f->max_loop
+			|| prev->zoom_level != f->zoom_level
+			|| prev->type != f->type
 			);
 	return (is_f_updated);
 }
