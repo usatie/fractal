@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/10/07 22:08:31 by susami           ###   ########.fr        #
+#    Updated: 2022/10/07 23:41:29 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS		=	$(SRC_DIR)/color/instant_colors.c			\
 				$(SRC_DIR)/draw/barnsley_config.c			\
 				$(SRC_DIR)/draw/help.c						\
 				$(SRC_DIR)/draw/footer.c					\
+				$(SRC_DIR)/rand/rand.c						\
 				$(SRC_DIR)/affine/affine.c					\
 				$(SRC_DIR)/affine/affine_iteration.c		\
 				$(SRC_DIR)/argparse/argparse.c				\

@@ -6,13 +6,12 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:08:26 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 21:05:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 23:40:02 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// rand()
-#include <stdlib.h>
 #include <math.h>
+#include "rand.h"
 #include "color.h"
 #include "draw.h"
 #include "affine.h"
@@ -48,7 +47,7 @@ static t_dpoint	ifs_affine(t_dpoint v,
 	int		i;
 	double	rng;
 
-	rng = rand() / (double)RAND_MAX;
+	rng = rand_one();
 	i = 0;
 	while (true)
 	{
