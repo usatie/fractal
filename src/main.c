@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 17:19:00 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 23:43:01 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "argparse.h"
 #include "env.h"
 
-static void	setup_args(t_fractal *f, int argc, char*const argv[]);
+static void	setup_args(t_fractal *f, t_args args);
 static void	setup_hooks(t_env *e);
 
 /*
@@ -29,19 +29,18 @@ static void	destructor(void) {
 
 int	main(int argc, char *const argv[])
 {
+	t_args	args;
 	t_env	e;
 
+	args = argparse(argc, argv);
 	init_env(&e);
-	setup_args(e.fractal, argc, argv);
+	setup_args(e.fractal, args);
 	setup_hooks(&e);
 	return (0);
 }
 
-static void	setup_args(t_fractal *f, int argc, char *const argv[])
+static void	setup_args(t_fractal *f, t_args args)
 {
-	t_args	args;
-
-	args = argparse(argc, argv);
 	setup_fractal(f, args.type);
 	f->julia_degree = args.julia_degree;
 	f->color_rotation_enabled = args.color_rotation_enabled;
