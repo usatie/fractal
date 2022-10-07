@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 16:45:53 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 17:19:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 static void	setup_args(t_fractal *f, int argc, char*const argv[]);
 static void	setup_hooks(t_env *e);
 
+/*
 #include <stdlib.h>
 
 __attribute__((destructor))
 static void	destructor(void) {
 	system("leaks -q fractol");
 }
+*/
 
 int	main(int argc, char *const argv[])
 {
