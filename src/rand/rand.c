@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 23:06:29 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 23:39:28 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 23:56:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // Returns pseudo random number
 // This source code is taken from URL below.
 // https://stackoverflow.com/questions/53886131/how-does-xorshift32-works
+//
+// https://en.wikipedia.org/wiki/Linear-feedback_shift_register
 uint64_t	rand(void)
 {
 	const uint64_t	multiplier = UINT64_C(2685821657736338717);
