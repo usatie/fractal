@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 22:48:02 by susami            #+#    #+#             */
-/*   Updated: 2022/10/06 14:43:24 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:06:14 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 #define MSG_JULIA_ONLY	"[Only for Julia]"
 #define MSG_JULIA 		"  Press 'j' to enable/disable fractal rotation."
 
-void	put_help_msg_to_window(void *mlx_ptr, void *win_ptr)
+void	put_help_text_to_window(void *mlx_ptr, void *win_ptr)
 {
 	int			i;
 	int			h;

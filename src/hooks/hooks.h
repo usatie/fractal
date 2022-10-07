@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:34:17 by susami            #+#    #+#             */
-/*   Updated: 2022/10/04 22:40:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/06 15:02:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int		loop_handler(t_env *e);
 int		key_handler(int keycode, t_env *e);
 int		mouse_handler(int button, int x, int y, t_env *e);
 int		expose_handler(t_env *e);
+int		debug_expose_handler(t_env *e);
 
 // close_window.c
 int		close_window(t_env *e);
+int		close_debug_window(t_env *e);
 #endif

@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:52:05 by susami            #+#    #+#             */
-/*   Updated: 2022/10/06 14:56:40 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 00:04:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	init_fractal(t_fractal *f, void *mlx_ptr)
 
 static void	init_debug(t_env *e, void *mlx_ptr)
 {
+	int	color;
+
 	e->debug_win_ptr = mlx_new_window(mlx_ptr, DEBUG_WIN_W, DEBUG_WIN_H,
 			DEBUG_WIN_TITLE);
 	if (e->debug_win_ptr == NULL)
@@ -57,4 +59,6 @@ static void	init_debug(t_env *e, void *mlx_ptr)
 	e->debug_img = init_img(mlx_ptr, DEBUG_WIN_W, DEBUG_WIN_H);
 	if (e->debug_img == NULL)
 		err_exit("Error: init_img()");
+	color = rgb(30, 30, 30, 0).mlx_color;
+	fill_img(e->debug_img, DEBUG_WIN_W, DEBUG_WIN_H, color);
 }

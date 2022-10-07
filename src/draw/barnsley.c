@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 23:59:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:17:45 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static bool	need_to_update(t_fractal *f)
 	}
 	is_f_updated = (
 			g_prev.win_ptr == NULL
+			|| g_prev.max_loop != f->max_loop
 			|| g_prev.zoom_level != f->zoom_level
 			|| g_prev.type != f->type
 			);

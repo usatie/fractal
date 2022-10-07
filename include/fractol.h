@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:14:59 by susami            #+#    #+#             */
-/*   Updated: 2022/10/06 14:47:59 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 00:05:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define DEBUG_WIN_H 400
 
 # define WIN_TITLE "fract-ol"
-# define DEBUG_WIN_TITLE "debug window"
+# define DEBUG_WIN_TITLE "DEBUG WINDOW"
 
 typedef uint32_t			t_speeds[400][400];
 typedef struct s_point		t_point;

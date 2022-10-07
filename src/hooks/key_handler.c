@@ -6,10 +6,11 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 20:51:15 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 10:53:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_error_functions.h"
 #include "env.h"
 #include "keymap.h"
 #include "draw.h"
@@ -60,7 +61,8 @@ static void	increase_max_loop(t_fractal *f)
 {
 	if (f->type == MANDELBROT || f->type == JULIA)
 		f->max_loop += 10;
-	else if (f->type == BARNSLEY)
+	else if (f->type == BARNSLEY || f->type == CYCLOSORUS
+		|| f->type == GOLDEN_BEE || f->type == FRACTAL_TREE)
 		f->max_loop = f->max_loop * 11 / 10;
 }
 
@@ -68,8 +70,11 @@ static void	decrease_max_loop(t_fractal *f)
 {
 	if (f->type == MANDELBROT || f->type == JULIA)
 		f->max_loop -= 10;
-	else if (f->type == BARNSLEY)
+	else if (f->type == BARNSLEY || f->type == CYCLOSORUS
+		|| f->type == GOLDEN_BEE || f->type == FRACTAL_TREE)
 		f->max_loop = f->max_loop * 10 / 11;
+	else
+		err_exit("change_type: Unknown type");
 }
 
 static void	change_type(t_fractal *f)
@@ -86,4 +91,6 @@ static void	change_type(t_fractal *f)
 		setup_fractal(f, GOLDEN_BEE);
 	else if (f->type == GOLDEN_BEE)
 		setup_fractal(f, MANDELBROT);
+	else
+		err_exit("change_type: Unknown type");
 }
