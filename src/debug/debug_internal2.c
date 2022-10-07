@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:35:58 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 16:50:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:38:25 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	put_color_rotation_enabled(t_env *e)
 	char	s[128];
 
 	if (e->fractal->color_rotation_enabled)
-		ft_sprintf(s, DEBUG_TEXT_CR, "true");
+		ft_sprintf(s, DEBUG_TEXT_COLOR_ROTATION, "true");
 	else
-		ft_sprintf(s, DEBUG_TEXT_CR, "false");
+		ft_sprintf(s, DEBUG_TEXT_COLOR_ROTATION, "false");
 	put_text_to_debug(s, e->mlx_ptr, e->debug_win_ptr);
 }
 
@@ -37,9 +37,9 @@ void	put_julia_rotation_enabled(t_env *e)
 	char	s[128];
 
 	if (e->fractal->julia_rotation_enabled)
-		ft_sprintf(s, DEBUG_TEXT_JR, "true");
+		ft_sprintf(s, DEBUG_TEXT_JULIA_ROTATION, "true");
 	else
-		ft_sprintf(s, DEBUG_TEXT_JR, "false");
+		ft_sprintf(s, DEBUG_TEXT_JULIA_ROTATION, "false");
 	put_text_to_debug(s, e->mlx_ptr, e->debug_win_ptr);
 }
 

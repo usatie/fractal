@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/10/07 17:48:38 by susami           ###   ########.fr        #
+#    Updated: 2022/10/07 18:38:45 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS		=	$(SRC_DIR)/color/instant_colors.c			\
 				$(SRC_DIR)/debug/debug.c					\
 				$(SRC_DIR)/debug/debug_internal.c			\
 				$(SRC_DIR)/debug/debug_internal2.c			\
+				$(SRC_DIR)/debug/debug_internal3.c			\
 
 
 OBJ_DIR		=	objs
