@@ -6,7 +6,7 @@
 #    By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 18:48:58 by susami            #+#    #+#              #
-#    Updated: 2022/10/07 15:54:54 by susami           ###   ########.fr        #
+#    Updated: 2022/10/07 17:48:38 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ $(LIBFT):
 
 debug: CFLAGS += -Weverything -Wno-padded -Wno-strict-prototypes -Wno-packed
 debug: re norm
+	./test.sh
 
 norm:
 	norminette $(LIBFTDIR) $(SRC_DIR) $(INCLUDE_DIR)
