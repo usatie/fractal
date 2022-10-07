@@ -6,14 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:04:38 by susami            #+#    #+#             */
-/*   Updated: 2022/09/14 22:42:43 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:34:18 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <stdlib.h>
 #include "libft.h"
 #include "ft_printf.h"
 #include "ft_decimal.h"
-#include <errno.h>
 
 void	ftoa(float f, char *res, int width, int precision);
 void	dtoa(double f, char *res, int width, int precision);
@@ -54,4 +55,5 @@ void	printf_f(t_fmt *fmt)
 		fmt->precision = DEFAULT_PRECISION;
 	dtoa(d, buf, fmt->width, fmt->precision);
 	print(fmt, buf, ft_strlen(buf));
+	free(buf);
 }
