@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:01:00 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 22:05:29 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/08 07:52:33 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static const t_ifs_config	*get_config(enum e_fractal type)
 	else if (type == GOLDEN_BEE)
 		config = (const t_ifs_config *)g_ifs_golden_bee;
 	else
-		err_exit("Unexpected fractal type are passed to get_config.");
+		err_exit("Unexpected fractal type are passed to get_config.\n");
 	return (config);
 }
 

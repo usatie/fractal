@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:18:40 by susami            #+#    #+#             */
-/*   Updated: 2022/10/05 23:43:50 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/08 07:53:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_fractal_name(enum e_fractal type)
 	else if (type == FRACTAL_TREE)
 		return ("[Fractal Tree]");
 	else
-		err_exit("Unknown fractal type");
+		err_exit("get_fractal_name: Unknown fractal type\n");
 }
 
 void	setup_fractal(t_fractal *f, enum e_fractal type)
@@ -52,6 +52,8 @@ void	setup_fractal(t_fractal *f, enum e_fractal type)
 		setup_golden_bee(f);
 	else if (type == FRACTAL_TREE)
 		setup_fractal_tree(f);
+	else
+		err_exit("setup_fractal: Unknown fractal type\n");
 }
 
 static void	setup_barnsley(t_fractal *f)

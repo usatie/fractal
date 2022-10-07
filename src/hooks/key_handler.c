@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:25:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 10:53:46 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/08 07:52:55 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	increase_max_loop(t_fractal *f)
 	else if (f->type == BARNSLEY || f->type == CYCLOSORUS
 		|| f->type == GOLDEN_BEE || f->type == FRACTAL_TREE)
 		f->max_loop = f->max_loop * 11 / 10;
+	else
+		err_exit("increase_max_loop: Unknown type\n");
 }
 
 static void	decrease_max_loop(t_fractal *f)
@@ -74,7 +76,7 @@ static void	decrease_max_loop(t_fractal *f)
 		|| f->type == GOLDEN_BEE || f->type == FRACTAL_TREE)
 		f->max_loop = f->max_loop * 10 / 11;
 	else
-		err_exit("change_type: Unknown type");
+		err_exit("decrease_max_loop: Unknown type\n");
 }
 
 static void	change_type(t_fractal *f)
@@ -92,5 +94,5 @@ static void	change_type(t_fractal *f)
 	else if (f->type == GOLDEN_BEE)
 		setup_fractal(f, MANDELBROT);
 	else
-		err_exit("change_type: Unknown type");
+		err_exit("change_type: Unknown type\n");
 }
