@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 15:06:30 by susami            #+#    #+#             */
-/*   Updated: 2022/10/06 15:00:23 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:45:53 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 
 static void	setup_args(t_fractal *f, int argc, char*const argv[]);
 static void	setup_hooks(t_env *e);
+
+#include <stdlib.h>
+
+__attribute__((destructor))
+static void	destructor(void) {
+	system("leaks -q fractol");
+}
 
 int	main(int argc, char *const argv[])
 {
@@ -45,7 +52,7 @@ static void	setup_hooks(t_env *e)
 	mlx_mouse_hook(e->fractal->win_ptr, mouse_handler, e);
 	mlx_loop_hook(e->mlx_ptr, loop_handler, e);
 	mlx_closebutton_hook(e->fractal->win_ptr, close_window, e);
-	mlx_closebutton_hook(e->debug_win_ptr, close_debug_window, e);
+	mlx_closebutton_hook(e->debug_win_ptr, close_window, e);
 	mlx_expose_hook(e->fractal->win_ptr, expose_handler, e);
 	mlx_expose_hook(e->debug_win_ptr, debug_expose_handler, e);
 	mlx_loop(e->mlx_ptr);

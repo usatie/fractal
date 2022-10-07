@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:35:58 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 15:49:52 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:50:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,9 @@ void	put_center(t_env *e)
 
 	ft_sprintf(s, DEBUG_TEXT_CENTER, x, y);
 	put_text_to_debug(s, e->mlx_ptr, e->debug_win_ptr);
+}
+
+void	put_spacer(t_env *e)
+{
+	put_text_to_debug("", e->mlx_ptr, e->debug_win_ptr);
 }

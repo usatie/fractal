@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 11:23:09 by susami            #+#    #+#             */
-/*   Updated: 2022/10/07 15:46:44 by susami           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:50:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@
 #include "draw.h"
 #include "debug_internal.h"
 
+// Put debug text to debug window
 void	put_text_to_debug(char *text, void *mlx_ptr, void *win_ptr)
 {
 	static int	i = 0;
 	const int	w = 30;
 	const int	h = 30 + 20 * i;
 
-	mlx_string_put(mlx_ptr, win_ptr, w, h, white().mlx_color, text);
+	if (*text)
+	{
+		mlx_string_put(mlx_ptr, win_ptr, w, h, white().mlx_color, text);
+	}
 	i++;
 	i %= NUM_DEBUG_ITEM;
 }
 
-// fractal type
 void	put_fractal_name(t_env *e)
 {
 	char	s[128];
